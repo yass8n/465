@@ -1,0 +1,10 @@
+$ cd  whois/app/views/home
+$ vim show.html.erb
+<%= link_to "Search Page", root_path %>
+
+<p><%= "$ whois #{@query_text} returned" %></p>
+<br>
+
+<%= @result %>
+
+<%= link_to "Search Page", root_path %>
