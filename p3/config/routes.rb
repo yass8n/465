@@ -53,6 +53,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-	 root "home#index"
-	 get 'display', to: 'home#show'
+  root "wladder#index"
+  get "display", to: "wladder#show"
 end
