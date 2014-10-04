@@ -1,0 +1,17 @@
+<h1>Word Ladder Results</h1>
+<hr>
+<br>
+<br>
+
+<%= form_tag(display_path, method: "get") do  %>
+    Start: <%= @step0 %>
+    <br>
+    <% @steps_array.each do |step| %>
+    	<%= text_field_tag("", step) %>
+    	<br>
+    <% end %>
+	Goal : <%= @goal %>
+	<br>
+	<%= @result %>
+<% end %>
+
