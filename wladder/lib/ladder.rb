@@ -14,13 +14,9 @@ load "#{Rails.root}/lib/words4.rb"
 
 # return true if the two strings differ by only one letter
 def edit_distance_of_one word1, word2
-puts word1
-puts word2
-puts word2
-puts word2
-puts word2
-puts word2
-  return false if word2.nil? || word2.length == 0 || word1.length != word2.length
+
+  return false if word2.nil? || word1.length != word2.length
+  #checking if the user inputted no values || words are a different length
 
   # count the different letters
   difference_count = 0
