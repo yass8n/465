@@ -5,17 +5,17 @@ load "#{Rails.root}/lib/words4.rb"
 
 
 	def index
-		@step0 = @@step0 = dictionary.sample
-		@goal = @@goal = dictionary.sample
+		@step0 = dictionary.sample
+		@goal = dictionary.sample
 		#setting class variable and instance variable  so we can get the same value later in the 'show' function
 		while(@goal == @step0) do
 			@goal = dictionary.sample
 		end
 	end
 	def show
-		@step0 = @@step0
-		@goal = @@goal
 		#strip getting rid of trailing white space
+		@step0 = params[:step0].strip
+		@goal = params[:goal].strip
 		@step1 = params[:step1].strip
 		@step2 = params[:step2].strip
 		@step3 = params[:step3].strip

@@ -5,7 +5,7 @@ Fill in each step with a word that differs from the word in the previous step by
 <br>
 <br>
 
-<%= form_tag(display_path, method: "get") do  %>
+<%= form_tag(display_path(@step0, @goal), method: "get") do  %>
     Start: <%= @step0 %>
     <br>
 	1:<%= text_field_tag(:step1) %>
@@ -17,6 +17,8 @@ Fill in each step with a word that differs from the word in the previous step by
 	4:<%= text_field_tag(:step4) %>
 	<br>
 	5:<%= text_field_tag(:step5) %>
+	<%= hidden_field_tag :step0, @step0 %>
+	<%= hidden_field_tag :goal, @goal %>
 	<br>
 	Goal : <%= @goal %>
 	<br>
