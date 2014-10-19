@@ -11,15 +11,18 @@
 </p>
 
 <p>
-<% @url = @url_objects.url %>
   <strong>DOI:</strong>
-   <%= link_to @doi_object.doi, @url %>
+   <%= link_to @doi_object.doi, @doi_object.url_objects.last(2)[0].url %>
+   <%# the last url is a null one..so we get the last 2 and reference the first one with [0] %>
 </p>
 
 <p>
   <strong>URL:</strong>
-<%= @url_objects.url %>
+  <%= @doi_object.url_objects.last(2)[0].url  %>
 </p>
+
+<%= render 'url_objects/form' %>
+
 
 <%= link_to 'Edit', edit_doi_object_path(@doi_object) %> |
 <%= link_to "All #{@doi_object.name} url's", all_doi_urls_path(@doi_object) %> |

@@ -12,7 +12,8 @@ class DoiObjectsController < ApplicationController
   # GET /doi_objects/1
   # GET /doi_objects/1.json
   def show
-    @url_objects =  UrlObject.where("doi_object_id = #{@doi_object.id}").last
+     @url_object = @doi_object.url_objects.new
+    # @url_object =  UrlObject.where("doi_object_id = #{@doi_object.id}").last
   end
 
   def all
@@ -24,7 +25,7 @@ class DoiObjectsController < ApplicationController
 
   # GET /doi_objects/1/edit
   def edit
-    @url_objects =  UrlObject.where("doi_object_id = #{@doi_object.id}").last
+    @url_object =  UrlObject.where("doi_object_id = #{@doi_object.id}").last
   end
 
   def new

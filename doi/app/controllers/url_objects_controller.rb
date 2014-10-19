@@ -41,11 +41,11 @@ class UrlObjectsController < ApplicationController
   # isn't trying to hack the id of the new url_object's DoiObject
   # rails ensures that the URL has not be tampered with
   def create
-    @DoiObject = DoiObject.find params[:DoiObject_id]
+    @DoiObject = DoiObject.find params[:id]
     @url_object = @DoiObject.url_objects.new(url_object_params)
 
     if @url_object.save
-      redirect_to DoiObject_url_objects_url(@DoiObject) , notice: 'url_object was successfully created.'
+      redirect_to doi_object_path(@DoiObject) , notice: 'url_object was successfully created.'
     else
       render :new
     end
@@ -71,7 +71,7 @@ class UrlObjectsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_url_object
-      @url_object = url_object.find(params[:id])
+      @url_object = UrlObject.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
