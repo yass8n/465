@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @doi_object.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @doi_object.description %>
+</p>
+
+<% @url_objects.each do |url| %>
+	<tr>
+        <td><%= url.url %></td>
+    </tr>
+    <% end %>
+
+
+<%= link_to 'Edit', edit_doi_object_path(@doi_object) %> |
+<%= link_to 'Back', doi_objects_path %>
