@@ -60,5 +60,7 @@ Rails.application.routes.draw do
     resources :url_objects, shallow: true
   end
 
- root "doi_objects#index"
+  get 'doi_object/:id/all_urls', to: "doi_objects#all", as: "all_doi_urls"
+
+ root 'doi_objects#index'
 end

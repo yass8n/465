@@ -20,8 +20,6 @@
     <%= f.text_field :description %>
   </div>
     <%= f.fields_for :url_objects do |url_form| %>
-    <h3>New URL</h3>
-    <div style="margin-left:30px;">
       <div class="field">
         <%= url_form.label :url %><br>
         <%= url_form.text_field :url %>

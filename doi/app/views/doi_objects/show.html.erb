@@ -22,4 +22,5 @@
 </p>
 
 <%= link_to 'Edit', edit_doi_object_path(@doi_object) %> |
-<%= link_to 'Back', doi_objects_path %>
+<%= link_to "All #{@doi_object.name} url's", all_doi_urls_path(@doi_object) %> |
+<%= link_to "Show All DOI's", doi_objects_path %> 

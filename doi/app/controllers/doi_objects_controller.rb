@@ -1,5 +1,5 @@
 class DoiObjectsController < ApplicationController
-  before_action :set_doi_object, only: [:show, :edit, :update, :destroy]
+  before_action :set_doi_object, only: [:show, :edit, :update, :destroy, :all]
   require 'securerandom'
 
 
@@ -15,11 +15,16 @@ class DoiObjectsController < ApplicationController
     @url_objects =  UrlObject.where("doi_object_id = #{@doi_object.id}").last
   end
 
+  def all
+     @url_objects =  UrlObject.where("doi_object_id = #{@doi_object.id}")
+  end
+
   # GET /doi_objects/new
 
 
   # GET /doi_objects/1/edit
   def edit
+    @url_objects =  UrlObject.where("doi_object_id = #{@doi_object.id}").last
   end
 
   def new
@@ -31,8 +36,6 @@ class DoiObjectsController < ApplicationController
   def create
     @doi_object = DoiObject.new(doi_object_params)
     @doi_object.doi = SecureRandom.urlsafe_base64;
-    puts @doi_object.url_objects;
-    puts @doi_object.doi
 
 
     respond_to do |format|

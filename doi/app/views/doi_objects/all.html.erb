@@ -1,0 +1,16 @@
+
+
+<% @url_objects.each_with_index do |url, index| %>
+	<tr>
+	    <strong><%= index + 1%> URL:</strong>
+        <td><%= url.url %></td>
+    </tr>
+	<tr>
+	    <strong> Created At:</strong>
+        <td><%= url.created_at.to_s.chomp('UTC') %></td>
+	</tr>
+	<br>
+    <% end %>
+<br>
+<%= link_to 'Back', doi_object_path %> |
+<%= link_to "Show All DOI's", doi_objects_path %> 

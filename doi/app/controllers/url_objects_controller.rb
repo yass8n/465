@@ -76,6 +76,6 @@ class UrlObjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def url_object_params
-      params.require(:url_object).permit(:url,:url_object)
+      params.require(:url_object).permit(:url, :url_object)
     end
 end
