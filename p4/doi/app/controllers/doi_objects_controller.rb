@@ -41,6 +41,7 @@ class DoiObjectsController < ApplicationController
   # POST /doi_objects
   # POST /doi_objects.json
   def create
+    puts "...................................."
     @doi_object = DoiObject.new(doi_object_params)
     @doi_object.doi = SecureRandom.urlsafe_base64;
 
