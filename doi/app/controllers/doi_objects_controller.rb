@@ -12,7 +12,7 @@ class DoiObjectsController < ApplicationController
   # GET /doi_objects/1
   # GET /doi_objects/1.json
   def show
-    @url_objects =  UrlObject.where("doi_object_id = '25'")
+    @url_objects =  UrlObject.where("doi_object_id = #{@doi_object.id}").last
   end
 
   # GET /doi_objects/new
@@ -31,7 +31,6 @@ class DoiObjectsController < ApplicationController
   def create
     @doi_object = DoiObject.new(doi_object_params)
     @doi_object.doi = SecureRandom.urlsafe_base64;
-    puts "................................................";
     puts @doi_object.url_objects;
     puts @doi_object.doi
 

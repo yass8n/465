@@ -10,12 +10,16 @@
   <%= @doi_object.description %>
 </p>
 
-<% @url_objects.each do |url| %>
-	<tr>
-        <td><%= url.url %></td>
-    </tr>
-    <% end %>
+<p>
+<% @url = @url_objects.url %>
+  <strong>DOI:</strong>
+   <%= link_to @doi_object.doi, @url %>
+</p>
 
+<p>
+  <strong>URL:</strong>
+<%= @url_objects.url %>
+</p>
 
 <%= link_to 'Edit', edit_doi_object_path(@doi_object) %> |
 <%= link_to 'Back', doi_objects_path %>
