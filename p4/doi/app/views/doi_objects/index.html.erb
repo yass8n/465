@@ -20,8 +20,8 @@
       <tr>
         <td><%= doi_object.name %></td>
         <% if doi_object.description.length > 30 %>
-        <% @description = doi_object.description.length > 30 %>
-          <td><%= doi_object.description[0..28] + "..." %></td>
+        <% @description = doi_object.description.length >= 46 %>
+          <td><%= doi_object.description[0..46] + "..." %></td>
         <% else %>
           <td><%= doi_object.description %></td>
         <% end %>
