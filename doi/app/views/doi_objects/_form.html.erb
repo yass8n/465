@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.text_area :description %>
   </div>
   <% if  @dont_show_urls.nil? %>
     <%= f.fields_for :url_objects do |url_form| %>
@@ -28,7 +28,7 @@
     </div>
   <% end %>
 <% end %>
-  <div class="actions">
+  <div class="actions" style="text-align:center">
     <%= f.submit %>
   </div>
 <% end %>

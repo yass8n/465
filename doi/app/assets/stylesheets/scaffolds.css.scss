@@ -1,11 +1,40 @@
-body {
+html body {
   background-color: #fff;
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
-}
+  width: 50%;
+  margin: auto;
+  margin-top: 60px;
 
+}
+.footer{
+  min-height: 100px;
+}
+html{
+  background-image: url(http://www.edudemic.com/wp-content/uploads/2014/02/48405289.jpg);
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
+}
+.center{
+  margin-left: auto;
+  width: 150px;
+  margin-right: auto;
+}
+.text-align{
+  text-align:center;
+}
+#lookup{
+  position: relative;
+  margin-left: 50px;
+  margin-top: 5px;
+}
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;

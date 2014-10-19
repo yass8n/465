@@ -11,11 +11,10 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :url %><br>
-    <%= f.text_field :url %>
+  <div class="field text-align">
+    <%= f.text_field :url, placeholder: "Enter new URL" %>
   </div>
-  <div class="actions">
+  <div class="actions text-align">
     <%= f.submit %>
   </div>
 <% end %>

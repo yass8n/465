@@ -1,11 +1,17 @@
-<h1>Listing doi_objects</h1>
-
-<table>
+<div class="foreground">
+<h1 class="text-align"> Yaseen Aniss's DOI SERVER </h1>
+<br>
+<div class="row">
+  <div class="col-md-12">
+   <table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
       <th>Description</th>
-      <th colspan="3"></th>
+      <th>Show</th>
+<!--       <th>Edit</th> -->
+      <th>Destroy</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -13,21 +19,34 @@
     <% @doi_objects.each do |doi_object| %>
       <tr>
         <td><%= doi_object.name %></td>
-        <td><%= doi_object.description %></td>
+        <% if doi_object.description.length > 30 %>
+        <% @description = doi_object.description.length > 30 %>
+          <td><%= doi_object.description[0..28] + "..." %></td>
+        <% else %>
+          <td><%= doi_object.description %></td>
+        <% end %>
         <td><%= link_to 'Show', doi_object %></td>
-        <td><%= link_to 'Edit', edit_doi_object_path(doi_object) %></td>
+        <%# link_to 'Edit', edit_doi_object_path(doi_object) %>
         <td><%= link_to 'Destroy', doi_object, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+<br>
+<div class = "center">
 <%= form_tag(look_up_path, method: "get") do  %>
-    <%= label_tag(:name, "Name: ") %>
-    <%= text_field_tag(:name) %>
-    <%= submit_tag("Lookup") %>
+    <%= text_field_tag :name, nil, placeholder: "Search by name"  %>
+    <br>
+    <div id="lookup"><%= submit_tag("Lookup") %></div>
 <% end %>
+</div>
 
 <br>
+<div class="text-align"><%= link_to 'New Doi object', new_doi_object_path %></div>
+</div>
+</div>
+</div>
+<br>
+<br>
 
-<%= link_to 'New Doi object', new_doi_object_path %>

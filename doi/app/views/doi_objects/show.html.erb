@@ -1,32 +1,38 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-12">
+<p id="notice" class="text-align"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @doi_object.name %>
-</p>
+<h1 class="text-align"> <%= @doi_object.name %> </h1>
 
-<p>
+<p class="text-align">
   <strong>Description:</strong>
   <%= @doi_object.description %>
 </p>
 
-<p>
+<p class="text-align">
   <strong>DOI:</strong>
    <%= link_to @doi_object.doi, @doi_object.url_objects.last(2)[0].url %>
    <%# the last url is a null one..so we get the last 2 and reference the first one with [0] %>
 </p>
 
-<p>
+<p class="text-align">
   <strong>URL:</strong>
   <%= @doi_object.url_objects.last(2)[0].url  %>
+  <% if @render_url_form.nil? %>
+  <%= render 'url_objects/form' %>
+  <% end %>
 </p>
-<% if @render_url_form.nil? %>
-<%= render 'url_objects/form' %>
-<% end %>
 
 
-<%= link_to 'Edit URL', edit_url_object_path(@doi_object.url_objects.last(2)[0]) %>
-<%= link_to "Edit #{@doi_object.name}", edit_doi_object_path(@doi_object) %>
+
+<%# link_to 'Edit URL', edit_url_object_path(@doi_object.url_objects.last(2)[0]) %>
+<%# link_to "Edit #{@doi_object.name}", edit_doi_object_path(@doi_object) %>
 <%#...only keep above if I want to actually EDIT a specific URL%> 
-<%= link_to "All #{@doi_object.name} url's", all_doi_urls_path(@doi_object) %> |
-<%= link_to "Show All DOI's", doi_objects_path %> 
+<div class="text-align"><%= link_to "All #{@doi_object.name} url's", all_doi_urls_path(@doi_object) %> 
+</div> 
+<div class="text-align"><%= link_to "Show All DOI's", doi_objects_path %> 
+</div>
+</div>
+</div>
+
+
