@@ -13,7 +13,13 @@ class DoiObjectsController < ApplicationController
   # GET /doi_objects/1.json
   def show
      @url_object = @doi_object.url_objects.new
-    # @url_object =  UrlObject.where("doi_object_id = #{@doi_object.id}").last
+  end
+
+  def find
+    @doi_object = DoiObject.where("name = '#{params[:name]}'")[0]
+    @url_object = @doi_object.url_objects.new
+    @render_url_form = false
+    render :show
   end
 
   def all
@@ -25,7 +31,7 @@ class DoiObjectsController < ApplicationController
 
   # GET /doi_objects/1/edit
   def edit
-    @url_object =  UrlObject.where("doi_object_id = #{@doi_object.id}").last
+    # @url_object =  UrlObject.where("doi_object_id = #{@doi_object.id}").last
   end
 
   def new

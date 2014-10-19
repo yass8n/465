@@ -62,6 +62,8 @@ Rails.application.routes.draw do
 
   get 'doi_object/:id/all_urls', to: "doi_objects#all", as: "all_doi_urls"
 
+  get 'look_up', to: "doi_objects#find", as: "look_up"
+
   post 'doi_objects/:id/new', to: "url_objects#create", as: "url_objects"
 
  root 'doi_objects#index'

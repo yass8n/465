@@ -19,6 +19,7 @@
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>
+  <% if  @dont_show_urls.nil? %>
     <%= f.fields_for :url_objects do |url_form| %>
       <div class="field">
         <%= url_form.label :url %><br>
@@ -26,6 +27,7 @@
       </div>
     </div>
   <% end %>
+<% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

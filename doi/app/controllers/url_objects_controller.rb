@@ -33,6 +33,7 @@ class UrlObjectsController < ApplicationController
 
   # GET /url_objects/1/edit
   def edit
+    @url_object =  UrlObject.find params[:id]
     # edit routes are not nested (we already know our DoiObject's foreign_key)
   end
 
@@ -56,7 +57,7 @@ class UrlObjectsController < ApplicationController
   # and cannot be changed by edit (note that DoiObject_id is not permitted in url_object_params())
   def update
     if @url_object.update(url_object_params)
-      redirect_to DoiObject_url_objects_url(@url_object.DoiObject), notice: 'url_object was successfully updated.'
+      redirect_to root_path, notice: 'url_object was successfully updated.'
     else
       render :edit
     end
