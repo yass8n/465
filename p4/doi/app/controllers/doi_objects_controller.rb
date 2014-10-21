@@ -31,7 +31,7 @@ class DoiObjectsController < ApplicationController
 
   # GET /doi_objects/1/edit
   def edit
-    # @url_object =  UrlObject.where("doi_object_id = #{@doi_object.id}").last
+    @url_object =  UrlObject.where("doi_object_id = #{@doi_object.id}").last
   end
 
   def new
@@ -41,7 +41,7 @@ class DoiObjectsController < ApplicationController
   # POST /doi_objects
   # POST /doi_objects.json
   def create
-    puts "...................................."
+    # puts "...................................."
     @doi_object = DoiObject.new(doi_object_params)
     @doi_object.doi = SecureRandom.urlsafe_base64;
 

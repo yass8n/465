@@ -1,6 +1,7 @@
-<h1>Editing doi_object</h1>
+<h1 class="text-align">Editing <%= @doi_object.name.capitalize %></h1>
 <% @dont_show_urls = true %>
 <%= render 'form' %>
-
-<%= link_to 'Show', @doi_object %> |
-<%= link_to "Show all Doi's", root_path %>
+<div style="height:15px;">
+<div class="pull-left"><%= link_to 'Show', @doi_object %></div>
+<div class="pull-right"><%= link_to "Show all Doi's", root_path %></div>
+</div>

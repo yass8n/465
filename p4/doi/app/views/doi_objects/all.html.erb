@@ -1,4 +1,4 @@
-<h1 class="text-align"><%= @url_objects[0].doi_object.name %></h1>
+<h1 class="text-align"><%= @url_objects[0].doi_object.name.capitalize + " URL History" %></h1>
 <div class="row">
   <div class="col-md-12">
    <table class="table table-striped">
@@ -18,5 +18,15 @@
     <% end %>
     </tbody>
 </table>
-<div class="pull-left" style="margin-left: 10px"><%= link_to 'Back', doi_object_path %></div>
-<div class="pull-right" style="margin-right: 10px"><%= link_to "Show All DOI's", doi_objects_path %></div>
+<div class="pull-left"><%= link_to 'Back', doi_object_path %></div>
+<div class="pull-right"><%= link_to "Show All DOI's", doi_objects_path %></div>
+
+<!-- if doi.find_by(doi_string: self.string)
+generate new DOI
+end 
+allow to search by reg expression to find similar URLs
+allow them to click on any URL and send them to that URL
+
+allow them to click all URL's and direct them there
+
+edit notices-->
