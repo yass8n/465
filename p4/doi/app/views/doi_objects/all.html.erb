@@ -18,8 +18,10 @@
     <% end %>
     </tbody>
 </table>
-<div class="pull-left"><%= link_to 'Back', doi_object_path %></div>
-<div class="pull-right"><%= link_to "Show All DOI's", doi_objects_path %></div>
+<div style="height:10px;">
+<div class="pull-left left-pad"><%= link_to 'Back', doi_object_path %></div>
+<div class="pull-right right-pad"><%= link_to "Show All DOI's", doi_objects_path %></div>
+</div>
 
 <!-- if doi.find_by(doi_string: self.string)
 generate new DOI
@@ -29,4 +31,6 @@ allow them to click on any URL and send them to that URL
 
 allow them to click all URL's and direct them there
 
-edit notices-->
+edit notices
+
+border-radius: 10px on body-->

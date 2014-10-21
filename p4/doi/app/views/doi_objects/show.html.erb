@@ -28,9 +28,11 @@
 <%# link_to 'Edit URL', edit_url_object_path(@doi_object.url_objects.last(2)[0]) %>
 <%# link_to "Edit #{@doi_object.name}", edit_doi_object_path(@doi_object) %>
 <%#...only keep above if I want to actually EDIT a specific URL%> 
-<div class="pull-left"><%= link_to "All #{@doi_object.name} url's", all_doi_urls_path(@doi_object) %> 
+<div style="height:10px;">
+<div class="pull-left left-pad"><%= link_to "All #{@doi_object.name} url's", all_doi_urls_path(@doi_object) %> 
 </div> 
-<div class="pull-right"><%= link_to "Show All DOI's", doi_objects_path %> 
+<div class="pull-right right-pad"><%= link_to "Show All DOI's", doi_objects_path %> 
+</div>
 </div>
 </div>
 </div>

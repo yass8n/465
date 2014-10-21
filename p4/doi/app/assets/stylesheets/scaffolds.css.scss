@@ -7,8 +7,17 @@ html body {
   width: 50%;
   margin: auto;
   margin-top: 60px;
+  border-radius: 12px;
 
 }
+.left-pad{
+     margin-left: 8px;
+     margin-bottom: 4px;
+  }
+.right-pad{
+     margin-right: 8px;
+     margin-bottom: 4px;
+  }
 .footer{
   min-height: 100px;
 }
