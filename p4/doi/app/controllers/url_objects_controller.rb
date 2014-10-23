@@ -5,11 +5,6 @@
 class UrlObjectsController < ApplicationController
   before_action :set_url_object, only: [:edit, :update, :destroy]
 
-
-  # GET DoiObjects/:DoiObject_id/url_objects/new
-  # Create a new url_object in the context of a DoiObject object
-  # that way the url_object's foreign key (DoiObject_id) will be
-  # initialized correctly.
   def new
     # since our the url_object new path contains the DoiObject's id
     # we can use params[:DoiObject_id] to get that id

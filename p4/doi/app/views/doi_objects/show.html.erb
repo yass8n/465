@@ -1,45 +1,39 @@
-<% if @doi_object.length > 1%>
-<div class="row scrollable" style="margin-bottom: 10px;">
-<% else %>
 <div class="row" style="margin-bottom: 10px;">
-<% end %>
   <div class="col-md-12">
-<p id="notice" class="text-align"><%= notice %></p>
-<% @doi_object.each do |doi_object| %>
-<div>
-<h1 class="text-align"> <%= doi_object.name.capitalize %> </h1>
+    <p id="notice" class="text-align"><%= notice %></p>
+    <% @doi_object.each do |doi_object| %>
+    <div>
+      <h1 class="text-align"> <%= doi_object.name.capitalize %> </h1>
+      <p class="text-align">
+      <strong>Description:</strong>
+      <%= doi_object.description %>
+      </p>
 
-<p class="text-align">
-  <strong>Description:</strong>
-  <%= doi_object.description %>
-</p>
+      <p class="text-align">
+      <strong>DOI:</strong>
+      <%= link_to doi_object.doi, doi_object.url_objects.last(2)[0].url %>
+      <%# the last url is a null one..so we get the last 2 and reference the first one with [0] %>
+      </p>
 
-<p class="text-align">
-  <strong>DOI:</strong>
-   <%= link_to doi_object.doi, doi_object.url_objects.last(2)[0].url %>
-   <%# the last url is a null one..so we get the last 2 and reference the first one with [0] %>
-</p>
+      <p class="text-align">
+      <strong>Most Recent URL:</strong>
+      <%= doi_object.url_objects.last(2)[0].url  %>
+      <% if @render_url_form.nil? %>
+        <%= render 'url_objects/form' %>
+      <% end %>
+      </p>
 
-<p class="text-align">
-  <strong>Most Recent URL:</strong>
-  <%= doi_object.url_objects.last(2)[0].url  %>
-  <% if @render_url_form.nil? %>
-  <%= render 'url_objects/form' %>
-  <% end %>
-</p>
-<p id="alert" class="text-align"><%= alert %></p>
-
-<div style="height:10px;">
-<div class="center"><%= link_to "All #{doi_object.name} url's", all_doi_urls_path(doi_object) %> 
-</div> 
-</div>
-<br>
-<hr>
-<% end %>
-<div class="center"><%= link_to "Show All DOI's", doi_objects_path %> 
-</div>
-</div>
-</div>
+      <p id="alert" class="text-align"><%= alert %></p>
+      <div style="height:10px;">
+        <div class="center"><%= link_to "All #{doi_object.name} url's", all_doi_urls_path(doi_object) %> </div> 
+      </div>
+      <br>
+      <hr>
+      <% end %>
+      <div class="center"><%= link_to "Show All DOI's", doi_objects_path %> 
+      </div>
+    </div>
+  </div>
 </div>
 <br>
 

@@ -1,30 +1,26 @@
 <h1 class="text-align"><%= @url_objects[0].doi_object.name.capitalize + " URL History" %></h1>
 <div class="row">
   <div class="col-md-12">
-   <table class="table table-striped">
-  <thead>
-    <tr>
-      <th class="text-align">URL</th>
-      <th class="text-align">Date and Time Created</th>
-    </tr>
-  </thead>
+    <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="text-align">URL</th>
+        <th class="text-align">Date and Time Created</th>
+      </tr>
+      </thead>
 
-  <tbody>
-<% @url_objects.each_with_index do |url, index| %>
-	<tr>
-        <td class="text-align"><%= link_to url.url, url.url %>
-        <td class="text-align"><%= url.created_at.to_s.chomp('UTC') %></td>
-	</tr>
-    <% end %>
-    </tbody>
-</table>
-<div style="height:10px;">
-<div class="pull-left left-pad"><%= link_to 'Back', doi_object_path %></div>
-<div class="pull-right right-pad"><%= link_to "Show All DOI's", doi_objects_path %></div>
+      <tbody>
+        <% @url_objects.each_with_index do |url, index| %>
+          <tr>
+            <td class="text-align"><%= link_to url.url, url.url %>
+            <td class="text-align"><%= url.created_at.to_s.chomp('UTC') %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div style="height:10px;">
+      <div class="pull-left left-pad"><%= link_to 'Back', doi_object_path %></div>
+      <div class="pull-right right-pad"><%= link_to "Show All DOI's", doi_objects_path %></div>
+    </div>
+  </div>
 </div>
-
-<!--
-allow to search by reg expression to find similar URLs
-allow them to click on any URL and send them to that URL
-make sure a new URL cant be empty
--->
