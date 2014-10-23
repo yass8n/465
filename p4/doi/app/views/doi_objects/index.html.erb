@@ -37,7 +37,7 @@
     <div class = "center">
       <p id="alert" class="text-align"><%= alert %></p>
       <%= form_tag(look_up_path, method: "get") do  %>
-      <%= text_field_tag :name, nil, placeholder: "Search by name"  %>
+      <%= text_field_tag :name, nil, placeholder: "Search by REGEX"  %>
       <br>
       <div id="lookup"><%= submit_tag("Lookup") %></div>
       <% end %>
