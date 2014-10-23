@@ -12,7 +12,7 @@ class DoiObjectsController < ApplicationController
   end
 
   def find
-    @doi_object = DoiObject.where( [ "name LIKE ?" , "%#{params[:name]}%" ] ) #possible SQL injection
+    @doi_object = DoiObject.all.select { |doi| /#{params[:name]}/ =~ doi.name }
     @render_url_form = false
     if params[:name].length < 1
       redirect_to doi_objects_path, alert: "Please enter a name."
