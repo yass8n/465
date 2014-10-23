@@ -10,7 +10,7 @@ dois = DoiObject.create(
     { name: 'google', description: 'The best search Engine EVER. Bing sucks compared to google.', doi: '3Hv1Rzqnn5aRwV-WH-TM-w'},
     { name: 'facebook', description: 'Best Social Media Site', doi: '5KL3Vzqqq5FcwV-WX-IL-p'},
     { name: 'Chico State', description: 'This school rocks.', doi: '3Hhsjndy5aRwV-WH-TM-w'},
-    { name: 'CSUEB', description: 'This school is okay.', doi: '3Hhsjndy5aRwV-WH-TM-w'}
+    { name: 'CSUEB', description: 'This school is okay.', doi: '3Hjdk9875379V-WH-TM-w'}
   ]
 )
 
