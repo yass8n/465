@@ -3,6 +3,7 @@
 <br>
 <div class="row">
   <div class="col-md-12">
+  <p id="notice" class="text-align"><%= notice %></p>
    <table class="table table-striped">
   <thead>
     <tr>
@@ -20,7 +21,7 @@
       <tr>
         <td><%= doi_object.name %></td>
         <% if doi_object.description.length > 30 %>
-        <% @description = doi_object.description.length >= 40 %>
+          <% @description = doi_object.description.length >= 40 %>
           <td><%= doi_object.description[0..40] + "..." %></td>
         <% else %>
           <td><%= doi_object.description %></td>
@@ -35,18 +36,17 @@
 
 <br>
 <div class = "center">
+<p id="alert" class="text-align"><%= alert %></p>
 <%= form_tag(look_up_path, method: "get") do  %>
     <%= text_field_tag :name, nil, placeholder: "Search by name"  %>
     <br>
     <div id="lookup"><%= submit_tag("Lookup") %></div>
 <% end %>
 </div>
-
-<br>
+<hr>
 <div class="text-align"><%= link_to 'New Doi object', new_doi_object_path %></div>
 </div>
 </div>
 </div>
-<br>
 <br>
 

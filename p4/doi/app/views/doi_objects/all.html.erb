@@ -12,7 +12,7 @@
   <tbody>
 <% @url_objects.each_with_index do |url, index| %>
 	<tr>
-        <td class="text-align"><%= url.url %></td>
+        <td class="text-align"><%= link_to url.url, url.url %>
         <td class="text-align"><%= url.created_at.to_s.chomp('UTC') %></td>
 	</tr>
     <% end %>
@@ -23,14 +23,8 @@
 <div class="pull-right right-pad"><%= link_to "Show All DOI's", doi_objects_path %></div>
 </div>
 
-<!-- if doi.find_by(doi_string: self.string)
-generate new DOI
-end 
+<!--
 allow to search by reg expression to find similar URLs
 allow them to click on any URL and send them to that URL
-
-allow them to click all URL's and direct them there
-
-edit notices
-
-border-radius: 10px on body-->
+make sure a new URL cant be empty
+-->
