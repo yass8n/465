@@ -20,10 +20,32 @@ class ImagesController < ApplicationController
   def edit
   end
 
+# POST /images
   def create
+    if params[:uploaded_file].nil?
+    	redirect_to new_image_path, alert: "Please upload a photo"
+    	return
+    end
+    if params[:public].nil?
+    	redirect_to new_image_path, alert: "Stop trying to hack me, pick public or private!"
+    	return
+    end
     @image = Image.new(image_params)
-    @image.save
-    respond_with(@image)
+    @image.filename = @image.generate_filename
+    @image.user = current_user
+    @image.public = params[:public]
+
+    @uploaded_io = params[:image][:uploaded_file]
+
+    File.open(Rails.root.join('public', 'images', @image.filename), 'wb') do |file|
+        file.write(@uploaded_io.read)
+    end
+
+    if @image.save
+      redirect_to @image, notice: 'Image was successfully created.'
+    else
+      render :new
+    end
   end
 
   def update

@@ -11,22 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :filename %><br>
-    <%= f.text_field :filename %>
-  </div>
-  <div class="field">
-    <%= f.label :public %><br>
-    <%= f.check_box :public %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </div>
+<%= f.file_field :uploaded_file %>
+  <br>
+  <%= radio_button_tag(:public, "true", checked = true) %>
+  <%= label_tag(:public_true, "public") %>
+  <%= radio_button_tag(:public, "false") %>
+  <%= label_tag(:public_false, "private") %>
+  <br>
+  <br>
+
   <div class="actions">
     <%= f.submit %>
   </div>
