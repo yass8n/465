@@ -7,4 +7,5 @@ resources :images do
 end
 root to: 'images#index'
 post 'images/:id/tags', to: "tags#create", as: "image_tag" #created this route so the form for creating tags works in the images show view
+post 'images/:id', to: "images#change_visibility", as: "change_visibility"
 end

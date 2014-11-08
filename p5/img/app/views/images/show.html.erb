@@ -17,11 +17,16 @@
   <%= @image.user.name %>
 </p>
 
+<% if !current_user.nil? && @image.user == current_user %>
+<%= button_to "Toggle Private/Public", action: "change_visibility" %>
+<% end %>
+<br>
+<%= render 'tags/form' %>
+
 <% @image.tags.each do |tag| %>
      <p><%= tag.tag_string %></p>
 <% end %>
 
-<%= render 'tags/form' %>
 
 <%= link_to 'Edit', edit_image_path(@image) %> |
 <%= link_to 'Back', images_path %>

@@ -1,13 +1,11 @@
 class ImagesController < ApplicationController
-  before_action :set_image, only: [:show, :edit, :update, :destroy]
+  before_action :set_image, only: [:show, :edit, :update, :destroy, :change_visibility]
 
   respond_to :html
 
   def index
     @images = Image.where(:public => true)
     @my_images = Image.where(:user_id => current_user.id)
-    puts current_user.id
-    puts "............................."
     respond_with(@images, @my_images)
   end
 
@@ -23,6 +21,17 @@ class ImagesController < ApplicationController
 
   def edit
   end
+
+  def change_visibility
+      @image.public = !@image.public
+      @image.public ? notice = "Image now public" : notice = "Image now private"
+      if @image.save
+        redirect_to image_path, notice: notice
+      else
+        redirect_to image_path, alert: "Image not updated"
+      end
+  end
+
 
 # POST /images
   def create

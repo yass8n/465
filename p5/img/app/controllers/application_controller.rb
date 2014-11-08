@@ -11,10 +11,10 @@ class ApplicationController < ActionController::Base
 
 		# if u are trying to access any pages other than the sign in page and you are not a user, you are redirected to the login page
 		if 	current_user.nil? && (params[:controller] == 'images' || params[:controller] == "tags" || params[:controller] == "image_users")
-			redirect_to new_user_session_path
+			redirect_to new_user_session_path, notice: "Must sign in to proceed"
 		end
 
-		if params[:controller] == 'images' && (params[:action] == 'edit' || params[:action] == 'update' || params[:action] == 'destroy')
+		if params[:controller] == 'images' && (params[:action] == 'edit' || params[:action] == 'update' || params[:action] == 'destroy' || params[:action] == "change_visibility")
 		  current_image = Image.find(params[:id])
 
 		  if current_image.user == current_user
