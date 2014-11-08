@@ -23,7 +23,7 @@ class ImagesController < ApplicationController
 
 # POST /images
   def create
-    if params[:uploaded_file].nil?
+    if params[:image][:uploaded_file].nil?
     	redirect_to new_image_path, alert: "Please upload a photo"
     	return
     end
