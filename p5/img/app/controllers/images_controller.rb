@@ -56,6 +56,7 @@ class ImagesController < ApplicationController
 
   def destroy
     @image.destroy
+    @image.tags.all.delete_all
     respond_with(@image)
   end
 
