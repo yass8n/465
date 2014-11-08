@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 	def authenticate!
 		:authenticate_user!
 
+		# if u are trying to access any pages other than the sign in page and you are not a user, you are redirected to the login page
 		if 	current_user.nil? && (params[:controller] == 'images' || params[:controller] == "tags" || params[:controller] == "image_users")
 			redirect_to new_user_session_path
 		end

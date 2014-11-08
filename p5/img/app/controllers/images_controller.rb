@@ -5,7 +5,10 @@ class ImagesController < ApplicationController
 
   def index
     @images = Image.where(:public => true)
-    respond_with(@images)
+    @my_images = Image.where(:user_id => current_user.id)
+    puts current_user.id
+    puts "............................."
+    respond_with(@images, @my_images)
   end
 
   def show
