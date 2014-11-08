@@ -8,6 +8,11 @@ class ApplicationController < ActionController::Base
   protected
 	def authenticate!
 		:authenticate_user!
+
+		if 	current_user.nil? && (params[:controller] == 'images' || params[:controller] == "tags" || params[:controller] == "image_users")
+			redirect_to new_user_session_path
+		end
+
 		if params[:controller] == 'images' && (params[:action] == 'edit' || params[:action] == 'update' || params[:action] == 'destroy')
 		  current_image = Image.find(params[:id])
 
