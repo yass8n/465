@@ -4,11 +4,12 @@ class ImagesController < ApplicationController
   respond_to :html
 
   def index
-    @images = Image.all
+    @images = Image.where(:public => true)
     respond_with(@images)
   end
 
   def show
+  	@tag = Tag.new 
     respond_with(@image)
   end
 

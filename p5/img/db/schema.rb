@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108093518) do
+ActiveRecord::Schema.define(version: 20141108105033) do
 
   create_table "image_users", force: true do |t|
     t.integer  "image_id"
@@ -34,10 +34,10 @@ ActiveRecord::Schema.define(version: 20141108093518) do
   add_index "images", ["user_id"], name: "index_images_on_user_id"
 
   create_table "tags", force: true do |t|
-    t.string   "tag_sring"
     t.integer  "image_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "tag_string"
   end
 
   add_index "tags", ["image_id"], name: "index_tags_on_image_id"
