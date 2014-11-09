@@ -8,6 +8,8 @@ class ImagesController < ApplicationController
     @my_images = Image.where(:user_id => current_user.id) 
     access_image_objects = ImageUser.all.where('user_id in (?)', current_user.id) #finding all accesses the current user has access to
     @access_images =  access_image_objects.map do |object| Image.where(:id => object.image_id).first end #must add .first because we want the first object in the relation that is returned
+    
+    @access_images.reject! { |i| i.nil? || i.user.id == current_user.id } #getting rid of images that the user owns
     respond_with(@images, @my_images, @access_images)
   end
 
@@ -22,6 +24,7 @@ class ImagesController < ApplicationController
       #returns all images the user has access to
     access_images += Image.where(:user_id => current_user.id) #adding in the current users images
     access_images += Image.where(:public => true)
+    access_images.reject! { |i| i.nil? }
     tags = Tag.all.where(tag_string:  @tag_string) #getting all tags that match the given tag name
     @images = tags.map do |tag|  
       access_images.select do |image|

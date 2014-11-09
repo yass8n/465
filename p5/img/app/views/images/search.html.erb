@@ -20,20 +20,19 @@
 
   <tbody>
 
-    <% @images.each_with_index do |image, index| %>
-    <!-- images is an array of images that match the search...we must index it starting from 0...'index' == 1 in the firs iteration so we use index -1 to get the images we want -->
+    <% @images.size.times do |index| %>
       <tr>
       <td></td>
-      <td><%= link_to (image_tag root_url + "/images/" + image[index-1].filename, size: "100x100", alt: image[index-1].filename), image_path(image[index-1]) %><td>
-        <td><%= image[index-1].user.name %></td>
+      <td><%= link_to (image_tag root_url + "/images/" + @images[index][0].filename, size: "100x100", alt: @images[index][0].filename), image_path(@images[index][0]) %><td>
+        <td><%= @images[index][0].user.name %></td>
 
-        <% if !current_user.nil? && image[index-1].user == current_user %>
-        <td><%= link_to 'Destroy', image[index-1], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if !current_user.nil? && @images[index][0].user == current_user %>
+        <td><%= link_to 'Destroy', @images[index][0], method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 <div class ="center">
-<%= link_to 'Back', root_path %>
+<%= link_to 'Home', root_path %>
 </div>
