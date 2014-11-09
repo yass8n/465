@@ -17,6 +17,7 @@
 <% @image.tags.each do |tag| %>
 <%= form_tag(tag_path(tag), method: :delete) do %>
 		<%= hidden_field_tag :image_id, @image.id %> <!-- passing in image_id in hidden form  to the delete controller -->
+		<%= hidden_field_tag :view, "show" %> <!-- passing in image_id in hidden form  to the delete controller -->
 		<%= submit_tag (tag.tag_string), data: { confirm: "Are you sure you want to delete the tag #{tag.tag_string}?" } %>
 		<% end %>
 <% end %>

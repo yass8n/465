@@ -40,10 +40,21 @@ class TagsController < ApplicationController
 
   def destroy
     @image = Image.find params[:image_id]
-    if @tag.destroy
-      redirect_to image_path(@image), notice: 'Tag was successfully deleted.'
-    else
-       redirect_to image_path(@image), alert: "Error."
+    view = params[:view]
+
+    if view == "show"
+      if @tag.destroy
+        redirect_to image_path(@image), notice: 'Tag was successfully deleted.' 
+      else
+         redirect_to image_path(@image), alert: "Error."
+      end
+    end
+    if view == "edit"
+      if @tag.destroy
+        redirect_to edit_image_path(@image), notice: 'Tag was successfully deleted.' 
+      else
+         redirect_to edit_image_path(@image), alert: "Error."
+      end
     end
   end
 

@@ -28,6 +28,7 @@ class ImagesController < ApplicationController
   end
 
   def edit
+        @tag = Tag.new #to create a new tag if the user wants to
   end
 
   def change_visibility
