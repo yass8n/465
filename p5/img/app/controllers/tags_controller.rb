@@ -17,6 +17,11 @@ class TagsController < ApplicationController
     respond_with(@tag)
   end
 
+  def search
+    tags = Tag.all.where(tag_string: params[:tag_string])
+    @images = tags.map do |tag| Image.where(id: tag.image_id).first end
+  end
+
   def edit
   end
 

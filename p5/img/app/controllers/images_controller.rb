@@ -5,10 +5,27 @@ class ImagesController < ApplicationController
 
   def index
     @images = Image.where(:public => true)
-    @my_images = Image.where(:user_id => current_user.id)
-    access_image_objects = ImageUser.all.where('user_id in (?)', current_user.id)
+    @my_images = Image.where(:user_id => current_user.id) 
+    access_image_objects = ImageUser.all.where('user_id in (?)', current_user.id) #finding all accesses the current user has access to
     @access_images =  access_image_objects.map do |object| Image.where(:id => object.image_id).first end #must add .first because we want the first object in the relation that is returned
     respond_with(@images, @my_images, @access_images)
+  end
+
+  def search
+    access_image_objects = ImageUser.all.where('user_id in (?)', current_user.id) #finding all accesses the current user has access to
+    access_images =  access_image_objects.map do |object| Image.where(:id => object.image_id).first end #must add .first because we want the first object in the relation that is returned
+      #returns all images the user has access to
+    access_images += Image.where(:user_id => current_user.id) #adding in the current users images
+    @tag_string = params[:tag_string]
+    tags = Tag.all.where(tag_string:  @tag_string) #getting all tags that match the given tag name
+    @images = tags.map do |tag|  
+      access_images.select do |image|
+        image.id == tag.image_id
+      end
+    end
+    puts @images.inspect
+    puts "..........................."
+    respond_with(@images, @tag_string)
   end
 
   def show
@@ -17,9 +34,10 @@ class ImagesController < ApplicationController
     ids.compact!
     ids << current_user.id #so the excluded users doent include the current user
     @excluded_users = User.all.where('id not in (?)',ids)
-    ids.delete(current_user.id)
+    ids.delete(current_user.id) #so the included users doesnt include the current_user
     @included_users = User.all.where('id in (?)',ids)
     respond_with(@image, @excluded_users, @included_users)
+    # the above code is mostly being used to create the drop-down menue
   end
 
   def new

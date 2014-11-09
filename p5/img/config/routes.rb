@@ -10,4 +10,5 @@ post 'images/:id/tags', to: "tags#create", as: "image_tag" #created this route s
 post 'images/:id', to: "images#change_visibility", as: "change_visibility"
 post '/images/:image_id/image_users/create/', to: 'image_users#create', as: 'create_image_user'
 delete "/images/:image_id/image_users/destroy/", to: 'image_users#destroy', as: 'destroy_image_user'
+get "/images/tag/search/", to: 'images#search', as: 'image_tag_search'
 end
