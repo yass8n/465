@@ -1,4 +1,6 @@
 <nav class="center">
+<h3 class="text-align" style="margin-right: 14px;"><%= link_to 'Upload New Image', new_image_path %></h3>
+<br>
 <ul>
 <li><%= link_to "My Images", root_path(anchor: "my") %></li>
 <li><%= link_to "Public Images", root_path(anchor: "public") %></li>
@@ -101,4 +103,4 @@
 <% end %>
 <br>
 
-<h3 class="text-align"><%= link_to 'New Image', new_image_path %></h3>
+<h3 class="text-align"><%= link_to 'Upload New Image', new_image_path %></h3>
