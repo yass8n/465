@@ -39,21 +39,25 @@ class ImagesController < ApplicationController
     respond_with(@images, @tag_string)
   end
     def search_user
-    @user = params[:user_name]
-    user = User.where(name: @user).first
+    @user = params[:user_name] #getting name from db
+    user = User.where(name: @user).first #checking if there is a user with that name
     if (@user.size == 0 || !user)
       redirect_to root_path, notice: "Invalid Search"
       return
     end
     user_id = user.id
-    access_image_objects = ImageUser.all.where('user_id in (?)', current_user.id) #finding all accesses the current user has access to
+    access_image_objects = ImageUser.all.where('user_id in (?)', current_user.id) #finding all pics the current user has access to
     @access_images =  access_image_objects.map do |object| Image.where(:id => object.image_id).where("user_id in (?)", user_id).first end #must add .first because we want the first object in the relation that is returned
-    @access_images += Image.where(:user_id => current_user.id) if current_user.id == user_id #adding in the current users images
-    @access_images += Image.where(:public => true).where("user_id in (?)", user_id)
-    @access_images.reject! { |i| i.nil? || i.user.name != @user }
-    @access_images = @access_images.uniq
+    #getting all images that the current user is offered view priveledges by the searched user
+
+    @access_images += Image.where(:user_id => current_user.id) if current_user.id == user_id #adding in the current users images if they are the searched user
+    @access_images += Image.where(:public => true).where("user_id in (?)", user_id) #adding all public photos incase the searched users photos are in there
+
+    @access_images.reject! { |i| i.nil? || i.user.name != @user } #removing empty slots
+    @access_images = @access_images.uniq #removing duplicates
+
     if @access_images.nil? || @access_images.size == 0
-      redirect_to root_path, notice: "No Images matching the name '#{@user}'"
+      redirect_to root_path, notice: "#{@user.capitalize} isn't currently sharing photos with you"
       return
     end
     respond_with(@access_images, @user)
