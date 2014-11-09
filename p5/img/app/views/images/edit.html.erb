@@ -1,5 +1,9 @@
 <h1>Editing image</h1>
 
+<%= image_tag root_url + "/images/" + @image.filename, size: "100x100", alt: @image.filename %>
+<br>
+<br>
+
 <%= render 'form' %>
 
 <%= link_to 'Show', @image %> |

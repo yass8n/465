@@ -68,8 +68,18 @@ class ImagesController < ApplicationController
   end
 
   def update
+    if params[:public].nil?
+      redirect_to new_image_path, alert: "Stop trying to hack me, pick public or private!"
+      return
+    end
+    @image.public = params[:public]
+    @uploaded_io = params[:image][:uploaded_file]
+    File.open(Rails.root.join('public', 'images', @image.filename), 'wb') do |file|
+        file.write(@uploaded_io.read)
+      end
+
     @image.update(image_params)
-    respond_with(@image)
+    redirect_to @image, notice: 'Image was successfully updated.'
   end
 
   def destroy
