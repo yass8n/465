@@ -39,13 +39,17 @@ class TagsController < ApplicationController
   end
 
   def destroy
-    @tag.destroy
-    respond_with(@tag)
+    @image = Image.find params[:image_id]
+    if @tag.destroy
+      redirect_to image_path(@image), notice: 'Tag was successfully deleted.'
+    else
+       redirect_to image_path(@image), alert: "Error."
+    end
   end
 
   private
     def set_tag
-      @tag = tag.find(params[:id])
+      @tag = Tag.find(params[:id])
     end
 
     def tag_params
