@@ -16,9 +16,13 @@ Signed in as <%= current_user.email %>. Not you?
 <%= link_to "Sign in", new_user_session_path %>
 <% end %>
 </div>
+<div class="notice text-align" id="notice"><%= notice %></div>
+<div class="alert text-align" id="alert"><%= alert %></div>
 <%= yield %>
-<p class="notice text-align"><%= notice %></p>
-<p class="alert text-align"><%= alert %></p>
+<br>
+<br>
+<br>
+
 
 </body>
 </html>

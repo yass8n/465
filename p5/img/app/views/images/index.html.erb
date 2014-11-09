@@ -1,6 +1,3 @@
-<div class ="center"><p id="notice"><%= notice %></p>
-<p id="alert"><%= alert %></p></div>
-
 <div class="center">
 <%= form_tag(image_tag_search_path, method: "get") do %>
   <%= label_tag(:tag_string, "Tag Search") %>
@@ -9,7 +6,8 @@
 <% end %>
 </div>
 
-<h1 class="text-align">Public images</h1>
+<% if @images.length > 0 %>
+<h1 class="text-align">Public Images</h1>
 
 <table class="center table table-striped">
   <thead>
@@ -35,10 +33,11 @@
     <% end %>
   </tbody>
 </table>
-
+<% end %>
 <br>
 
-<h1 class="text-align">My images</h1>
+<% if @my_images.length > 0 %>
+<h1 class="text-align">My Images</h1>
 
 <table class="center table table-striped">
   <thead>
@@ -56,14 +55,17 @@
       <td></td>
       <td><%= link_to (image_tag root_url + "/images/" + image.filename, size: "100x100", alt: image.filename), image_path(image) %><td>
         <% if !current_user.nil? && image.user == current_user %>
-        <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', image, method: :delete, data: { confirm: 'Are you sure you want to delete this image?' } %></td>
         <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
+<% end %>
 <br>
-<h1 class="text-align">My accessed images</h1>
+
+<% if @access_images.length > 0 %>
+<h1 class="text-align">Images Shared With Me</h1>
 
 <table class="center table table-striped">
   <thead>
@@ -87,7 +89,7 @@
     
   </tbody>
 </table>
-
+<% end %>
 <br>
 
 <h3 class="text-align"><%= link_to 'New Image', new_image_path %></h3>

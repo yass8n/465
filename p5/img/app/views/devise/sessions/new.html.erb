@@ -25,7 +25,8 @@
 </div>
 
 <div class="center"><%= render "devise/shared/links" %></div>
-
+<% public_images = Image.where(:public => true) %>
+<% if public_images.length > 0 %>
 <table class="center table table-striped">
   <thead>
     <tr>
@@ -36,7 +37,7 @@
   </thead>
 
   <tbody>
-    <% Image.where(:public => true).each do |image| %>
+    <% public_images.each do |image| %>
       <tr>
       <td></td>
       <td><%= image_tag root_url + "/images/" + image.filename, size: "100x100", alt: image.filename %><td>
@@ -45,3 +46,4 @@
     <% end %>
   </tbody>
 </table>
+<% end %>
