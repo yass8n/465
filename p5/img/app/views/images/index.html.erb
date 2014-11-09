@@ -21,7 +21,7 @@
 <%= form_tag(image_user_search_path, method: "get") do %>
   <%= submit_tag("Search") %>
   <!-- adding spaces to the left of the place holder -->
-  <% placeholder = "Search by Name".rjust(20) %>
+  <% placeholder = "Search by User".rjust(19) %>
   <%= text_field_tag(:user_name, nil, placeholder: placeholder) %>
 <% end %>
 </div>
