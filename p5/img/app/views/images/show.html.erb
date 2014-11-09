@@ -16,17 +16,25 @@
   <strong>User:</strong>
   <%= @image.user.name %>
 </p>
-
-<% if !current_user.nil? && @image.user == current_user %>
-<%= button_to "Toggle Private/Public", action: "change_visibility" %>
-<% end %>
-<br>
+<hr>
 <%= render 'tags/form' %>
-
 <% @image.tags.each do |tag| %>
      <p><%= tag.tag_string %></p>
 <% end %>
-
+<hr>
+<% if !current_user.nil? && @image.user == current_user %>
+<%= button_to "Toggle Private/Public", action: "change_visibility" %>
+	<br>
+	<% if !@image.public %>
+		<%= form_tag("/images/#{@image.id}/image_users/create/", method: "get") do %>
+			<% users_array = @excluded_users.map { |user| [user.name + " " + user.email, user.id] } %>
+			<%= select_tag(:user_id, options_for_select(users_array)) %>
+			<%= submit_tag("Give Access") %>
+		<% end %>
+	<% end %>
+<% end %>
+<br>
+<br>
 
 <%= link_to 'Edit', edit_image_path(@image) %> |
 <%= link_to 'Back', images_path %>

@@ -10,8 +10,12 @@ class ImagesController < ApplicationController
   end
 
   def show
-  	@tag = Tag.new 
-    respond_with(@image)
+  	@tag = Tag.new #to create a new tag if the user wants to
+    ids = ImageUser.all.map do |m| m.user_id if m.image_id == @image.id end #loops through all the accesses and returns all the user_ids of the accesses that this current image has
+    ids.compact!
+    ids << current_user.id
+    @excluded_users = User.all.where('id not in (?)',ids)
+    respond_with(@image, @excluded_users)
   end
 
   def new
