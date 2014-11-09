@@ -28,7 +28,7 @@ class ImagesController < ApplicationController
         image.id == tag.image_id
       end
     end
-    if (@images.size == 0)
+    if (@images.size == 0 || !@images.size || @images[0].size == 0 )
       redirect_to root_path, notice: "No Images matching the tag '#{@tag_string}'"
       return
     end
