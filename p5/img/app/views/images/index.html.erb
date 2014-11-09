@@ -9,13 +9,22 @@
 </nav>
 <br>
 <br>
-<div class="text-align">
+<div class="text-align pull-left">
 <%= form_tag(image_tag_search_path, method: "get") do %>
   <%= label_tag(:tag_string, "Tag Search") %>
   <%= text_field_tag(:tag_string) %>
   <%= submit_tag("Search") %>
 <% end %>
 </div>
+<div class="text-align pull-right">
+<%= form_tag(image_user_search_path, method: "get") do %>
+  <%= label_tag(:user_name, "User Search") %>
+  <%= text_field_tag(:user_name) %>
+  <%= submit_tag("Search") %>
+<% end %>
+</div>
+<br>
+<br>
 
 <% if @images.length > 0 %>
 <h1 id ="public" class="text-align">All Public Images</h1>

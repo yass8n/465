@@ -13,7 +13,7 @@ class ImagesController < ApplicationController
     respond_with(@images, @my_images, @access_images)
   end
 
-  def search
+  def search_tag
     @tag_string = params[:tag_string]
     if (@tag_string.size == 0)
       redirect_to root_path, notice: "Tag can't be empty"
@@ -37,6 +37,26 @@ class ImagesController < ApplicationController
       return
     end
     respond_with(@images, @tag_string)
+  end
+    def search_user
+    @user = params[:user_name]
+    user = User.where(name: @user).first
+    if (@user.size == 0 || !user)
+      redirect_to root_path, notice: "Invalid Search"
+      return
+    end
+    user_id = user.id
+    access_image_objects = ImageUser.all.where('user_id in (?)', current_user.id) #finding all accesses the current user has access to
+    @access_images =  access_image_objects.map do |object| Image.where(:id => object.image_id).where("user_id in (?)", user_id).first end #must add .first because we want the first object in the relation that is returned
+    @access_images += Image.where(:user_id => current_user.id) if current_user.id == user_id #adding in the current users images
+    @access_images += Image.where(:public => true).where("user_id in (?)", user_id)
+    @access_images.reject! { |i| i.nil? || i.user.name != @user }
+    @access_images = @access_images.uniq
+    if @access_images.nil? || @access_images.size == 0
+      redirect_to root_path, notice: "No Images matching the name '#{@user}'"
+      return
+    end
+    respond_with(@access_images, @user)
   end
 
   def show
