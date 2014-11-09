@@ -1,5 +1,5 @@
 class ImageUsersController < ApplicationController
-  before_action :set_ImageUser, only: [:show, :edit, :update, :destroy]
+  before_action :set_ImageUser, only: [:show, :edit, :update, :destroy, :create]
 
   respond_to :html
 
@@ -23,12 +23,10 @@ class ImageUsersController < ApplicationController
 # POST /ImageUsers
   def create
     @ImageUser = ImageUser.new(image_id: params[:image_id], user_id: params[:user_id])
-    user_name = User.find(params[:user_id].to_i).name
-    image = Image.find(params[:image_id].to_i)
     if @ImageUser.save
-      redirect_to image_path(image), notice: user_name + " was given access."
+      redirect_to image_path(@image), notice: @user_name + " was given access."
     else
-       redirect_to image_path(image), alert: user_name + " was not given access."
+       redirect_to image_path(@image), alert: @user_name + " was not given access."
     end
   end
 
@@ -38,13 +36,18 @@ class ImageUsersController < ApplicationController
   end
 
   def destroy
-    @ImageUser.destroy
-    respond_with(@ImageUser)
+    @ImageUser = ImageUser.where(image_id: params[:image_id], user_id: params[:user_id])
+    if @ImageUser[0].destroy
+      redirect_to image_path(@image), notice: @user_name + " no longer has access."
+    else
+      redirect_to image_path(@image), alert: "Error."
+    end
   end
 
   private
     def set_ImageUser
-      @ImageUser = ImageUser.find(params[:id])
+      @user_name = User.find(params[:user_id].to_i).name
+      @image = Image.find(params[:image_id].to_i)
     end
 
     def ImageUser_params

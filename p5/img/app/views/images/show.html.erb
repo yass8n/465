@@ -25,13 +25,26 @@
 <% if !current_user.nil? && @image.user == current_user %>
 <%= button_to "Toggle Private/Public", action: "change_visibility" %>
 	<br>
-	<% if !@image.public %>
-		<%= form_tag("/images/#{@image.id}/image_users/create/", method: "get") do %>
-			<% users_array = @excluded_users.map { |user| [user.name + " " + user.email, user.id] } %>
+	<% if !@image.public && @excluded_users.length > 0 %>
+		<%= form_tag(create_image_user_path(@image), method: :post) do %>
+			<% users_array = @excluded_users.map { |user| [user.name + " " + user.email, user.id] } %> 
+			<!--the first argument is what will be shown, the second argument is the value of that slot in the array -->
 			<%= select_tag(:user_id, options_for_select(users_array)) %>
+			<!-- setting it to user_id so we can access that in the create imageUser controller as params[:user_id] -->
 			<%= submit_tag("Give Access") %>
 		<% end %>
 	<% end %>
+	<% if @included_users.length > 0 && !@image.public %>
+	Users who have access to this picture
+	<br>
+		<% @included_users.each do |user| %>
+		<%= form_tag(destroy_image_user_path(@image), method: :delete) do %>
+		<%= hidden_field_tag :user_id, user.id %> <!-- passing in user_id in hidden form  to teh delete controller -->
+		<%= submit_tag (user.name), data: { confirm: "Are you sure you want to delete #{user.name}'s access?" } %>
+		<% end %>
+        <br>
+        <% end %>
+    <% end %>
 <% end %>
 <br>
 <br>

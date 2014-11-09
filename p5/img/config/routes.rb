@@ -8,5 +8,6 @@ end
 root to: 'images#index'
 post 'images/:id/tags', to: "tags#create", as: "image_tag" #created this route so the form for creating tags works in the images show view
 post 'images/:id', to: "images#change_visibility", as: "change_visibility"
-get '/images/:image_id/image_users/create/', to: 'image_users#create', as: 'create_image_user'
+post '/images/:image_id/image_users/create/', to: 'image_users#create', as: 'create_image_user'
+delete "/images/:image_id/image_users/destroy/", to: 'image_users#destroy', as: 'destroy_image_user'
 end
