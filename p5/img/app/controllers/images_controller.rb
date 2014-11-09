@@ -6,7 +6,9 @@ class ImagesController < ApplicationController
   def index
     @images = Image.where(:public => true)
     @my_images = Image.where(:user_id => current_user.id)
-    respond_with(@images, @my_images)
+    access_image_objects = ImageUser.all.where('user_id in (?)', current_user.id)
+    @access_images =  access_image_objects.map do |object| Image.where(:id => object.image_id).first end #must add .first because we want the first object in the relation that is returned
+    respond_with(@images, @my_images, @access_images)
   end
 
   def show
