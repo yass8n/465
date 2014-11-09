@@ -107,3 +107,21 @@ div {
 #notice{
   color: limegreen;
 }
+nav ul li {
+  display: inline-block;
+  text-align: center;
+  width: 24%;
+  list-style-type: none;
+  background: #DEB887;
+  border-radius: 5px;
+}
+h1{
+  background: #DEB887;
+}
+hr {
+    border: none;
+    height: 1px;
+    /* Set the hr color */
+    color: #333; /* old IE */
+    background-color: #333; /* Modern Browsers */
+}

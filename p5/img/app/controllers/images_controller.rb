@@ -21,6 +21,7 @@ class ImagesController < ApplicationController
     access_images =  access_image_objects.map do |object| Image.where(:id => object.image_id).first end #must add .first because we want the first object in the relation that is returned
       #returns all images the user has access to
     access_images += Image.where(:user_id => current_user.id) #adding in the current users images
+    access_images += Image.where(:public => true)
     tags = Tag.all.where(tag_string:  @tag_string) #getting all tags that match the given tag name
     @images = tags.map do |tag|  
       access_images.select do |image|
@@ -31,7 +32,6 @@ class ImagesController < ApplicationController
       redirect_to root_path, notice: "No Images matching the tag '#{@tag_string}'"
       return
     end
-
     respond_with(@images, @tag_string)
   end
 

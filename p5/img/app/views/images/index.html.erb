@@ -1,4 +1,13 @@
-<div class="center">
+<nav class="center">
+<ul>
+<li><%= link_to "My Images", root_path(anchor: "my") %></li>
+<li><%= link_to "Public Images", root_path(anchor: "public") %></li>
+<li><%= link_to "Shared Images", root_path(anchor: "shared") %></li>
+</ul>
+</nav>
+<br>
+<br>
+<div class="text-align">
 <%= form_tag(image_tag_search_path, method: "get") do %>
   <%= label_tag(:tag_string, "Tag Search") %>
   <%= text_field_tag(:tag_string) %>
@@ -7,7 +16,7 @@
 </div>
 
 <% if @images.length > 0 %>
-<h1 class="text-align">Public Images</h1>
+<h1 id ="public" class="text-align">Public Images</h1>
 
 <table class="center table table-striped">
   <thead>
@@ -37,7 +46,7 @@
 <br>
 
 <% if @my_images.length > 0 %>
-<h1 class="text-align">My Images</h1>
+<h1 id="my" class="text-align">My Images</h1>
 
 <table class="center table table-striped">
   <thead>
@@ -65,7 +74,7 @@
 <br>
 
 <% if @access_images.length > 0 %>
-<h1 class="text-align">Images Shared With Me</h1>
+<h1 id="shared" class="text-align">Images Shared With Me</h1>
 
 <table class="center table table-striped">
   <thead>

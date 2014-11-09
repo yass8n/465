@@ -37,14 +37,16 @@
 		<% end %>
 		</div>
 	<% end %>
+	<hr>
 	<% if @included_users.length > 0 && !@image.public %>
-	Users who have access to this picture
+	<div class ="center">Users who have access to this picture</div>
 	<br>
 		<% @included_users.each do |user| %>
-		<%= form_tag(destroy_image_user_path(@image), method: :delete) do %>
+		<div class ="center"><%= form_tag(destroy_image_user_path(@image), method: :delete) do %>
 		<%= hidden_field_tag :user_id, user.id %> <!-- passing in user_id in hidden form  to teh delete controller -->
 		<%= submit_tag (user.name), data: { confirm: "Are you sure you want to delete #{user.name}'s access?" } %>
 		<% end %>
+		</div>
         <br>
         <% end %>
     <% end %>
