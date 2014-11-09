@@ -12,19 +12,26 @@ class ImagesController < ApplicationController
   end
 
   def search
+    @tag_string = params[:tag_string]
+    if (@tag_string.size == 0)
+      redirect_to root_path, notice: "Tag can't be empty"
+      return
+    end
     access_image_objects = ImageUser.all.where('user_id in (?)', current_user.id) #finding all accesses the current user has access to
     access_images =  access_image_objects.map do |object| Image.where(:id => object.image_id).first end #must add .first because we want the first object in the relation that is returned
       #returns all images the user has access to
     access_images += Image.where(:user_id => current_user.id) #adding in the current users images
-    @tag_string = params[:tag_string]
     tags = Tag.all.where(tag_string:  @tag_string) #getting all tags that match the given tag name
     @images = tags.map do |tag|  
       access_images.select do |image|
         image.id == tag.image_id
       end
     end
-    puts @images.inspect
-    puts "..........................."
+    if (@images.size == 0)
+      redirect_to root_path, notice: "No Images matching the tag '#{@tag_string}'"
+      return
+    end
+
     respond_with(@images, @tag_string)
   end
 

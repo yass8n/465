@@ -1,3 +1,6 @@
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+
 <%= form_tag(image_tag_search_path, method: "get") do %>
   <%= label_tag(:tag_string, "Tag Search") %>
   <%= text_field_tag(:tag_string) %>
