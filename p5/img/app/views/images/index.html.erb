@@ -11,23 +11,25 @@
 <br>
 <div class="text-align pull-left">
 <%= form_tag(image_tag_search_path, method: "get") do %>
-  <%= label_tag(:tag_string, "Tag Search") %>
-  <%= text_field_tag(:tag_string) %>
+  <!-- adding spaces to the left of the place holder -->
+  <% placeholder = "Search by Tags".rjust(20) %> 
+  <%= text_field_tag(:tag_string, nil, placeholder: placeholder) %>
   <%= submit_tag("Search") %>
 <% end %>
 </div>
 <div class="text-align pull-right">
 <%= form_tag(image_user_search_path, method: "get") do %>
-  <%= label_tag(:user_name, "User Search") %>
-  <%= text_field_tag(:user_name) %>
   <%= submit_tag("Search") %>
+  <!-- adding spaces to the left of the place holder -->
+  <% placeholder = "Search by Name".rjust(20) %>
+  <%= text_field_tag(:user_name, nil, placeholder: placeholder) %>
 <% end %>
 </div>
 <br>
 <br>
 
 <% if @images.length > 0 %>
-<h1 id ="public" class="text-align">All Public Images</h1>
+<h2 id ="public" class="text-align">All Public Images</h2>
 
 <table class="center table table-striped">
   <thead>
@@ -57,7 +59,7 @@
 <br>
 
 <% if @my_images.length > 0 %>
-<h1 id="my" class="text-align">My Images</h1>
+<h2 id="my" class="text-align">My Images</h2>
 
 <table class="center table table-striped">
   <thead>
@@ -85,7 +87,7 @@
 <br>
 
 <% if @access_images.length > 0 %>
-<h1 id="shared" class="text-align">Images Shared With Me</h1>
+<h2 id="shared" class="text-align">Images Shared With Me</h2>
 
 <table class="center table table-striped">
   <thead>

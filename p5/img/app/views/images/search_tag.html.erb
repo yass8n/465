@@ -6,7 +6,7 @@
 <% end %>
 </div>
 
-<h1 class="text-align">Images That Match The Tag '<%= @tag_string %>'</h1>
+<h3 class="text-align">Images That Match The Tag '<%= @tag_string %>'</h3>
 
 <table class="center table table-striped">
   <thead>
@@ -27,7 +27,7 @@
         <td><%= @images[index][0].user.name %></td>
 
         <% if !current_user.nil? && @images[index][0].user == current_user %>
-        <td><%= link_to 'Destroy', @images[index][0], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', @images[index][0], method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
     <% end %>
