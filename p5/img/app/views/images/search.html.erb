@@ -23,10 +23,9 @@
     <% @images.each_with_index do |image, index| %>
     <!-- images is an array of images that match the search...we must index it starting from 0...'index' == 1 in the firs iteration so we use index -1 to get the images we want -->
       <tr>
-      <td><%= image_tag root_url + "/images/" + image[index-1].filename, size: "100x100", alt: image[index-1].filename %><td>
+      <td><%= link_to (image_tag root_url + "/images/" + image[index-1].filename, size: "100x100", alt: image[index-1].filename), image_path(image[index-1]) %><td>
         <td><%= image[index-1].user.name %></td>
 
-        <td><%= link_to 'Show', image[index-1] %></td>
         <% if !current_user.nil? && image[index-1].user == current_user %>
         <td><%= link_to 'Edit', edit_image_path(image[index-1]) %></td>
         <td><%= link_to 'Destroy', image[index-1], method: :delete, data: { confirm: 'Are you sure?' } %></td>
