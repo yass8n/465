@@ -1,21 +1,21 @@
-<p id="notice"><%= notice %></p>
-<p id="alert"><%= alert %></p>
+<div class ="center"><p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p></div>
 
-<p>
+<p class="center">
   <strong>Public:</strong>
   <%= @image.public %>
 </p>
 
-<%= image_tag root_url + "/images/" + @image.filename, size: "100x100", alt: @image.filename %>
-<p>
+<div class="center"><%= image_tag root_url + "/images/" + @image.filename, size: "100x100", alt: @image.filename %></div>
+<p class="center">
   <strong>User:</strong>
   <%= @image.user.name %>
 </p>
 <hr>
-<%= render 'tags/form' %>
-Tags
+<div class ="center"><%= render 'tags/form' %></div>
+<h3 class="center"><%= @t %></h3>
 <% @image.tags.each do |tag| %>
-<%= form_tag(tag_path(tag), method: :delete) do %>
+<div class ="center"><%= form_tag(tag_path(tag), method: :delete) do %>
 		<%= hidden_field_tag :image_id, @image.id %> <!-- passing in image_id in hidden form  to the delete controller -->
 		<%= hidden_field_tag :view, "show" %> <!-- passing in image_id in hidden form  to the delete controller -->
 		<% if !current_user.nil? && @image.user == current_user %>
@@ -24,19 +24,21 @@ Tags
 		    <%= tag.tag_string %>
 		<% end %>
 		<% end %>
+		</div>
 <% end %>
 <hr>
 <% if !current_user.nil? && @image.user == current_user %>
-<%= button_to "Toggle Private/Public", action: "change_visibility" %>
+<div class ="center"><%= button_to "Toggle Private/Public", action: "change_visibility" %></div>
 	<br>
 	<% if !@image.public && @excluded_users.length > 0 %>
-		<%= form_tag(create_image_user_path(@image), method: :post) do %>
+		<div class ="center"><%= form_tag(create_image_user_path(@image), method: :post) do %>
 			<% users_array = @excluded_users.map { |user| [user.name + " " + user.email, user.id] } %> 
 			<!--the first argument is what will be shown, the second argument is the value of that slot in the array -->
 			<%= select_tag(:user_id, options_for_select(users_array)) %>
 			<!-- setting it to user_id so we can access that in the create imageUser controller as params[:user_id] -->
 			<%= submit_tag("Give Access") %>
 		<% end %>
+		</div>
 	<% end %>
 	<% if @included_users.length > 0 && !@image.public %>
 	Users who have access to this picture
@@ -52,6 +54,7 @@ Tags
 <% end %>
 <br>
 <br>
-
+<div class ="center">
 <%= link_to 'Edit', edit_image_path(@image) %> |
 <%= link_to 'Back', images_path %>
+</div>

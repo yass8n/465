@@ -43,7 +43,12 @@ class ImagesController < ApplicationController
     @excluded_users = User.all.where('id not in (?)',ids)
     ids.delete(current_user.id) #so the included users doesnt include the current_user
     @included_users = User.all.where('id in (?)',ids)
-    respond_with(@image, @excluded_users, @included_users)
+    if (@image.tags.length == 0)
+      @t = "No Tags"
+    else
+      @t = "Tags"
+    end
+    respond_with(@image, @excluded_users, @included_users ,@t)
     # the above code is mostly being used to create the drop-down menue
   end
 
@@ -54,6 +59,11 @@ class ImagesController < ApplicationController
 
   def edit
         @tag = Tag.new #to create a new tag if the user wants to
+        if (@image.tags.length == 0)
+          @t = "No Tags"
+        else
+          @t = "Tags"
+        end
   end
 
   def change_visibility
@@ -96,8 +106,12 @@ class ImagesController < ApplicationController
   end
 
   def update
+    if params[:image].nil? || params[:image][:uploaded_file].nil?
+      redirect_to edit_image_path, alert: "Please upload a photo"
+      return
+    end
     if params[:public].nil?
-      redirect_to new_image_path, alert: "Stop trying to hack me, pick public or private!"
+      redirect_to edit_image_path, alert: "Stop trying to hack me, pick public or private!"
       return
     end
     @image.public = params[:public]
@@ -106,8 +120,12 @@ class ImagesController < ApplicationController
         file.write(@uploaded_io.read)
       end
 
-    @image.update(image_params)
-    redirect_to @image, notice: 'Image was successfully updated.'
+    if @image.update(image_params)
+      redirect_to @image, notice: 'Image was successfully updated.'
+    else
+      redirect_to @image, alert: 'Image was NOT successfully updated.'
+    end
+
   end
 
   def destroy

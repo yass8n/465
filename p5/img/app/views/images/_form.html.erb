@@ -11,18 +11,20 @@
     </div>
   <% end %>
 
-<%= f.file_field :uploaded_file %>
+<div class ="text-align center" style="margin-left: 100px;"><%= f.file_field :uploaded_file %></div>
   <br>
   <br>
+  <div class ="center">
   <%= radio_button_tag(:public, "true", checked = true) %>
   <%= label_tag(:public_true, "public") %>
   <%= radio_button_tag(:public, "false") %>
   <%= label_tag(:public_false, "private") %>
+  </div>
   <!-- COMMENT: if public is checked, the params[:public] will be true, else, false -->
   <br>
   <br>
 
-  <div class="actions">
+  <div class ="center"><div class="actions">
     <%= f.submit %>
-  </div>
+  </div></div>
 <% end %>

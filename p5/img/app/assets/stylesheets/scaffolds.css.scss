@@ -1,11 +1,47 @@
-body {
+html body {
   background-color: #fff;
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+  width: 50%;
+  height: 100%;
+  margin: auto;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  border-radius: 12px;
 }
-
+.left-pad{
+     margin-left: 8px;
+     margin-bottom: 4px;
+  }
+.right-pad{
+     margin-right: 8px;
+     margin-bottom: 4px;
+  }
+.footer{
+  min-height: 100px;
+}
+html{
+  background: url(http://facebookjustice.files.wordpress.com/2011/07/student_collage.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.center{
+  margin-left: auto;
+  margin-right: auto;
+  display: table;
+}
+.text-align{
+  text-align:center;
+}
+#lookup{
+  position: relative;
+  margin-left: 50px;
+  margin-top: 5px;
+}
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
@@ -24,8 +60,6 @@ a {
     color: #666;
   }
   &:hover {
-    color: #fff;
-    background-color: #000;
   }
 }
 
@@ -66,4 +100,10 @@ div {
     font-size: 12px;
     list-style: square;
   }
+}
+#alert{
+  color: crimson;
+}
+#notice{
+  color: limegreen;
 }
