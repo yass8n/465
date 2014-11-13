@@ -3,7 +3,7 @@
   <%= @image.public %>
 </p>
 
-<div class="center"><%= image_tag root_url + "/images/" + @image.filename, size: "100x100", alt: @image.filename %></div>
+<div class="center"><%= image_tag root_url + "/images/" + @image.filename, size: "400x400", alt: @image.filename %></div>
 <p class="center">
   <strong>User:</strong>
   <%= @image.user.name %>
