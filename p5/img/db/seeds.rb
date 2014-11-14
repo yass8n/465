@@ -185,7 +185,7 @@ Tag.create!([
   {image_id: 25, tag_string: "happy"},
   {image_id: 26, tag_string: "hat"},
   {image_id: 26, tag_string: "forsale"},
-  {image_id: 27, tag_string: "chico2013"},
-  {image_id: 27, tag_string: "fun"},
-  {image_id: 28, tag_string: "lol"}
+  {image_id: 26, tag_string: "something"},
+  {image_id: 26, tag_string: "stuff"},
+  {image_id: 26, tag_string: "tag"}
 ])
