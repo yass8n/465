@@ -40,7 +40,7 @@
       <tr>
       <td></td>
       <td><%= image_tag root_url + "/images/" + image.filename, size: "100x100", alt: image.filename %><td>
-        <td><%= image.user.name %></td>
+        <td><%= image.user.name.capitalize %></td>
       </tr>
     <% end %>
   </tbody>

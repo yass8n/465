@@ -14,7 +14,7 @@ class ImagesController < ApplicationController
   end
 
   def search_tag
-    @tag_string = params[:tag_string]
+    @tag_string = params[:tag_string].downcase
     if (@tag_string.size == 0)
       redirect_to root_path, notice: "Tag can't be empty"
       return
@@ -39,7 +39,7 @@ class ImagesController < ApplicationController
     respond_with(@images, @tag_string)
   end
     def search_user
-    @user = params[:user_name] #getting name from params
+    @user = params[:user_name].downcase  #getting name from params
     user = User.where(name: @user).first #checking if there is a user with that name
     if (@user.size == 0 || !user)
       redirect_to root_path, notice: "Invalid Search"
@@ -56,6 +56,7 @@ class ImagesController < ApplicationController
     @access_images.reject! { |i| i.nil? || i.user.name != @user } #removing empty slots
     @access_images = @access_images.uniq #removing duplicates
 
+    @user = "You" if user == current_user
     if @access_images.nil? || @access_images.size == 0
       redirect_to root_path, notice: "#{@user.capitalize} isn't currently sharing photos with you"
       return

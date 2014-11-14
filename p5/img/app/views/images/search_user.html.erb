@@ -23,7 +23,7 @@
       <tr>
       <td></td>
       <td><%= link_to (image_tag root_url + "/images/" + image.filename, size: "100x100", alt: image.filename), image_path(image) %><td>
-        <td><%= image.user.name %></td>
+        <td><%= image.user.name.capitalize %></td>
 
         <% if !current_user.nil? && image.user == current_user %>
         <td><%= link_to 'Delete', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>

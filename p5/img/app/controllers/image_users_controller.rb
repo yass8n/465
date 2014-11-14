@@ -24,9 +24,9 @@ class ImageUsersController < ApplicationController
   def create
     @ImageUser = ImageUser.new(image_id: params[:image_id], user_id: params[:user_id])
     if @ImageUser.save
-      redirect_to image_path(@image), notice: @user_name + " was given access."
+      redirect_to image_path(@image), notice: @user_name.capitalize + " was given access."
     else
-       redirect_to image_path(@image), alert: @user_name + " was not given access."
+       redirect_to image_path(@image), alert: @user_name.capitalize + " was not given access."
     end
   end
 
