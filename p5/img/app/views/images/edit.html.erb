@@ -16,5 +16,6 @@
 <br>
 <div class ="center">
 <%= link_to 'Show', @image %> |
+<%= link_to 'Delete', @image, method: :delete, data: { confirm: 'Are you sure you want to delete this image?' } %> |
 <%= link_to 'Home', images_path %>
 </div>

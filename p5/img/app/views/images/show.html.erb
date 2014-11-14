@@ -1,4 +1,4 @@
-<% if @just_created_image %>
+<% if !current_user.nil? && @image.user == current_user  %>
    <h3 class="text-align"><%= link_to 'Upload Another Image?', new_image_path %></h3>
 <% end %>
 <p class="center">
@@ -46,7 +46,7 @@
 	<% end %>
 	<hr>
 	<% if @included_users.length > 0 && !@image.public %>
-	<div class ="center">Users who have access to this picture</div>
+	<strong><div class ="center">Users who have access to this picture</div></strong>
 	<br>
 		<% @included_users.each do |user| %>
 		<div class ="center"><%= form_tag(destroy_image_user_path(@image), method: :delete) do %>

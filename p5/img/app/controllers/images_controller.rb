@@ -70,7 +70,6 @@ class ImagesController < ApplicationController
     ids = ImageUser.all.map do |m| m.user_id if m.image_id == @image.id end #loops through all the accesses and returns all the user_ids of the accesses that this current image has
     ids.compact!
     ids << current_user.id #so the excluded users doent include the current user
-    @just_created_image = params[:just_created_image]
     @excluded_users = User.all.where('id not in (?)',ids)
     ids.delete(current_user.id) #so the included users doesnt include the current_user
     @included_users = User.all.where('id in (?)',ids)
@@ -131,7 +130,7 @@ class ImagesController < ApplicationController
     end
 
     if @image.save
-      redirect_to :controller => 'images', :action => 'show', :id => @image.id, :just_created_image => true
+      redirect_to :controller => 'images', :action => 'show', :id => @image.id
     else
       render :new
     end
