@@ -145,10 +145,10 @@ class ImagesController < ApplicationController
       redirect_to edit_image_path, alert: "Stop trying to hack me, pick public or private!"
       return
     end
-    @image.remove_tags
+    # @image.remove_tags
     @image.remove_image_path
     @image.public = params[:public]
-    @image.remove_users if @image.public == false
+    # @image.remove_users if @image.public == false
     @uploaded_io = params[:image][:uploaded_file]
     @image.filename = @image.generate_filename
     File.open(Rails.root.join('public', 'images', @image.filename), 'wb') do |file|
