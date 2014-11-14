@@ -54,7 +54,7 @@ user.password_confirmation = 'c'
 user.name = "cassy"
 user.save!
 
-Image.create!([
+images_hash = ([
   {filename: "2a47a5c4539657a10b8ef391351d385f.jpg", public: true, user_id: 1},
   {filename: "75479140b58a599d7d2b4ceeec91ae1c.jpg", public: true, user_id: 1},
   {filename: "a4cb308aa19dd3950fcc67ff626c2fc9.jpg", public: true, user_id: 1},
@@ -82,6 +82,15 @@ Image.create!([
   {filename: "80585be723cdec06a3fed13892c6adee.jpg", public: true, user_id: 5},
   {filename: "30de7372ccd89029ff65e79e5ed0383c.jpg", public: true, user_id: 5}
 ])
+
+images_hash.each do |hash|
+  image = Image.new
+  image.filename = hash[:filename]
+  image.public = hash[:public]
+  image.user_id = hash[:user_id]
+  image.save!
+end
+
 ImageUser.create!([
   {image_id: 4, user_id: 2},
   {image_id: 4, user_id: 3},
