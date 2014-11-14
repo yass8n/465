@@ -7,8 +7,8 @@
 
 <div class="center"><%= image_tag root_url + "/images/" + @image.filename, size: "400x400", alt: @image.filename %></div>
 <p class="center">
-  <strong>Owner:</strong>
-  <%= @image.user.name.capitalize %>
+  <strong>Owner: </strong>
+  <a><%= link_to @image.user.name.capitalize, controller: "images", action: "search_user", user_name: @image.user.name %> </a>
 </p>
 <hr>
 <div class ="center"><%= render 'tags/form' %></div>

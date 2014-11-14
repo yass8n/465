@@ -39,7 +39,7 @@ class ImagesController < ApplicationController
     respond_with(@images, @tag_string)
   end
     def search_user
-    @user = params[:user_name] #getting name from db
+    @user = params[:user_name] #getting name from params
     user = User.where(name: @user).first #checking if there is a user with that name
     if (@user.size == 0 || !user)
       redirect_to root_path, notice: "Invalid Search"
