@@ -65,6 +65,7 @@ class ImagesController < ApplicationController
 
   def show
   	@tag = Tag.new #to create a new tag if the user wants to
+    @visibility = @image.visibility(current_user)
     ids = ImageUser.all.map do |m| m.user_id if m.image_id == @image.id end #loops through all the accesses and returns all the user_ids of the accesses that this current image has
     ids.compact!
     ids << current_user.id #so the excluded users doent include the current user
@@ -96,6 +97,7 @@ class ImagesController < ApplicationController
 
   def change_visibility
       @image.public = !@image.public
+      @image.remove_users if @image.public == false
       @image.public ? notice = "Image now public" : notice = "Image now private"
       if @image.save
         redirect_to image_path, notice: notice
@@ -142,8 +144,12 @@ class ImagesController < ApplicationController
       redirect_to edit_image_path, alert: "Stop trying to hack me, pick public or private!"
       return
     end
+    @image.remove_tags
+    @image.remove_image_path
     @image.public = params[:public]
+    @image.remove_users if @image.public == false
     @uploaded_io = params[:image][:uploaded_file]
+    @image.filename = @image.generate_filename
     File.open(Rails.root.join('public', 'images', @image.filename), 'wb') do |file|
         file.write(@uploaded_io.read)
       end
@@ -157,6 +163,7 @@ class ImagesController < ApplicationController
   end
 
   def destroy
+    @image.remove_image_path
     @image.destroy
     @image.tags.all.delete_all
     redirect_to root_path, notice: 'Image was successfully deleted.'
