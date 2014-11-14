@@ -8,7 +8,8 @@
 <div class ="center"><%= form_tag(tag_path(tag), method: :delete) do %>
 		<%= hidden_field_tag :image_id, @image.id %> <!-- passing in image_id in hidden form  to the delete controller -->
 		<%= hidden_field_tag :view, "edit" %> <!-- passing in image_id in hidden form  to the delete controller -->
-		<%= submit_tag (tag.tag_string), data: { confirm: "Are you sure you want to delete the tag #{tag.tag_string}?" } %>
+		<a><%= link_to "#" + tag.tag_string, controller: "images", action: "search_tag", tag_string: tag.tag_string %></a>
+		<%= submit_tag ("X"), data: { confirm: "Are you sure you want to delete the tag #{tag.tag_string}?" } %>
 		<% end %>
 		</div>
 <% end %>

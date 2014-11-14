@@ -15,3 +15,8 @@
 //= require_tree .
 
 //if I add require turbolinks, it prints confirmations twice
+// $(function() {
+//   $('#submit').click(function() {
+//     $('#form').submit();
+//   });
+// });

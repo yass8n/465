@@ -1,25 +1,29 @@
+<% if @just_created_image %>
+   <h3 class="text-align"><%= link_to 'Upload Another Image?', new_image_path %></h3>
+<% end %>
 <p class="center">
   <strong><%= @visibility + " "%> Photo</strong>
 </p>
 
 <div class="center"><%= image_tag root_url + "/images/" + @image.filename, size: "400x400", alt: @image.filename %></div>
 <p class="center">
-  <strong>User:</strong>
-  <%= @image.user.name %>
+  <strong>Owner:</strong>
+  <%= @image.user.name.capitalize %>
 </p>
 <hr>
 <div class ="center"><%= render 'tags/form' %></div>
-<h3 class="center"><%= @t %></h3>
+<h3 class="center" id="submit"><%= @t %></h3>
 <% @image.tags.each do |tag| %>
 <div class ="center"><%= form_tag(tag_path(tag), method: :delete) do %>
 		<%= hidden_field_tag :image_id, @image.id %> <!-- passing in image_id in hidden form  to the delete controller -->
 		<%= hidden_field_tag :view, "show" %> <!-- passing in image_id in hidden form  to the delete controller -->
 		<% if !current_user.nil? && @image.user == current_user %>
-			<%= submit_tag (tag.tag_string), data: { confirm: "Are you sure you want to delete the tag #{tag.tag_string}?" } %>
+			<a><%= link_to "#" + tag.tag_string, controller: "images", action: "search_tag", tag_string: tag.tag_string %></a>
+			<%= submit_tag ("X"), data: { confirm: "Are you sure you want to delete the tag #{tag.tag_string}?" } %>
 			<br>
 			<br>
 		<% else %>
-		    <%= tag.tag_string %>
+		   <a id="submit"><%= link_to "#" + tag.tag_string, controller: "images", action: "search_tag", tag_string: tag.tag_string %></a>
 		    <br>
 		    <br>
 		<% end %>
@@ -47,7 +51,8 @@
 		<% @included_users.each do |user| %>
 		<div class ="center"><%= form_tag(destroy_image_user_path(@image), method: :delete) do %>
 		<%= hidden_field_tag :user_id, user.id %> <!-- passing in user_id in hidden form  to teh delete controller -->
-		<%= submit_tag (user.name), data: { confirm: "Are you sure you want to delete #{user.name}'s access?" } %>
+		<%= user.name.capitalize + ", " + user.email%>
+		<%= submit_tag ("X"), data: { confirm: "Are you sure you want to delete #{user.name}'s access?" } %>
 		<% end %>
 		</div>
         <br>
