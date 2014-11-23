@@ -3,4 +3,8 @@ class Post < ActiveRecord::Base
   has_many :comments
   has_many :ratings
   validates :user_id, presence: true
+
+  def get_all_comments
+  	return Comment.where(post_id: self.id)
+  end
 end

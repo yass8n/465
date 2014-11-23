@@ -11,14 +11,15 @@
 </p>
 
 <p>
-  <strong>Views:</strong>
-  <%= @post.views %>
-</p>
-
-<p>
   <strong>Title:</strong>
   <%= @post.title %>
 </p>
+<% @comments.each do |comment| %>
+	<div> <%= comment.user.username + " " + comment.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") + " " + comment.comment %> </div>
+<% end %>
+<br>
+
+<div class ="center"><%= render 'comments/form' %></div>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
