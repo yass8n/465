@@ -1,8 +1,12 @@
 <p id="notice"><%= notice %></p>
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
 
 <p>
   <strong>User:</strong>
-  <%= @post.user_id %>
+  <%= @post.user.username %>
 </p>
 
 <p>
@@ -10,10 +14,6 @@
   <%= @post.content %>
 </p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
 <% @comments.each do |comment| %>
 	<div> <%= comment.user.username + " " + comment.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") + " " + comment.comment %> </div>
 	<div class ="center"><%= render partial: "ratings/rating", locals: {comment: comment} %></div>

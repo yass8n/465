@@ -1,0 +1,119 @@
+class Users::RegistrationsController < Devise::RegistrationsController
+  prepend_before_filter :require_no_authentication, only: [ :new, :create, :cancel ]
+  prepend_before_filter :authenticate_scope!, only: [:edit, :update, :destroy]
+
+  # GET /resource/sign_up
+  def new
+  	super
+  end
+
+  # POST /resource
+  def create
+  	super
+  	link = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business="
+  	paypal_email = resource.paypal_email.gsub("@", "%40")
+  	paypal_email = paypal_email.gsub(".", "%2e")
+  	paypal_email = paypal_email.gsub("-", "%2d")
+  	paypal_email = paypal_email.gsub("!", "%21")
+  	paypal_email = paypal_email.gsub("$", "%24")
+  	paypal_email = paypal_email.gsub("&", "%26")
+  	paypal_email = paypal_email.gsub("'", "%E2%80%98")
+  	paypal_email = paypal_email.gsub("*", "%2a")
+  	paypal_email = paypal_email.gsub("+", "%2b")
+  	paypal_email = paypal_email.gsub("-", "%2d")
+  	paypal_email = paypal_email.gsub("=", "%3d")
+  	paypal_email = paypal_email.gsub("?", "%3f")
+  	paypal_email = paypal_email.gsub("^", "%5e")
+  	paypal_email = paypal_email.gsub("`", "%60")
+  	paypal_email = paypal_email.gsub("{", "%7b")
+  	paypal_email = paypal_email.gsub("|", "%7c")
+  	paypal_email = paypal_email.gsub("}", "%7d")
+  	paypal_email = paypal_email.gsub("~", "%7e")
+  	link += paypal_email
+  	link += "&lc=US&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest"
+  	resource.paypal_link = link
+  	resource.save
+  end
+
+  # GET /resource/edit
+  def edit
+  	super
+  end
+
+  # PUT /resource
+  # We need to use a copy of the resource because we don't want to change
+  # the current user in place.
+  def update
+  	super
+  end
+
+  # DELETE /resource
+  def destroy
+  	super
+  end
+
+  # GET /resource/cancel
+  # Forces the session data which is usually expired after sign
+  # in to be expired now. This is useful if the user wants to
+  # cancel oauth signing in/up in the middle of the process,
+  # removing all OAuth session data.
+  def cancel
+  	super
+  end
+
+  protected
+
+  def update_needs_confirmation?(resource, previous)
+  	super
+  end
+
+  # By default we want to require a password checks on update.
+  # You can overwrite this method in your own RegistrationsController.
+  def update_resource(resource, params)
+  	super
+  end
+
+  # Build a devise resource passing in the session. Useful to move
+  # temporary session data to the newly created user.
+  def build_resource(hash=nil)
+  	super
+  end
+
+  # Signs in a user on sign up. You can overwrite this method in your own
+  # RegistrationsController.
+  def sign_up(resource_name, resource)
+    sign_in(resource_name, resource)
+  end
+
+  # The path used after sign up. You need to overwrite this method
+  # in your own RegistrationsController.
+  def after_sign_up_path_for(resource)
+    after_sign_in_path_for(resource)
+  end
+
+  # The path used after sign up for inactive accounts. You need to overwrite
+  # this method in your own RegistrationsController.
+  def after_inactive_sign_up_path_for(resource)
+  	super
+  end
+
+  # The default url to be used after updating a resource. You need to overwrite
+  # this method in your own RegistrationsController.
+  def after_update_path_for(resource)
+    signed_in_root_path(resource)
+  end
+
+  # Authenticates the current scope and gets the current resource from the session.
+  def authenticate_scope!
+    send(:"authenticate_#{resource_name}!", force: true)
+    self.resource = send(:"current_#{resource_name}")
+  end
+
+  def sign_up_params
+    devise_parameter_sanitizer.sanitize(:sign_up)
+  end
+
+  def account_update_params
+    devise_parameter_sanitizer.sanitize(:account_update)
+  end
+end

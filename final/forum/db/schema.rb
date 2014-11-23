@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141123095931) do
+ActiveRecord::Schema.define(version: 20141123123719) do
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20141123095931) do
     t.datetime "updated_at"
     t.string   "username"
     t.string   "paypal_email"
+    t.string   "paypal_link"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
