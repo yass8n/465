@@ -16,6 +16,7 @@
 </p>
 <% @comments.each do |comment| %>
 	<div> <%= comment.user.username + " " + comment.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") + " " + comment.comment %> </div>
+	<div class ="center"><%= render partial: "ratings/rating", locals: {comment: comment} %></div>
 <% end %>
 <br>
 

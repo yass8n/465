@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
 
 	protect_from_forgery with: :exception
 	before_action :configure_permitted_parameters, if: :devise_controller?
+	helper_method :get_rating #so the post.show.view can call this function
+
+	def get_rating(comment_id, current_user_id)
+		return Rating.where(comment_id: comment_id, user_id: current_user_id)[0]
+	end
 
 	protected
 	def configure_permitted_parameters
