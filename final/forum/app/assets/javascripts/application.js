@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require_tree .
 $(document).ready(function(){
+	// for states and countries
 	if ($('#user_country').val() == "US") {
 		$('#states').removeClass('hidden')
 	}
@@ -29,4 +30,5 @@ $(document).ready(function(){
 			$('#states').addClass('hidden')
 		}
 	});
+
 });

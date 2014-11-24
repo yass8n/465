@@ -17,6 +17,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
+    if !params[:user].nil? && !params[:user][:uploaded_file].nil?
+      resource.filename = resource.generate_filename
+      @uploaded_io = params[:user][:uploaded_file]
+      File.open(Rails.root.join('public', 'images', resource.filename), 'wb') do |file|
+        file.write(@uploaded_io.read)
+      end
+    end
     resource.paypal_link = resource.create_paypal_link(params[:user][:paypal_email])
     resource.country = params[:user][:country]
     if resource.country == "US"
@@ -37,6 +44,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
     else
+      resource.remove_image_path
       clean_up_passwords resource
       @validatable = devise_mapping.validatable?
       if @validatable
@@ -57,10 +65,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
-    if params[:user][:country] == "US"
+    resource.paypal_link = resource.create_paypal_link(params[:user][:paypal_email])
+    resource.country = params[:user][:country]
+    if resource.country == "US"
       resource.state = params[:state] 
     else
       resource.state = nil
+    end
+    if !params[:user].nil? && !params[:user][:uploaded_file].nil?
+      resource.remove_image_path
+      @uploaded_io = params[:user][:uploaded_file]
+      resource.filename = resource.generate_filename
+      File.open(Rails.root.join('public', 'images', resource.filename), 'wb') do |file|
+        file.write(@uploaded_io.read)
+      end
     end
     resource_updated = update_resource(resource, account_update_params)
     yield resource if block_given?
@@ -76,6 +94,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
       clean_up_passwords resource
       respond_with resource
     end
+  end
+  def destroy_pic
+    resource = User.find(params[:id])
+    if ( resource.filename.nil? || resource.filename == "" )
+      redirect_to edit_user_registration_path, alert: "An error occurred when processing your request"
+      return
+    end
+    resource.remove_image_path
+    clean_up_passwords resource
+    resource.save
+    redirect_to edit_user_registration_path, notice: "Picture successfully deleted"
   end
 
   # DELETE /resource
@@ -97,6 +126,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     redirect_to new_registration_path(resource_name)
   end
 
+  # Need to create a module for the states function below!
   def states
     [
       ['Alabama', 'AL'],

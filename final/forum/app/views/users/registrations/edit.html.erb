@@ -3,6 +3,15 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
+  <% if ( !resource.filename.nil? && resource.filename != "" ) %>
+  <p><%= link_to 'Delete Profile Pic',  destroy_pic_path(id: resource.id), data: { confirm: 'Are you sure you want to delete your profile pic?' }, method: :delete  %></p>
+  <% end %>
+   <div>
+  Profile Pic
+  </div>
+  <div class ="text-align center"><%= f.file_field :uploaded_file %><br></br>
+  </div>
+
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
@@ -52,6 +61,6 @@
 
 <h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure you want to delete your account?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>
