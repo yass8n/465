@@ -2,8 +2,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   require 'securerandom'
-  validates_uniqueness_of :username
-  validates_uniqueness_of :email
+  validates_uniqueness_of :username, uniqueness: { scope: :username }, unless: Proc.new { |b| b.username == "deleted" }
+  validates_uniqueness_of :email, uniqueness: { scope: :email }, unless: Proc.new { |b| b.email == "deleted" }
   validates_uniqueness_of :paypal_email, uniqueness: { scope: :paypal_email }, unless: Proc.new { |b| b.paypal_email.blank? }
   validates :username, presence: true
   devise :database_authenticatable, :registerable,
@@ -51,5 +51,14 @@ class User < ActiveRecord::Base
 			File.delete(path)
 		    self.filename = ""
 		end
+	end
+	def set_all_to_deleted
+		self.username = "deleted"
+	    self.encrypted_password = "deleted"
+	    self.reset_password_token = "deleted"
+	    self.reset_password_sent_at = "deleted"
+	    self.paypal_email= "deleted"
+	    self.country= "deleted"
+	    self.state = "deleted"
 	end
 end
