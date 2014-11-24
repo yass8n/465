@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 		# :authenticate_user!
 
 		# if u are trying to access any pages other than the sign in page and you are not a user, you are redirected to the login page
-		if 	current_user.nil? && protected_routes
+		if  current_user.nil? && protected_routes
 			redirect_to new_user_session_path, notice: "Must sign in to proceed"
 		end
 
@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
 
 	protected
 	def configure_permitted_parameters
-	    registration_params = [:username, :state, :filename, :country, :paypal_email, :email, :password, :password_confirmation]
+	    registration_params = [:username, :state, :status, :filename, :country, :paypal_email, :email, :password, :password_confirmation]
 
 		    if params[:action] == 'update'
 		      devise_parameter_sanitizer.for(:account_update) { 

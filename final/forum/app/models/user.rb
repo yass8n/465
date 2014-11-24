@@ -2,12 +2,20 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   require 'securerandom'
-  validates_uniqueness_of :username, uniqueness: { scope: :username }, unless: Proc.new { |b| b.username == "deleted" }
-  validates_uniqueness_of :email, uniqueness: { scope: :email }, unless: Proc.new { |b| b.email == "deleted" }
-  validates_uniqueness_of :paypal_email, uniqueness: { scope: :paypal_email }, unless: Proc.new { |b| b.paypal_email.blank? }
+  validates_uniqueness_of :username
+  validates_uniqueness_of :email
+  validates_uniqueness_of :paypal_email, :allow_nil => true, :allow_blank => true
   validates :username, presence: true
+  validates :email, presence: true
+  validates :password, presence: true
+  validates :password_confirmation, presence: true
+  validates :country, presence: true
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  before_create :status_active
+    def status_active
+    	self.status = "active"
+    end
 	def create_paypal_link(email)
 		return nil if email == "" || email.nil? 
 	  	link = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business="
@@ -52,13 +60,8 @@ class User < ActiveRecord::Base
 		    self.filename = ""
 		end
 	end
-	def set_all_to_deleted
-		self.username = "deleted"
-	    self.encrypted_password = "deleted"
-	    self.reset_password_token = "deleted"
-	    self.reset_password_sent_at = "deleted"
-	    self.paypal_email= "deleted"
-	    self.country= "deleted"
-	    self.state = "deleted"
+	def set_to_deleted
+	    self.status = "deleted"
 	end
+	  
 end

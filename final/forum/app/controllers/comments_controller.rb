@@ -34,7 +34,7 @@ class CommentsController < ApplicationController
         format.html { redirect_to @post, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
-        format.html { render :new }
+        format.html { redirect_to post_path(@post), notice: "Can't have empty comment"}
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end

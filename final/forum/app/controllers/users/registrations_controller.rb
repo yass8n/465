@@ -109,8 +109,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # DELETE /resource
   def destroy
-    resource.remove_image_path
-    resource.set_all_to_deleted
+    # resource.remove_image_path
+    resource.set_to_deleted
     resource.save
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
     set_flash_message :notice, :destroyed if is_flashing_format?
