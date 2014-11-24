@@ -8,6 +8,11 @@
     <%= f.email_field :email, autofocus: true %>
   </div>
 
+  <div class="field">
+    <%= f.label :paypal_email %> </br>
+    <%= f.email_field :paypal_email, placeholder: "optional" %>
+  </div>
+
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
@@ -26,6 +31,19 @@
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
+
+  <div>
+    <%= f.label :country %><br>
+    <%= country_select("user", "country", priority_countries: ["US"]) %>
+    <br></br>
+  </div>
+
+  <div id="states">
+  <%= f.label :state %> <br>
+  <%= select_tag(:state, options_for_select(Users::RegistrationsController.new.states)) %>
+  <br></br>
+  </div>
+
 
   <div class="actions">
     <%= f.submit "Update" %>

@@ -34,7 +34,7 @@ class RatingsController < ApplicationController
         format.html { redirect_to @post, notice: 'Rating was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
-        format.html { redirect_to @post, notice: 'Rating was NOT successfully created.' }
+        format.html { redirect_to @post, alert: 'Rating was NOT successfully created.' }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -50,7 +50,7 @@ class RatingsController < ApplicationController
         format.html { redirect_to @post, notice: 'Rating was successfully updated.' }
         format.json { render :show, status: :created, location: @post }
       else
-        format.html { redirect_to @post, notice: 'Rating was NOT successfully updated.' }
+        format.html { redirect_to @post, alert: 'Rating was NOT successfully updated.' }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end

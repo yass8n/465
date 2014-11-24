@@ -3,53 +3,88 @@ class Users::RegistrationsController < Devise::RegistrationsController
   prepend_before_filter :authenticate_scope!, only: [:edit, :update, :destroy]
 
   # GET /resource/sign_up
+
   def new
-  	super
+    build_resource({})
+    @validatable = devise_mapping.validatable?
+    if @validatable
+      @minimum_password_length = resource_class.password_length.min
+    end
+    yield resource if block_given?
+    respond_with self.resource
   end
 
   # POST /resource
   def create
-  	super
-  	link = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business="
-  	paypal_email = resource.paypal_email.gsub("@", "%40")
-  	paypal_email = paypal_email.gsub(".", "%2e")
-  	paypal_email = paypal_email.gsub("-", "%2d")
-  	paypal_email = paypal_email.gsub("!", "%21")
-  	paypal_email = paypal_email.gsub("$", "%24")
-  	paypal_email = paypal_email.gsub("&", "%26")
-  	paypal_email = paypal_email.gsub("'", "%E2%80%98")
-  	paypal_email = paypal_email.gsub("*", "%2a")
-  	paypal_email = paypal_email.gsub("+", "%2b")
-  	paypal_email = paypal_email.gsub("-", "%2d")
-  	paypal_email = paypal_email.gsub("=", "%3d")
-  	paypal_email = paypal_email.gsub("?", "%3f")
-  	paypal_email = paypal_email.gsub("^", "%5e")
-  	paypal_email = paypal_email.gsub("`", "%60")
-  	paypal_email = paypal_email.gsub("{", "%7b")
-  	paypal_email = paypal_email.gsub("|", "%7c")
-  	paypal_email = paypal_email.gsub("}", "%7d")
-  	paypal_email = paypal_email.gsub("~", "%7e")
-  	link += paypal_email
-  	link += "&lc=US&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest"
-  	resource.paypal_link = link
-  	resource.save
+    build_resource(sign_up_params)
+    resource.paypal_link = resource.create_paypal_link(params[:user][:paypal_email])
+    resource.country = params[:user][:country]
+    if resource.country == "US"
+      resource.state = params[:state] 
+    else
+      resource.state = nil
+    end
+    resource_saved = resource.save
+    yield resource if block_given?
+    if resource_saved
+      if resource.active_for_authentication?
+        set_flash_message :notice, :signed_up if is_flashing_format?
+        sign_up(resource_name, resource)
+        respond_with resource, location: after_sign_up_path_for(resource)
+      else
+        set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
+        expire_data_after_sign_in!
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+      end
+    else
+      clean_up_passwords resource
+      @validatable = devise_mapping.validatable?
+      if @validatable
+        @minimum_password_length = resource_class.password_length.min
+      end
+      respond_with resource
+    end
   end
 
   # GET /resource/edit
   def edit
-  	super
+    render :edit
   end
 
   # PUT /resource
   # We need to use a copy of the resource because we don't want to change
   # the current user in place.
   def update
-  	super
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+    prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+    if params[:user][:country] == "US"
+      resource.state = params[:state] 
+    else
+      resource.state = nil
+    end
+    resource_updated = update_resource(resource, account_update_params)
+    yield resource if block_given?
+    if resource_updated
+      if is_flashing_format?
+        flash_key = update_needs_confirmation?(resource, prev_unconfirmed_email) ?
+          :update_needs_confirmation : :updated
+        set_flash_message :notice, flash_key
+      end
+      sign_in resource_name, resource, bypass: true
+      respond_with resource, location: after_update_path_for(resource)
+    else
+      clean_up_passwords resource
+      respond_with resource
+    end
   end
 
   # DELETE /resource
   def destroy
-  	super
+    resource.destroy
+    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+    set_flash_message :notice, :destroyed if is_flashing_format?
+    yield resource if block_given?
+    respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
   end
 
   # GET /resource/cancel
@@ -58,25 +93,85 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # cancel oauth signing in/up in the middle of the process,
   # removing all OAuth session data.
   def cancel
-  	super
+    expire_data_after_sign_in!
+    redirect_to new_registration_path(resource_name)
+  end
+
+  def states
+    [
+      ['Alabama', 'AL'],
+      ['Alaska', 'AK'],
+      ['Arizona', 'AZ'],
+      ['Arkansas', 'AR'],
+      ['California', 'CA'],
+      ['Colorado', 'CO'],
+      ['Connecticut', 'CT'],
+      ['Delaware', 'DE'],
+      ['District of Columbia', 'DC'],
+      ['Florida', 'FL'],
+      ['Georgia', 'GA'],
+      ['Hawaii', 'HI'],
+      ['Idaho', 'ID'],
+      ['Illinois', 'IL'],
+      ['Indiana', 'IN'],
+      ['Iowa', 'IA'],
+      ['Kansas', 'KS'],
+      ['Kentucky', 'KY'],
+      ['Louisiana', 'LA'],
+      ['Maine', 'ME'],
+      ['Maryland', 'MD'],
+      ['Massachusetts', 'MA'],
+      ['Michigan', 'MI'],
+      ['Minnesota', 'MN'],
+      ['Mississippi', 'MS'],
+      ['Missouri', 'MO'],
+      ['Montana', 'MT'],
+      ['Nebraska', 'NE'],
+      ['Nevada', 'NV'],
+      ['New Hampshire', 'NH'],
+      ['New Jersey', 'NJ'],
+      ['New Mexico', 'NM'],
+      ['New York', 'NY'],
+      ['North Carolina', 'NC'],
+      ['North Dakota', 'ND'],
+      ['Ohio', 'OH'],
+      ['Oklahoma', 'OK'],
+      ['Oregon', 'OR'],
+      ['Pennsylvania', 'PA'],
+      ['Puerto Rico', 'PR'],
+      ['Rhode Island', 'RI'],
+      ['South Carolina', 'SC'],
+      ['South Dakota', 'SD'],
+      ['Tennessee', 'TN'],
+      ['Texas', 'TX'],
+      ['Utah', 'UT'],
+      ['Vermont', 'VT'],
+      ['Virginia', 'VA'],
+      ['Washington', 'WA'],
+      ['West Virginia', 'WV'],
+      ['Wisconsin', 'WI'],
+      ['Wyoming', 'WY']
+    ]
   end
 
   protected
 
   def update_needs_confirmation?(resource, previous)
-  	super
+    resource.respond_to?(:pending_reconfirmation?) &&
+      resource.pending_reconfirmation? &&
+      previous != resource.unconfirmed_email
   end
 
   # By default we want to require a password checks on update.
   # You can overwrite this method in your own RegistrationsController.
   def update_resource(resource, params)
-  	super
+    resource.update_with_password(params)
   end
 
   # Build a devise resource passing in the session. Useful to move
   # temporary session data to the newly created user.
   def build_resource(hash=nil)
-  	super
+    self.resource = resource_class.new_with_session(hash || {}, session)
   end
 
   # Signs in a user on sign up. You can overwrite this method in your own
@@ -94,7 +189,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up for inactive accounts. You need to overwrite
   # this method in your own RegistrationsController.
   def after_inactive_sign_up_path_for(resource)
-  	super
+    scope = Devise::Mapping.find_scope!(resource)
+    router_name = Devise.mappings[scope].router_name
+    context = router_name ? send(router_name) : self
+    context.respond_to?(:root_path) ? context.root_path : "/"
   end
 
   # The default url to be used after updating a resource. You need to overwrite

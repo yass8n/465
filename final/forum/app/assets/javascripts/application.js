@@ -14,3 +14,19 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+$(document).ready(function(){
+	if ($('#user_country').val() == "US") {
+		$('#states').removeClass('hidden')
+	}
+	if ($('#user_country').val() != "US") {
+		$('#states').addClass('hidden')
+	}
+	$('#user_country').on('change', function(){
+		if ($(this).val()=="US"){
+			$('#states').removeClass('hidden')
+		}
+		else {
+			$('#states').addClass('hidden')
+		}
+	});
+});

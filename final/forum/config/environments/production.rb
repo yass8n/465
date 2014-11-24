@@ -84,4 +84,6 @@ Rails.application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
+
+  config.action_controller.include_all_helpers = true
 end
