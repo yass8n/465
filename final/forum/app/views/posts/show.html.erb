@@ -12,6 +12,7 @@
   <strong>Content:</strong>
   <%= @post.content %>
 </p>
+<%= render partial: "donate", locals: {comment: @post} %>
 
 <% @comments.each do |comment| %>
 	<div> <%= comment.user.username + " " + comment.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") + " " + comment.comment %> </div>
@@ -20,6 +21,7 @@
 		<%= render partial: "ratings/rating_invalid", locals: {comment: comment} %>
 	<% else %>
 	<!-- when someone IS signed in...this user can rate -->
+
 		<%= render partial: "ratings/rating_valid", locals: {comment: comment} %>
 	<%end%>
 		<%= render partial: "donate", locals: {comment: comment} %>

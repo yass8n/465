@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true
   validates :country, presence: true
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
   before_create :status_active
     def status_active
     	self.status = "active"
