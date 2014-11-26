@@ -31,4 +31,10 @@ $(document).ready(function(){
 		}
 	});
 
+	//adding link to end of alert when a deleted user tries to sign in again
+	if ($('.alert').html() == "Sorry, your account has previously been deleted."){
+		$('.alert').html("Sorry, your account has previously been deleted...<a href='recover'>Recover Account</a>")
+	}
+
+
 });

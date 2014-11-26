@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :paypal_email, :allow_nil => true, :allow_blank => true
   validates :username, presence: true
   validates :email, presence: true
+  validates :paypal_email, presence: true
   validates :password, presence: true
   validates :password_confirmation, presence: true
   validates :country, presence: true

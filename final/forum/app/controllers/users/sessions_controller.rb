@@ -5,11 +5,20 @@ class Users::SessionsController < Devise::SessionsController
   prepend_before_filter only: [ :create, :destroy ] { request.env["devise.skip_timeout"] = true }
 
   # GET /resource/sign_in
+  # GET /users/recover
   def new
+    parsed_url = request.original_url.split('/').reverse!
+    if (parsed_url.size() > 1 && parsed_url[0] == "recover" && parsed_url[1] == "users")
+      @submit_message = "Recover"
+      @url = recover_user_path(resource_name)
+    else
+      @submit_message = "Log in"
+      @url = session_path(resource_name)
+    end
     self.resource = resource_class.new(sign_in_params)
     clean_up_passwords(resource)
-    yield resource if block_given?
-    respond_with(resource, serialize_options(resource))
+    yield resource, @submit_message, @url if block_given?
+    respond_with(resource, serialize_options(resource), @url, @submit_message)
   end
 
   # POST /resource/sign_in

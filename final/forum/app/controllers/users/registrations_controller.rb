@@ -54,6 +54,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def recover
+  end
+
   # GET /resource/edit
   def edit
     render :edit
@@ -109,9 +112,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # DELETE /resource
   def destroy
-    # resource.remove_image_path
+    resource.remove_image_path
     resource.set_to_deleted
-    resource.save
+    # resource.destroy
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
     set_flash_message :notice, :destroyed if is_flashing_format?
     yield resource if block_given?
