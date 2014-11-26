@@ -18,7 +18,7 @@
         <td><%= post.content %></td>
         <td><%= post.views %></td>
         <td><%= post.title %></td>
-        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Show', post_path(id: post.id, comment_offset: 0) %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

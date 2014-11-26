@@ -37,7 +37,7 @@ class Users::SessionsController < Devise::SessionsController
       return
     elsif params[:commit] == "Recover"
       # a deleted user is trying to recover account
-      resource = User.where(email: params[:user][:email])[0]  
+      resource = User.where_email(params[:user][:email])
       resource.status = "active"
       resource.save!
       sign_in(resource_name, resource)

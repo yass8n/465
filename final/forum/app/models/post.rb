@@ -6,7 +6,7 @@ class Post < ActiveRecord::Base
   validates :content, presence: true
   validates :title, presence: true
 
-  def get_all_comments
-  	return Comment.where(post_id: self.id)
+  def get_comments(offset_value)
+  	return Comment.where(post_id: self.id).limit(10).offset(offset_value)
   end
 end

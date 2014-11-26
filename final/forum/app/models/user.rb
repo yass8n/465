@@ -65,5 +65,7 @@ class User < ActiveRecord::Base
 	def set_to_deleted
 	    self.status = "deleted"
 	end
-	  
+	def where_email
+		return User.where(email: params[:user][:email])[0]  
+	end
 end
