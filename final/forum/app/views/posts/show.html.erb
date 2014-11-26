@@ -2,15 +2,15 @@
   <strong>Title:</strong>
   <%= @post.title %>
 </p>
-<% unless @post.user.nil? || @post.user.status == "deleted" %>
+<% if @post.user.nil? || @post.user.status == "deleted" %>
 <p>
   <strong>User:</strong>
-  <%= @post.user.username %>
+   DELETED
 </p>
 <% else %>
 <p>
   <strong>User:</strong>
-   DELETED
+  <%= @post.user.username %>
 </p>
 <% end %>
 
@@ -23,24 +23,23 @@
 <% end %>
 
 <% @comments.each do |comment| %>
-	<% unless @post.user.nil? || @post.user.status == "deleted"%>
-		<div> <%= comment.user.username + " " + comment.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") + " " + comment.comment %> </div>
+	<% if comment.user.nil? || comment.user.status == "deleted"%>
+		<div> <%= "DELETED" + " " + comment.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") + " " + comment.comment %> 
+		</div>
 	<% else %>
-		<div> <%= "DELETED" + " " + comment.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") + " " + comment.comment %> </div>
+		<div> <%= comment.user.username + " " + comment.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") + " " + comment.comment %> </div>
 	<% end %>
-
 
 	<% if current_user.nil? %>
 	<!-- when someone is not signed in and tries to rate -->
 		<%= render partial: "ratings/rating_invalid", locals: {comment: comment} %>
 	<% else %>
 	<!-- when someone IS signed in...this user can rate -->
-
 		<%= render partial: "ratings/rating_valid", locals: {comment: comment} %>
-	<%end%>
-	<% unless comment.user.nil? || @comment.user.status == "deleted"%>
+	<% end %>
+	<% unless comment.user.nil? || comment.user.status == "deleted"%>
 		<%= render partial: "donate", locals: {comment: comment} %>
-	<%end%>
+	<% end %>
 <% end %>
 
 <br>
