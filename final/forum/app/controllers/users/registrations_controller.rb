@@ -109,13 +109,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # DELETE /resource
   def destroy
-    resource.remove_image_path
-    resource.set_to_deleted
-    # resource.destroy
-    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
-    set_flash_message :notice, :destroyed if is_flashing_format?
-    yield resource if block_given?
-    respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
+    if resource.valid_password?(params[:user][:current_password])
+      resource.remove_image_path
+      resource.set_to_deleted
+      Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+      set_flash_message :notice, :destroyed if is_flashing_format?
+      yield resource if block_given?
+      respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
+    else
+       redirect_to edit_user_registration_path, alert: "Password was incorrect"
+    end
   end
 
   # GET /resource/cancel

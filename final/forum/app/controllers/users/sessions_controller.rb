@@ -23,6 +23,7 @@ class Users::SessionsController < Devise::SessionsController
   def create
     self.resource = warden.authenticate!(auth_options)
     if resource.status == "deleted" && params[:commit] != "Recover"
+      # a deleted user is trying to sign in
       signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
       set_flash_message :alert, :deleted if signed_out && is_flashing_format?
       yield if block_given?
@@ -30,13 +31,15 @@ class Users::SessionsController < Devise::SessionsController
       return
     end
     if params[:commit] == "Recover"
+      # a deleted user is trying to recover account
       resource = User.where(email: params[:user][:email])[0]  
       resource.status = "active"
-      resource.save
+      resource.save!
       sign_in(resource_name, resource)
       redirect_to root_path, notice: "Account recovered...Signed in successfully."
       return
     else
+      # regular login
       set_flash_message(:notice, :signed_in) if is_flashing_format?
       sign_in(resource_name, resource)
     end

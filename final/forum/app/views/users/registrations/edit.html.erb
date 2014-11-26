@@ -61,6 +61,17 @@
 
 <h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure you want to delete your account?" }, method: :delete %></p>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :delete }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.password_field :current_password, autocomplete: "off" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Delete Account" , data: { confirm: "Are you sure you want to delete your account?" }%>
+  </div>
+<% end %>
 
 <%= link_to "Back", :back %>

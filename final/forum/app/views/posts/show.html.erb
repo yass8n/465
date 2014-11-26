@@ -2,10 +2,6 @@
   <strong>Title:</strong>
   <%= @post.title %>
 </p>
-<%= puts "..........???????????????............" %>
-<%= @post.user.username %>
-<%= @post.user.status %>
-<%= puts "..........???????????????............" %>
 <% unless @post.user.nil? || @post.user.status == "deleted" %>
 <p>
   <strong>User:</strong>
