@@ -1,3 +1,5 @@
+<%= puts comment.id %>
+<%= current_user.id %>
   <% rating = get_rating(comment.id, current_user.id) %>
   <% if comment.current_user_rating(current_user, rating) == nil %>
     <span><%= link_to ("Yes"), comment_ratings_path(comment, user_id: current_user.id, rate: 1, post_id: @post.id), method: :post %></span>
