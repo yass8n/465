@@ -11,12 +11,10 @@ class Comment < ActiveRecord::Base
 	return nil if rating.nil?
   	return Rating.where(user_id: current_user.id, comment_id: self.id)[0].rate
   end
-  def get_comments(offset_value, post_id)
-    return Comment.where(post_id: post_id).limit(20).offset(offset_value.to_i - 1)
+  def get_all_comments(post_id)
+    return Comment.where(post_id: post_id)
   end
-  def get_comment_pages(post_id)
-    return (Comment.where(post_id: post_id).count / 20) + 1
-  end
+  
   private
   def init_rating_score
   	self.rating_score = 0

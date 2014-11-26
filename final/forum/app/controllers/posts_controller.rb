@@ -11,8 +11,7 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @comment = Comment.new
-    @comments = @comment.get_comments(params[:comment_offset], params[:id])
-    @pages = @comment.get_comment_pages(params[:id])
+    @comments = @comment.get_all_comments(@post.id)
   end
 
   # GET /posts/new
