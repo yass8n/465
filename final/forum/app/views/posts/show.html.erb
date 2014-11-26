@@ -2,6 +2,7 @@
   <strong>Title:</strong>
   <%= @post.title %>
 </p>
+<%= render partial: "image", locals: {resource: @post} %>
 <% if @post.user.nil? || @post.user.status == "deleted" %>
 <p>
   <strong>User:</strong>
@@ -19,14 +20,11 @@
   <%= @post.content %>
 </p>
 <% unless @post.user.nil? %>
-<%= render partial: "donate", locals: {comment: @post} %>
+<%= render partial: "donate", locals: {resource: @post} %>
 <% end %>
 
 <% @comments.each do |comment| %>
-    <% image_name = "unknown.jpg" %>
-    <% image_name = comment.user.filename if !comment.user.filename.nil? && !comment.user.filename.blank?  %>
-	<div class="center"><%= image_tag root_url + "/images/" + image_name, size: "50x50"%>
-	</div>
+	<%= render partial: "image", locals: {resource: comment} %>
 	<% if comment.user.nil? || comment.user.status == "deleted"%>
 		<div> <%= "DELETED" + " " + comment.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") + " " + comment.comment %> 
 		</div>
@@ -42,7 +40,7 @@
 		<%= render partial: "ratings/rating_valid", locals: {comment: comment} %>
 	<% end %>
 	<% unless comment.user.nil? || comment.user.status == "deleted"%>
-		<%= render partial: "donate", locals: {comment: comment} %>
+		<%= render partial: "donate", locals: {resource: comment} %>
 	<% end %>
 <% end %>
 

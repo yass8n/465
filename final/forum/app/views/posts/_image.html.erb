@@ -1,0 +1,4 @@
+<% image_name = "unknown.jpg" %>
+<% image_name = resource.user.filename if !resource.user.filename.nil? && !resource.user.filename.blank?  %>
+<div class="center"><%= image_tag root_url + "/images/" + image_name, size: "50x50"%>
+</div>

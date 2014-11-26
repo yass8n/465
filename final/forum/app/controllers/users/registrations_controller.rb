@@ -19,18 +19,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
     if !params[:user].nil? && !params[:user][:uploaded_file].nil?
       resource.filename = resource.generate_filename
-      @uploaded_io = params[:user][:uploaded_file]
-      File.open(Rails.root.join('public', 'images', resource.filename), 'wb') do |file|
-        file.write(@uploaded_io.read)
-      end
+      upload_pic
     end
     resource.paypal_link = resource.create_paypal_link(params[:user][:paypal_email])
-    resource.country = params[:user][:country]
-    if resource.country == "US"
-      resource.state = params[:state] 
-    else
-      resource.state = nil
-    end
+    set_country_and_state
     resource_saved = resource.save
     yield resource if block_given?
     if resource_saved
@@ -66,19 +58,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
     resource.paypal_link = resource.create_paypal_link(params[:user][:paypal_email])
-    resource.country = params[:user][:country]
-    if resource.country == "US"
-      resource.state = params[:state] 
-    else
-      resource.state = nil
-    end
+    set_country_and_state
     if !params[:user].nil? && !params[:user][:uploaded_file].nil?
       resource.remove_image_path
-      @uploaded_io = params[:user][:uploaded_file]
       resource.filename = resource.generate_filename
-      File.open(Rails.root.join('public', 'images', resource.filename), 'wb') do |file|
-        file.write(@uploaded_io.read)
-      end
+      upload_pic
     end
     resource_updated = update_resource(resource, account_update_params)
     yield resource if block_given?
@@ -190,6 +174,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   protected
+  def set_country_and_state
+    resource.country = params[:user][:country]
+    if resource.country == "US"
+      resource.state = params[:state] 
+    else
+      resource.state = nil
+    end
+  end
+  def upload_pic
+    @uploaded_io = params[:user][:uploaded_file]
+    File.open(Rails.root.join('public', 'images', resource.filename), 'wb') do |file|
+      file.write(@uploaded_io.read)
+    end
+  end
 
   def update_needs_confirmation?(resource, previous)
     resource.respond_to?(:pending_reconfirmation?) &&
