@@ -45,12 +45,9 @@
 <% end %>
 
 <br>
-<%= link_to "<<", post_path(id: @post.id, comment_offset: 0) %>
-<% @pages.times do |page| %>
-    <!-- page at this point is a number...offset is where to start looking in the database -->
-	<%= link_to page+1, post_path(id: @post.id, comment_offset: page*10) %>
+<% if @pages > 1 %>
+<%= render partial: "pages", locals: {pages: @pages, post: @post} %>
 <% end %>
-<%= link_to ">>", post_path(id: @post.id, comment_offset: @pages*10) %>
 
 
 
