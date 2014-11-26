@@ -10,28 +10,35 @@ class Users::SessionsController < Devise::SessionsController
     parsed_url = request.original_url.split('/').reverse!
     if (parsed_url.size() > 1 && parsed_url[0] == "recover" && parsed_url[1] == "users")
       @submit_message = "Recover"
-      @url = recover_user_path(resource_name)
     else
       @submit_message = "Log in"
-      @url = session_path(resource_name)
     end
     self.resource = resource_class.new(sign_in_params)
     clean_up_passwords(resource)
-    yield resource, @submit_message, @url if block_given?
-    respond_with(resource, serialize_options(resource), @url, @submit_message)
+    yield resource, @submit_message if block_given?
+    respond_with(resource, serialize_options(resource), @submit_message)
   end
 
   # POST /resource/sign_in
   def create
     self.resource = warden.authenticate!(auth_options)
-    set_flash_message(:notice, :signed_in) if is_flashing_format?
-    sign_in(resource_name, resource)
-    if resource.status == "deleted"
+    if resource.status == "deleted" && params[:commit] != "Recover"
       signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
       set_flash_message :alert, :deleted if signed_out && is_flashing_format?
       yield if block_given?
       respond_to_on_destroy
       return
+    end
+    if params[:commit] == "Recover"
+      resource = User.where(email: params[:user][:email])[0]  
+      resource.status = "active"
+      resource.save
+      sign_in(resource_name, resource)
+      redirect_to root_path, notice: "Account recovered...Signed in successfully."
+      return
+    else
+      set_flash_message(:notice, :signed_in) if is_flashing_format?
+      sign_in(resource_name, resource)
     end
     yield resource if block_given?
     respond_with resource, location: after_sign_in_path_for(resource)
@@ -74,6 +81,14 @@ class Users::SessionsController < Devise::SessionsController
 
       respond_to_on_destroy
     end
+  end
+
+  def sign_up_params
+    devise_parameter_sanitizer.sanitize(:sign_up)
+  end
+
+  def build_resource(hash=nil)
+    self.resource = resource_class.new_with_session(hash || {}, session)
   end
 
   def all_signed_out?

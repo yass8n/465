@@ -54,9 +54,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def recover
-  end
-
   # GET /resource/edit
   def edit
     render :edit
