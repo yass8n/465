@@ -35,8 +35,8 @@ class ApplicationController < ActionController::Base
 		# end
 	end
 
-	def get_rating(comment_id, current_user_id)
-		return Rating.where(comment_id: comment_id, user_id: current_user_id)[0]
+	def get_rating(answer_id, current_user_id)
+		return Rating.where(answer_id: answer_id, user_id: current_user_id)[0]
 	end
 
 	protected
@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
 
 	def protected_routes
 		return true if (params[:controller] == 'posts' && (params[:action] == "create" || params[:action] == "update" || params[:action] == "destroy" || params[:action] == "edit" || params[:action] == "new")) 
-	    return true if (params[:controller] == 'comments' && (params[:action] == "create" || params[:action] == "update" || params[:action] == "destroy" || params[:action] == "edit" || params[:action] == "new")) 
+	    return true if (params[:controller] == 'answers' && (params[:action] == "create" || params[:action] == "update" || params[:action] == "destroy" || params[:action] == "edit" || params[:action] == "new")) 
 		return true if (params[:controller] == 'ratings' && (params[:action] == "create" || params[:action] == "update" || params[:action] == "destroy" || params[:action] == "edit" || params[:action] == "new")) 
 		return false #if not trying to access above routes
 	end

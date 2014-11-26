@@ -23,24 +23,24 @@
 <%= render partial: "donate", locals: {resource: @post} %>
 <% end %>
 
-<% @comments.each do |comment| %>
-	<%= render partial: "devise/images/image", locals: {resource: comment} %>
-	<% if comment.user.nil? || comment.user.status == "deleted"%>
-		<div> <%= "DELETED" + " " + comment.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") + " " + comment.comment %> 
+<% @answers.each do |answer| %>
+	<%= render partial: "devise/images/image", locals: {resource: answer} %>
+	<% if answer.user.nil? || answer.user.status == "deleted"%>
+		<div> <%= "DELETED" + " " + answer.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") + " " + answer.answer %> 
 		</div>
 	<% else %>
-		<div> <%= comment.user.username + " " + comment.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") + " " + comment.comment %> </div>
+		<div> <%= answer.user.username + " " + answer.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") + " " + answer.answer %> </div>
 	<% end %>
 
 	<% if current_user.nil? %>
 	<!-- when someone is not signed in and tries to rate -->
-		<%= render partial: "ratings/rating_invalid", locals: {comment: comment} %>
+		<%= render partial: "ratings/rating_invalid", locals: {answer: answer} %>
 	<% else %>
 	<!-- when someone IS signed in...this user can rate -->
-		<%= render partial: "ratings/rating_valid", locals: {comment: comment} %>
+		<%= render partial: "ratings/rating_valid", locals: {answer: answer} %>
 	<% end %>
-	<% unless comment.user.nil? || comment.user.status == "deleted"%>
-		<%= render partial: "donate", locals: {resource: comment} %>
+	<% unless answer.user.nil? || answer.user.status == "deleted"%>
+		<%= render partial: "donate", locals: {resource: answer} %>
 	<% end %>
 <% end %>
 
@@ -48,7 +48,7 @@
 
 
 
-<div class ="center"><%= render 'comments/form' %></div>
+<div class ="center"><%= render 'answers/form' %></div>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>

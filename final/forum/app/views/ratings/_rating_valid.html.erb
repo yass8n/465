@@ -1,12 +1,12 @@
-<%= puts comment.id %>
+<%= puts answer.id %>
 <%= current_user.id %>
-  <% rating = get_rating(comment.id, current_user.id) %>
-  <% if comment.current_user_rating(current_user, rating) == nil %>
-    <span><%= link_to ("Yes"), comment_ratings_path(comment, user_id: current_user.id, rate: 1, post_id: @post.id), method: :post %></span>
-    <span><%= link_to ("No"), comment_ratings_path(comment, user_id: current_user.id, rate: -1, post_id: @post.id), method: :post %></span>
-  <% elsif comment.current_user_rating(current_user, rating) == 1 %>
-    <span><%= link_to ("No"), rating_path(comment_id: comment.id, rate: -1, post_id: @post.id, id: rating.id), method: :patch %></span>
+  <% rating = get_rating(answer.id, current_user.id) %>
+  <% if answer.current_user_rating(current_user, rating) == nil %>
+    <span><%= link_to ("Yes"), answer_ratings_path(answer, user_id: current_user.id, rate: 1, post_id: @post.id), method: :post %></span>
+    <span><%= link_to ("No"), answer_ratings_path(answer, user_id: current_user.id, rate: -1, post_id: @post.id), method: :post %></span>
+  <% elsif answer.current_user_rating(current_user, rating) == 1 %>
+    <span><%= link_to ("No"), rating_path(answer_id: answer.id, rate: -1, post_id: @post.id, id: rating.id), method: :patch %></span>
   <% else %>
-    <span><%= link_to ("Yes"), rating_path(comment_id: comment.id, rate: 1, post_id: @post.id, id: rating.id), method: :patch %></span>
+    <span><%= link_to ("Yes"), rating_path(answer_id: answer.id, rate: 1, post_id: @post.id, id: rating.id), method: :patch %></span>
   <% end %>
-  <%= comment.rating_score %>
+  <%= answer.rating_score %>

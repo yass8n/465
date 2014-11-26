@@ -1,6 +1,6 @@
 class RatingsController < ApplicationController
   before_action :set_rating, only: [:show, :edit, :update, :destroy]
-  before_action :set_post_and_comment, only: [:update, :create]
+  before_action :set_post_and_answer, only: [:update, :create]
 
   def index
     @ratings = Rating.all
@@ -26,11 +26,11 @@ class RatingsController < ApplicationController
     @rating = Rating.new
     @rating.user_id = params[:user_id]
     @rating.rate = params[:rate].to_i
-    @rating.comment_id = params[:comment_id]
-    @comment.rating_score += @rating.rate
+    @rating.answer_id = params[:answer_id]
+    @answer.rating_score += @rating.rate
 
     respond_to do |format|
-      if @rating.save && @comment.save
+      if @rating.save && @answer.save
         format.html { redirect_to @post, notice: 'Rating was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -44,9 +44,9 @@ class RatingsController < ApplicationController
   # PATCH/PUT /ratings/1.json
   def update
     @rating.rate = params[:rate].to_i
-    @comment.rating_score += @rating.rate * 2
+    @answer.rating_score += @rating.rate * 2
     respond_to do |format|
-      if @rating.save && @comment.save
+      if @rating.save && @answer.save
         format.html { redirect_to @post, notice: 'Rating was successfully updated.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -67,9 +67,9 @@ class RatingsController < ApplicationController
   end
 
   private
-    def set_post_and_comment
+    def set_post_and_answer
       @post = Post.find(params[:post_id])
-      @comment = Comment.find(params[:comment_id])
+      @answer = Answer.find(params[:answer_id])
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_rating
@@ -78,6 +78,6 @@ class RatingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rating_params
-      params.require(:rating).permit(:user_id, :rate, :comment_id)
+      params.require(:rating).permit(:user_id, :rate, :answer_id)
     end
 end

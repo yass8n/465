@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126123205) do
+ActiveRecord::Schema.define(version: 20141126124837) do
 
   create_table "answers", force: true do |t|
     t.integer  "user_id"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20141126123205) do
     t.integer  "rate"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "comment_id"
+    t.integer  "answer_id"
   end
 
   create_table "users", force: true do |t|

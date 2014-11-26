@@ -8,9 +8,9 @@ Rails.application.routes.draw do
 	devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions'}
 
     resources :posts do
-	  resources :comments, shallow: true
+	  resources :answers, shallow: true
 	end
-	resources :comments do
+	resources :answers do
 	  resources :ratings, shallow: true
 	end
 

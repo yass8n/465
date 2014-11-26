@@ -10,8 +10,8 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @comment = Comment.new
-    @comments = @comment.get_all_comments(@post.id)
+    @answer = Answer.new
+    @answers = @answer.get_all_answers(@post.id)
   end
 
   # GET /posts/new
