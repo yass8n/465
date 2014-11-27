@@ -18,7 +18,7 @@
         <td><%= post.content %></td>
         <td><%= post.views %></td>
         <td><%= post.title %></td>
-        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Show', post_path(post) %></td>
         <% if post.user == current_user %>
           <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <% end %>

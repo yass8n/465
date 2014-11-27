@@ -15,24 +15,18 @@ class ApplicationController < ActionController::Base
 			redirect_to new_user_session_path, notice: "Must sign in to proceed"
 		end
 
-		# if params[:controller] == 'images' && params[:id]
-		# 	current_image = Image.find(params[:id])
-		# 	if (params[:action] == 'edit' || params[:action] == 'update' || params[:action] == 'destroy' || params[:action] == "change_visibility")
-		# 	  if current_image.user == current_user
-		# 	    # when you return from authentication!, the program continues to requested page
-		# 	    return
-		# 	  else
-		# 	    # by redirecting here, we are preventing the user from visiting the requested page
-		# 	    redirect_to root_url, notice: "Record not found" and return
-		# 	  end
-		# 	end
-		# 	if (params[:action] == 'show' && current_image.public == false && !current_image.can_view(current_user))
-		# 		redirect_to root_url, notice: "Record not found" and return
-		# 	else
-		#         # when you return from authentication!, the program continues to requested page
-		# 		return
-		# 	end
-		# end
+		if params[:controller] == 'posts' && params[:id]
+			current_post = Post.find(params[:id])
+			if (params[:action] == 'edit' || params[:action] == 'update' || params[:action] == 'destroy')
+			  if current_post.user == current_user
+			    # when you return from authentication!, the program continues to requested page
+			    return
+			  else
+			    # by redirecting here, we are preventing the user from visiting the requested page
+			    redirect_to root_url, notice: "Record not found" and return
+			  end
+			end
+		end
 	end
 
 	def get_rating(answer_id, current_user_id)

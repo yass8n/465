@@ -12,6 +12,7 @@ class PostsController < ApplicationController
   def show
     @answer = Answer.new
     @answers = @answer.get_all_answers(@post.id)
+    @answer_url = post_answers_path(@post)
   end
 
   # GET /posts/new

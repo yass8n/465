@@ -19,6 +19,7 @@ class AnswersController < ApplicationController
 
   # GET /answers/1/edit
   def edit
+    @answer_url = answer_path(@answer)
   end
 
   # POST /answers

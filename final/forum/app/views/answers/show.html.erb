@@ -1,11 +1,11 @@
 <p>
   <strong>User:</strong>
-  <%= @answer.user_id %>
+  <%= @answer.user.username %>
 </p>
 
 <p>
   <strong>Post:</strong>
-  <%= @answer.post_id %>
+  <%= @answer.post.title%>
 </p>
 
 <p>
@@ -14,4 +14,4 @@
 </p>
 
 <%= link_to 'Edit', edit_answer_path(@answer) %> |
-<%= link_to 'Back', answers_path %>
+<%= link_to 'Back', posts_path %>
