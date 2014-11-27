@@ -15,6 +15,11 @@ Rails.application.routes.draw do
 	end
 
 	root 'posts#index'
-	# delete 'users/pic/:id', to: "users/registrations#destroy_pic", as: "destroy_pic" 
-  
+
+    get  "/comment/:id/edit", to: "commentarys#edit", as: "edit_comment" 
+    post  "/users/:user_id/post/:post_id/comment/create", to: "commentarys#create_post_comment", as: "create_post_comment"
+	post  "/users/:user_id/post/:post_id/answer/:answer_id/comment/create", to: "commentarys#create_answer_comment", as: "create_answer_comment" 
+	# adding post id above so I can redirect to the post after creation
+    patch "/comment/:id", to: "commentarys#update", as: "edit_commentary" 
+
 end

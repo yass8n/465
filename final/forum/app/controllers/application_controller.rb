@@ -12,8 +12,7 @@ class ApplicationController < ActionController::Base
 
 		# if u are trying to access any pages other than the sign in page and you are not a user, you are redirected to the login page
 		if  current_user.nil? && protected_routes
-			redirect_to new_user_session_path, notice: "Must sign in to proceed"
-			return
+			redirect_to new_user_session_path, notice: "Must sign in to proceed" and return
 		end
 
 		if params[:controller] == 'posts' && params[:id]

@@ -5,9 +5,11 @@
 
   <% if ( !resource.filename.nil? && resource.filename != "" ) %>
   <p><%= link_to 'Delete Profile Pic',  destroy_pic_path(id: resource.id), data: { confirm: 'Are you sure you want to delete your profile pic?' }, method: :delete  %></p>
+    <%= render partial: "devise/images/image", locals: {resource: resource} %>
+   <br>
   <% end %>
    <div>
-  Profile Pic
+  Update Profile Pic
   </div>
   <div class ="text-align center"><%= f.file_field :uploaded_file %><br></br>
   </div>
@@ -36,11 +38,6 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
   <div>
     <%= f.label :country %><br>
     <%= country_select("user", "country", priority_countries: ["US"]) %>
@@ -52,7 +49,11 @@
   <%= select_tag(:state, options_for_select(Users::RegistrationsController.new.states)) %>
   <br></br>
   </div>
-
+  
+  <div class="field">
+    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.password_field :current_password, autocomplete: "off" %>
+  </div>
 
   <div class="actions">
     <%= f.submit "Update" %>
@@ -74,4 +75,4 @@
   </div>
 <% end %>
 
-<%= link_to "Back", :back %>
+<%= link_to "Back", root_path %>

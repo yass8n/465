@@ -2,7 +2,7 @@
   <strong>Title:</strong>
   <%= @post.title %>
 </p>
-<%= render partial: "devise/images/image", locals: {resource: @post} %>
+<%= render partial: "devise/images/image", locals: {resource: @post.user} %>
 <% if @post.user.nil? || @post.user.status == "deleted" %>
 <p>
   <strong>User:</strong>
@@ -22,9 +22,10 @@
 <% unless @post.user.nil? %>
 <%= render partial: "donate", locals: {resource: @post} %>
 <% end %>
+<%= link_to "Comment on Post" %>
 
 <% @answers.each do |answer| %>
-	<%= render partial: "devise/images/image", locals: {resource: answer} %>
+	<%= render partial: "devise/images/image", locals: {resource: answer.user} %>
 	<% if answer.user.nil? || answer.user.status == "deleted"%>
 		<div> <%= "DELETED" + " " + answer.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") + " " + answer.answer %> 
 		</div>
@@ -45,6 +46,7 @@
 			<%= link_to 'Edit Answer', edit_answer_path(answer) %>
 		<% end %>
 	<% end %>
+
 <% end %>
 
 <br>

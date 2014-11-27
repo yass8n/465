@@ -73,7 +73,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         set_flash_message :notice, flash_key
       end
       sign_in resource_name, resource, bypass: true
-      respond_with resource, location: after_update_path_for(resource)
+      respond_with resource, location:  edit_user_registration_path(resource)
     else
       clean_up_passwords resource
       respond_with resource
@@ -82,8 +82,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def destroy_pic
     resource = User.find(params[:id])
     if ( resource.filename.nil? || resource.filename == "" )
-      redirect_to edit_user_registration_path, alert: "An error occurred when processing your request"
-      return
+      redirect_to edit_user_registration_path, alert: "An error occurred when processing your request" and return
     end
     resource.remove_image_path
     clean_up_passwords resource
