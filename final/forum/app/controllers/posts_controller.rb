@@ -13,6 +13,7 @@ class PostsController < ApplicationController
     @answer = Answer.new
     @answers = @answer.get_all_answers(@post.id)
     @answer_url = post_answers_path(@post)
+    @comment = Commentary.new
   end
 
   # GET /posts/new

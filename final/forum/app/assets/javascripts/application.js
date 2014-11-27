@@ -35,5 +35,9 @@ $(document).ready(function(){
 		$('.alert').html("Sorry, your account has previously been deleted...<a href='recover'>Recover Account</a>")
 	}
 
+	//to show the post comment form
+	$('#comment_on_post').on('click', function(){
+		$('#post_comment_form').removeClass('hidden');
+	});
 
 });

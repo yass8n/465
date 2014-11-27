@@ -2,6 +2,7 @@ class Answer < ActiveRecord::Base
   belongs_to :post
   belongs_to :user
   has_many :ratings
+  has_many :commentarys
   validates :user_id, presence: true
   validates :post_id, presence: true
   validates :answer, presence: true

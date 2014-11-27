@@ -9,21 +9,24 @@ class CommentarysController < ApplicationController
   # commentary /commentarys
   # commentary /commentarys.json
   def create_post_comment
-    @commentary = commentary.new(commentary_params)
-    @commentary.user_id = current_user.id
+    @commentary = Commentary.new(commentary_params)
+    @commentary.post_id = params[:post_id]
+    @commentary.user_id = params[:user_id]
+    @commentary.answer_id = nil
+    @commentary.comment = params[:commentary][:comment]
 
     respond_to do |format|
       if @commentary.save
         format.html { redirect_to @post, notice: 'Commentary was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
-        format.html { render :new }
+        format.html { redirect_to @post, alert: 'Commentary was NOT successfully created.'  }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
     def create_answer_comment
-    @commentary = commentary.new(commentary_params)
+    @commentary = Commentary.new(commentary_params)
     @commentary.user_id = current_user.id
 
     respond_to do |format|

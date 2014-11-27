@@ -22,7 +22,9 @@
 <% unless @post.user.nil? %>
 <%= render partial: "donate", locals: {resource: @post} %>
 <% end %>
-<%= link_to "Comment on Post" %>
+<a href="#" id="comment_on_post">Comment on Post</a>
+<div id="post_comment_form" class="hidden"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_post_comment_path(post_id: @post.id, user_id: current_user.id)} %></div>
+
 
 <% @answers.each do |answer| %>
 	<%= render partial: "devise/images/image", locals: {resource: answer.user} %>
