@@ -26,23 +26,20 @@ class Users::SessionsController < Devise::SessionsController
       # regular login
       set_flash_message(:notice, :signed_in) if is_flashing_format?
       sign_in(resource_name, resource)
-      redirect_to root_path
-      return
+      redirect_to root_path and return
     elsif resource.status == "deleted" && params[:commit] != "Recover"
       # a deleted user is trying to sign in
       signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
       set_flash_message :alert, :deleted if signed_out && is_flashing_format?
       yield if block_given?
-      respond_to_on_destroy
-      return
+      respond_to_on_destroy and return
     elsif params[:commit] == "Recover"
       # a deleted user is trying to recover account
       resource = resource.where_email(params[:user][:email])
       resource.status = "active"
       resource.save!
       sign_in(resource_name, resource)
-      redirect_to root_path, notice: "Account recovered...Signed in successfully."
-      return
+      redirect_to root_path, notice: "Account recovered...Signed in successfully." and return
     end
     # yield resource if block_given?
     # respond_with resource, location: after_sign_in_path_for(resource)

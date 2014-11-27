@@ -13,12 +13,25 @@ class ApplicationController < ActionController::Base
 		# if u are trying to access any pages other than the sign in page and you are not a user, you are redirected to the login page
 		if  current_user.nil? && protected_routes
 			redirect_to new_user_session_path, notice: "Must sign in to proceed"
+			return
 		end
 
 		if params[:controller] == 'posts' && params[:id]
 			current_post = Post.find(params[:id])
 			if (params[:action] == 'edit' || params[:action] == 'update' || params[:action] == 'destroy')
 			  if current_post.user == current_user
+			    # when you return from authentication!, the program continues to requested page
+			    return
+			  else
+			    # by redirecting here, we are preventing the user from visiting the requested page
+			    redirect_to root_url, notice: "Record not found" and return
+			  end
+			end
+		end
+		if params[:controller] == 'answers' && params[:id]
+			current_answer = Answer.find(params[:id])
+			if (params[:action] == 'edit' || params[:action] == 'update' || params[:action] == 'destroy')
+			  if current_answer.user == current_user
 			    # when you return from authentication!, the program continues to requested page
 			    return
 			  else

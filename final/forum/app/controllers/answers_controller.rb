@@ -44,6 +44,9 @@ class AnswersController < ApplicationController
   # PATCH/PUT /answers/1
   # PATCH/PUT /answers/1.json
   def update
+    if params[:answer][:answer] == @answer.answer
+      redirect_to edit_answer_path(@answer), notice: "No changes made." and return
+    end
     respond_to do |format|
       if @answer.update(answer_params)
         format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }

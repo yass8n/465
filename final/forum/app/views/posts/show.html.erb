@@ -41,6 +41,9 @@
 	<% end %>
 	<% unless answer.user.nil? || answer.user.status == "deleted"%>
 		<%= render partial: "donate", locals: {resource: answer} %>
+		<% if answer.user == current_user %>
+			<%= link_to 'Edit Answer', edit_answer_path(answer) %>
+		<% end %>
 	<% end %>
 <% end %>
 
