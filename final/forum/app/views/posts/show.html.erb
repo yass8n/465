@@ -50,10 +50,11 @@
 		<br>
 	<% end %>
 	<a class="comment_on_answer">Comment on Answer</a>
-	<div class="answer_comment_form hidden"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_post_comment_path(post_id: @post.id, user_id: current_user.id, answer_id: answer.id)} %>
+	<div class="answer_comment_form hidden"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_answer_comment_path(post_id: @post.id, user_id: current_user.id, answer_id: answer.id)} %>
 	</div>
 	<% answer.commentarys.each do |comment| %>
-	<%= comment.comment %>
+	 <%= comment.comment %>
+	 <br>
 	<% end %>
 <% end %>
 
