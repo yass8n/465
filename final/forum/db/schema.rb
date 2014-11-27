@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126124837) do
+ActiveRecord::Schema.define(version: 20141127194719) do
 
   create_table "answers", force: true do |t|
     t.integer  "user_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20141126124837) do
     t.datetime "updated_at"
     t.text     "answer"
     t.integer  "rating_score"
+    t.text     "comment"
   end
 
   create_table "posts", force: true do |t|
@@ -29,6 +30,7 @@ ActiveRecord::Schema.define(version: 20141126124837) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "comment"
   end
 
   create_table "ratings", force: true do |t|
