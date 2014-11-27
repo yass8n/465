@@ -22,7 +22,7 @@
 <% unless @post.user.nil? %>
 <%= render partial: "donate", locals: {resource: @post} %>
 <% end %>
-<a href="#" id="comment_on_post">Comment on Post</a>
+<a id="comment_on_post">Comment on Post</a>
 <div id="post_comment_form" class="hidden"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_post_comment_path(post_id: @post.id, user_id: current_user.id)} %></div>
 
 
@@ -47,8 +47,14 @@
 		<% if answer.user == current_user %>
 			<%= link_to 'Edit Answer', edit_answer_path(answer) %>
 		<% end %>
+		<br>
 	<% end %>
-
+	<a class="comment_on_answer">Comment on Answer</a>
+	<div class="answer_comment_form hidden"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_post_comment_path(post_id: @post.id, user_id: current_user.id, answer_id: answer.id)} %>
+	</div>
+	<% answer.commentarys.each do |comment| %>
+	<%= comment.comment %>
+	<% end %>
 <% end %>
 
 <br>
