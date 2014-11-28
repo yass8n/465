@@ -40,4 +40,19 @@ $(document).ready(function(){
 		$(this).next().removeClass('hidden');
 	});
 
+	$('#filter-image').on('click', function(){
+		$('#filters-on').toggleClass('hidden');
+	});
+	$('#answered_true, #answered_false, #filter_rating, #filter_views, #filter_recent').click(function(){ 
+		var checked = false;
+		var src = "https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/128/empty_filter.png"
+		//empty filter
+        if((this).checked) {
+            checked = true;
+			src = "https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/128/filled_filter.png"
+			//full filter
+        }
+        $('#filter-image').attr("src", src);
+    });
+
 });

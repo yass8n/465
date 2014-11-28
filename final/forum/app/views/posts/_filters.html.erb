@@ -1,0 +1,14 @@
+  <div>
+  <%= radio_button_tag(:answered, "true") %>
+  <%= label_tag(:answered_only, "Answered") %>
+  <%= radio_button_tag(:answered, "false") %>
+  <%= label_tag(:Unanswered_only, "UnAnswered") %>
+  </div>
+  <div>
+  <%= radio_button_tag(:filter, "recent") %>
+  <%= label_tag(:recent, "Most Recent") %>
+  <%= radio_button_tag(:filter, "rating") %>
+  <%= label_tag(:rating, "Rating") %>
+  <%= radio_button_tag(:filter, "views") %>
+  <%= label_tag(:views, "Views") %>
+</div>
