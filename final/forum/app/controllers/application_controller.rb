@@ -14,8 +14,7 @@ class ApplicationController < ActionController::Base
 		if  current_user.nil? && protected_routes
 			redirect_to new_user_session_path, notice: "Must sign in to proceed" and return
 		end
-
-		if params[:controller] == 'posts' && params[:id]
+		if params[:controller] == 'posts' && params[:id] && !params[:commit] == 'Search'
 			current_post = Post.find(params[:id])
 			if (params[:action] == 'edit' || params[:action] == 'update' || params[:action] == 'destroy')
 			  if current_post.user == current_user
@@ -27,7 +26,7 @@ class ApplicationController < ActionController::Base
 			  end
 			end
 		end
-		if params[:controller] == 'answers' && params[:id]
+		if params[:controller] == 'answers' && params[:id] 
 			current_answer = Answer.find(params[:id])
 			if (params[:action] == 'edit' || params[:action] == 'update' || params[:action] == 'destroy')
 			  if current_answer.user == current_user

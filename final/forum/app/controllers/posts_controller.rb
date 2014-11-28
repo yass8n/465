@@ -65,7 +65,13 @@ class PostsController < ApplicationController
   #     format.json { head :no_content }
   #   end
   # end
-
+  def search_by_title
+    @title = params[:title].downcase
+    @posts = Post.new.find_by_title(@title)
+    if @title.nil? || @title.blank? || @posts.size == 0
+      redirect_to root_path, notice: "Not a valid Search...try again with a different phrase" and return
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post

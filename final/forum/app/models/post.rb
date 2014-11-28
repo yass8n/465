@@ -10,4 +10,7 @@ class Post < ActiveRecord::Base
   def get_answers(offset_value)
   	return Answer.where(post_id: self.id).limit(10).offset(offset_value)
   end
+  def find_by_title(title)
+    return Post.all.select { |post| /#{title}/i =~ post.title }
+  end
 end

@@ -7,19 +7,19 @@ Rails.application.routes.draw do
 	
 	devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions'}
 
+	root 'posts#index'
+    get  "/comment/:id/edit", to: "commentarys#edit", as: "edit_comment" 
+    post  "/users/:user_id/post/:post_id/comment/create", to: "commentarys#create_post_comment", as: "create_post_comment"
+	post  "/users/:user_id/post/:post_id/answer/:answer_id/comment/create", to: "commentarys#create_answer_comment", as: "create_answer_comment" 
+    get "/posts/search/", to: 'posts#search_by_title', as: 'title_search'
+	# adding post id above so I can redirect to the post after creation
+    patch "/comment/:id", to: "commentarys#update", as: "edit_commentary" 
+
     resources :posts do
 	  resources :answers, shallow: true
 	end
 	resources :answers do
 	  resources :ratings, shallow: true
 	end
-
-	root 'posts#index'
-
-    get  "/comment/:id/edit", to: "commentarys#edit", as: "edit_comment" 
-    post  "/users/:user_id/post/:post_id/comment/create", to: "commentarys#create_post_comment", as: "create_post_comment"
-	post  "/users/:user_id/post/:post_id/answer/:answer_id/comment/create", to: "commentarys#create_answer_comment", as: "create_answer_comment" 
-	# adding post id above so I can redirect to the post after creation
-    patch "/comment/:id", to: "commentarys#update", as: "edit_commentary" 
 
 end
