@@ -27,6 +27,7 @@
 
 
 <% @answers.each do |answer| %>
+	<hr>
 	<%= render partial: "devise/images/image", locals: {resource: answer.user} %>
 	<% if answer.user.nil? || answer.user.status == "deleted"%>
 		<div> <%= "DELETED" + " " + answer.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") + " " + answer.answer %> 
@@ -57,7 +58,7 @@
 	 <br>
 	<% end %>
 <% end %>
-
+<hr>
 <br>
 
 
