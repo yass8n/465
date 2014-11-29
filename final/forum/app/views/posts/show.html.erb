@@ -2,10 +2,14 @@
   <strong>Title:</strong>
   <%= @post.title %>
 </p>
+<p>
+ <strong>Contributions:</strong>
+  <%= current_user.posts.count + current_user.answers.count%>
+</p>
 <%= render partial: "devise/images/image", locals: {resource: @post.user} %>
 <p>
-  <strong>Date:</strong>
-  <%= @post.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") %>
+  <strong>Date Created:</strong>
+  <%= @post.created_at.strftime("%m/%d/%Y at %I:%M%p") %>
 </p>
 <% if @post.user.nil? || @post.user.status == "deleted" %>
 <p>
@@ -67,7 +71,7 @@
 		</div>
 	<% end %>
 	<% unless answer.user.nil? || answer.user.status == "deleted"%>
-		<%= render partial: "donate", locals: {resource: answer} %>
+		<%= render partial: "posts/donate", locals: {resource: answer} %>
 		<% if answer.user == current_user %>
 			<%= link_to 'Edit Answer', edit_answer_path(answer) %>
 		<% end %>
@@ -82,9 +86,9 @@
 <hr>
 <br>
 
-
-
-<div class ="center"><%= render 'answers/form' %></div>
+<% unless Answer.where(post_id: @post.id, user_id: current_user.id)[0] %>
+	<div class ="center"><%= render partial: 'answers/form' %></div>
+<% end %>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>

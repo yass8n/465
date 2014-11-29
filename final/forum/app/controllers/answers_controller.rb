@@ -29,14 +29,18 @@ class AnswersController < ApplicationController
     @answer.user_id = current_user.id
     @answer.post_id = params[:post_id]
     @post = Post.find(params[:post_id])
-
-    respond_to do |format|
-      if @answer.save
-        format.html { redirect_to @post, notice: 'Answer was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { redirect_to post_path(@post), notice: "Can't have empty answer"}
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+    if @answer.already_answered
+      #user already posted an answer before...cant post two answers to the same question
+      redirect_to @post, notice: 'You have already answered this question before.' and return
+    else
+      respond_to do |format|
+        if @answer.save
+          format.html { redirect_to @post, notice: 'Answer was successfully created.' }
+          format.json { render :show, status: :created, location: @post }
+        else
+          format.html { redirect_to post_path(@post), notice: "Can't have empty answer"}
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

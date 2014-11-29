@@ -2,8 +2,12 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   require 'securerandom'
-  validates_uniqueness_of :username
+  has_many :posts
+  has_many :answers
+  has_many :ratings
+  has_many :commentarys
   validates_uniqueness_of :email
+  validates_uniqueness_of :username
   validates_uniqueness_of :paypal_email, :allow_nil => true, :allow_blank => true
   validates :username, presence: true
   validates :email, presence: true
