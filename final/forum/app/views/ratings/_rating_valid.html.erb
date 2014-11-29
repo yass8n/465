@@ -1,12 +1,26 @@
-<%= puts answer.id %>
-<%= current_user.id %>
-  <% rating = get_rating(answer.id, current_user.id) %>
-  <% if answer.current_user_rating(current_user, rating) == nil %>
-    <span><%= link_to ("Yes"), answer_ratings_path(answer, user_id: current_user.id, rate: 1, post_id: @post.id), method: :post %></span>
-    <span><%= link_to ("No"), answer_ratings_path(answer, user_id: current_user.id, rate: -1, post_id: @post.id), method: :post %></span>
-  <% elsif answer.current_user_rating(current_user, rating) == 1 %>
-    <span><%= link_to ("No"), rating_path(answer_id: answer.id, rate: -1, post_id: @post.id, id: rating.id), method: :patch %></span>
-  <% else %>
-    <span><%= link_to ("Yes"), rating_path(answer_id: answer.id, rate: 1, post_id: @post.id, id: rating.id), method: :patch %></span>
+  <% rating = get_rating(resource, current_user.id) %> <!-- application controller helper function -->
+  <% if resource.is_a?(Answer) %>
+    <% @create_up_rate_path = create_rating_path(answer_id: resource.id, user_id: current_user.id, rate: 1, post_id: @post.id) %>
+    <% @create_down_rate_path = create_rating_path(answer_id: resource.id, user_id: current_user.id, rate: -1, post_id: @post.id) %>
+    <% unless rating.nil? %>
+      <% @up_path = update_rating_path(answer_id: resource.id, rate: 1, post_id: @post.id, id: rating.id) %>
+      <% @down_path = update_rating_path(answer_id: resource.id, rate: -1, post_id: @post.id, id: rating.id) %>
+    <% end %>
+  <% elsif resource.is_a?(Post) %>
+    <% @create_up_rate_path = create_rating_path(user_id: current_user.id, rate: 1, post_id: @post.id) %>
+    <% @create_down_rate_path = create_rating_path(user_id: current_user.id, rate: -1, post_id: @post.id) %>
+    <% unless rating.nil? %>
+      <% @up_path = update_rating_path(rate: 1, post_id: @post.id, id: rating.id) %>
+      <% @down_path = update_rating_path(rate: -1, post_id: @post.id, id: rating.id) %>
+    <% end %>
   <% end %>
-  <%= answer.rating_score %>
+
+  <% if resource.current_user_rating(current_user, rating) == nil %>
+    <span><%= link_to ("Yes"), @create_up_rate_path, method: :post %></span>
+    <span><%= link_to ("No"), @create_down_rate_path, method: :post %></span>
+  <% elsif resource.current_user_rating(current_user, rating) == 1 %>
+    <span><%= link_to ("No"), @down_path, method: :patch %></span>
+  <% else %>
+    <span><%= link_to ("Yes"), @up_path, method: :patch %></span>
+  <% end %>
+  <%= resource.rating_score %>

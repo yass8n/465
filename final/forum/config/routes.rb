@@ -14,12 +14,11 @@ Rails.application.routes.draw do
     get "/posts/search/", to: 'posts#search_by_title', as: 'title_search'
 	# adding post id above so I can redirect to the post after creation
     patch "/comment/:id", to: "commentarys#update", as: "edit_commentary" 
-
+    post   "/ratings/create", to: "ratings#create", as: "create_rating"
+    patch  "/ratings/:id/update", to: "ratings#update", as: "update_rating"
     resources :posts do
 	  resources :answers, shallow: true
 	end
-	resources :answers do
-	  resources :ratings, shallow: true
-	end
+
 
 end

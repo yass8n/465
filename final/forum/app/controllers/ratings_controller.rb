@@ -26,11 +26,18 @@ class RatingsController < ApplicationController
     @rating = Rating.new
     @rating.user_id = params[:user_id]
     @rating.rate = params[:rate].to_i
-    @rating.answer_id = params[:answer_id]
-    @answer.rating_score += @rating.rate
+    if @answer
+      @rating.answer_id = @answer.id
+      @answer.rating_score += @rating.rate
+      @answer.save
+    else
+       @rating.post_id = @post.id
+       @post.rating_score += @rating.rate
+       @post.save
+    end
 
     respond_to do |format|
-      if @rating.save && @answer.save
+      if @rating.save
         format.html { redirect_to @post, notice: 'Rating was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -44,9 +51,15 @@ class RatingsController < ApplicationController
   # PATCH/PUT /ratings/1.json
   def update
     @rating.rate = params[:rate].to_i
-    @answer.rating_score += @rating.rate * 2
+    if (@answer)
+      @answer.rating_score += @rating.rate * 2
+      @answer.save
+    else
+      @post.rating_score += @rating.rate * 2
+      @post.save
+    end
     respond_to do |format|
-      if @rating.save && @answer.save
+      if @rating.save 
         format.html { redirect_to @post, notice: 'Rating was successfully updated.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -69,7 +82,11 @@ class RatingsController < ApplicationController
   private
     def set_post_and_answer
       @post = Post.find(params[:post_id])
-      @answer = Answer.find(params[:answer_id])
+      if params[:answer_id]
+        @answer = Answer.find(params[:answer_id])
+      else
+         @answer = nil
+      end
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_rating

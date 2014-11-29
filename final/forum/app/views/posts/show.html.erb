@@ -3,6 +3,10 @@
   <%= @post.title %>
 </p>
 <%= render partial: "devise/images/image", locals: {resource: @post.user} %>
+<p>
+  <strong>Date:</strong>
+  <%= @post.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") %>
+</p>
 <% if @post.user.nil? || @post.user.status == "deleted" %>
 <p>
   <strong>User:</strong>
@@ -22,12 +26,23 @@
 <% unless @post.user.nil? %>
 <%= render partial: "donate", locals: {resource: @post} %>
 <% end %>
-<a id="comment_on_post">Comment on Post</a>
-<div id="post_comment_form" class="hidden"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_post_comment_path(post_id: @post.id, user_id: current_user.id)} %></div>
+<% if current_user.nil? %>
+<!-- when someone is not signed in and tries to rate -->
+	<%= render partial: "ratings/rating_invalid", locals: {resource: @post} %>
+<% else %>
+<!-- when someone IS signed in...this user can rate -->
+ <%= render partial: "ratings/rating_valid", locals: {resource: @post} %>
+	<br>
+	<a id="comment_on_post">Comment on Post</a>
+	<br>
+	<div id="post_comment_form" class="hidden"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_post_comment_path(post_id: @post.id, user_id: current_user.id)} %>
+	</div>
+<% end %>
+
 <% @post.commentarys.each do |comment| %>
 	 <%= comment.comment %>
 	 <br>
-	<% end %>
+<% end %>
 
 
 <% @answers.each do |answer| %>
@@ -42,10 +57,14 @@
 
 	<% if current_user.nil? %>
 	<!-- when someone is not signed in and tries to rate -->
-		<%= render partial: "ratings/rating_invalid", locals: {answer: answer} %>
+		<%= render partial: "ratings/rating_invalid", locals: {resource: answer} %>
 	<% else %>
 	<!-- when someone IS signed in...this user can rate -->
-		<%= render partial: "ratings/rating_valid", locals: {answer: answer} %>
+		<%= render partial: "ratings/rating_valid", locals: {resource: answer} %>
+		<br>
+		<a class="comment_on_answer">Comment on Answer</a>
+		<div class="answer_comment_form hidden"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_answer_comment_path(post_id: @post.id, user_id: current_user.id, answer_id: answer.id)} %>
+		</div>
 	<% end %>
 	<% unless answer.user.nil? || answer.user.status == "deleted"%>
 		<%= render partial: "donate", locals: {resource: answer} %>
@@ -54,9 +73,7 @@
 		<% end %>
 		<br>
 	<% end %>
-	<a class="comment_on_answer">Comment on Answer</a>
-	<div class="answer_comment_form hidden"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_answer_comment_path(post_id: @post.id, user_id: current_user.id, answer_id: answer.id)} %>
-	</div>
+
 	<% answer.commentarys.each do |comment| %>
 	 <%= comment.comment %>
 	 <br>
