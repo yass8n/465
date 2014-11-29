@@ -75,7 +75,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       sign_in resource_name, resource, bypass: true
       respond_with resource, location:  edit_user_registration_path(resource)
     else
-      resource.filename = nil #so the re-rendered edit view doesnt think there is a saved filename and accidentally display a errored picture
+      clean_up resource
       clean_up_passwords resource
       respond_with resource
     end
@@ -90,7 +90,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.save
     redirect_to edit_user_registration_path, notice: "Picture successfully deleted"
   end
-
   # DELETE /resource
   def destroy
     if resource.valid_password?(params[:user][:current_password])
@@ -194,7 +193,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.pending_reconfirmation? &&
       previous != resource.unconfirmed_email
   end
-
+  def clean_up(resource)
+    resource.filename = nil
+    resource.state = nil
+    resource.country = nil
+  end
   # By default we want to require a password checks on update.
   # You can overwrite this method in your own RegistrationsController.
   def update_resource(resource, params)
@@ -239,7 +242,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     send(:"authenticate_#{resource_name}!", force: true)
     self.resource = send(:"current_#{resource_name}")
   end
-
   def sign_up_params
     devise_parameter_sanitizer.sanitize(:sign_up)
   end

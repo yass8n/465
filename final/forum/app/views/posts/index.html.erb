@@ -18,7 +18,7 @@
         <!-- if the post has more than 20 letters, add a ... and only show some of it -->
         <td><%= post.title %></td>
         <td><%= link_to 'Show', post_path(post) %></td>
-        <% if post.user == current_user %>
+        <% if post.user == current_user  && post.answers.size == 0 && post.ratings.size == 0%>
           <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <% end %>
       </tr>
