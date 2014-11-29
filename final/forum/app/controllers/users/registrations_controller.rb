@@ -19,13 +19,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
     if !params[:user].nil? && !params[:user][:uploaded_file].nil?
       resource.filename = resource.generate_filename
-      upload_pic
     end
     resource.paypal_link = resource.create_paypal_link(params[:user][:paypal_email])
     set_country_and_state
     resource_saved = resource.save
     yield resource if block_given?
     if resource_saved
+      upload_pic
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)
@@ -62,11 +62,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if !params[:user].nil? && !params[:user][:uploaded_file].nil?
       resource.remove_image_path
       resource.filename = resource.generate_filename
-      upload_pic
     end
     resource_updated = update_resource(resource, account_update_params)
     yield resource if block_given?
     if resource_updated
+      upload_pic
       if is_flashing_format?
         flash_key = update_needs_confirmation?(resource, prev_unconfirmed_email) ?
           :update_needs_confirmation : :updated
@@ -75,6 +75,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       sign_in resource_name, resource, bypass: true
       respond_with resource, location:  edit_user_registration_path(resource)
     else
+      resource.filename = nil #so the re-rendered edit view doesnt think there is a saved filename and accidentally display a errored picture
       clean_up_passwords resource
       respond_with resource
     end

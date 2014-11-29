@@ -15,7 +15,7 @@ class Answer < ActiveRecord::Base
   def get_all_answers(post_id)
     return Answer.where(post_id: post_id)
   end
-  def already_answered
+  def you_already_answered
     answered = Answer.where(post_id: self.post_id, user_id: self.user_id)[0]
     return true if answered
     return false if !answered

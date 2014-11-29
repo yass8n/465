@@ -29,7 +29,7 @@ class AnswersController < ApplicationController
     @answer.user_id = current_user.id
     @answer.post_id = params[:post_id]
     @post = Post.find(params[:post_id])
-    if @answer.already_answered
+    if @answer.you_already_answered
       #user already posted an answer before...cant post two answers to the same question
       redirect_to @post, notice: 'You have already answered this question before.' and return
     else
