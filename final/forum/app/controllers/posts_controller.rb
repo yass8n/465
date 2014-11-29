@@ -67,7 +67,7 @@ class PostsController < ApplicationController
   # end
   def search_by_title
     @title = params[:title].downcase
-    @posts = Post.new.find_by_title(@title)
+    @posts = Post.new.find_by_title(@title, params[:answered], params[:filter])
     if @title.nil? || @title.blank? || @posts.size == 0
       redirect_to root_path, notice: "Not a valid Search...try again with a different phrase" and return
     end

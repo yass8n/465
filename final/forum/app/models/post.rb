@@ -10,7 +10,21 @@ class Post < ActiveRecord::Base
   def get_answers(offset_value)
   	return Answer.where(post_id: self.id).limit(10).offset(offset_value)
   end
-  def find_by_title(title)
-    return Post.all.select { |post| /#{title}/i =~ post.title }
+  def find_by_title(title, answered, filter)
+    posts = Post.all.select { |post| /#{title}/i =~ post.title}
+    unless answered.nil?
+      if answered == true
+        posts = posts.select { |post| post.answers.size > 0 }
+      else
+         posts = posts.select { |post| post.answers.size == 0 }
+      end 
+    end
+    unless answered.nil?
+      if answered == true
+        posts = posts.select { |post| post.answers.size > 0 }
+      else
+         posts = posts.select { |post| post.answers.size == 0 }
+      end 
+    end
   end
 end
