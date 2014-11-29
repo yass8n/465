@@ -27,10 +27,16 @@ class RatingsController < ApplicationController
     @rating.user_id = params[:user_id]
     @rating.rate = params[:rate].to_i
     if @answer
-      @rating.answer_id = @answer.id
-      @answer.rating_score += @rating.rate
-      @answer.save
+      if @answer.user_id == current_user.id
+        redirect_to @post, notice: "You can't rate your own answer." and return
+      end
+        @rating.answer_id = @answer.id
+        @answer.rating_score += @rating.rate
+        @answer.save
     else
+      if @post.user_id == current_user.id
+        redirect_to @post, notice: "You can't rate your own post." and return
+      end
        @rating.post_id = @post.id
        @post.rating_score += @rating.rate
        @post.save
