@@ -69,7 +69,7 @@ class PostsController < ApplicationController
     @title = params[:title].downcase
     @posts = Post.new.find_by_title(@title, params[:answered], params[:filter])
     if @title.nil? || @title.blank? || @posts.size == 0
-      redirect_to root_path, notice: "Not a valid Search...try again with a different phrase" and return
+      redirect_to root_path, notice: "No results. Check your spelling and filters then try again." and return
     end
   end
   private

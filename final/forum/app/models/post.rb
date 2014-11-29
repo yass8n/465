@@ -28,9 +28,8 @@ class Post < ActiveRecord::Base
     end
     unless filter.nil?
       if filter == "rating"
-         posts = posts.select { |post| post.answers.size > 0 }
-      else
-         posts = posts.select { |post| post.answers.size == 0 }
+         posts = Post.order(rating_score: :desc);
+         posts = posts.select { |post| /#{title}/i =~ post.title }
       end 
     end
     return posts
