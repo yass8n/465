@@ -13,18 +13,12 @@ class Post < ActiveRecord::Base
   def find_by_title(title, answered, filter)
     posts = Post.all.select { |post| /#{title}/i =~ post.title}
     unless answered.nil?
-      if answered == true
-        posts = posts.select { |post| post.answers.size > 0 }
+      if answered == "true"
+         posts = posts.select { |post| post.answers.size > 0 }
       else
          posts = posts.select { |post| post.answers.size == 0 }
       end 
     end
-    unless answered.nil?
-      if answered == true
-        posts = posts.select { |post| post.answers.size > 0 }
-      else
-         posts = posts.select { |post| post.answers.size == 0 }
-      end 
-    end
+    return posts
   end
 end
