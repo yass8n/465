@@ -1,5 +1,6 @@
    <%= form_tag(title_search_path, method: "get") do  %>
       <%= text_field_tag :title, nil, placeholder: "Search by title"  %>
       <%= submit_tag("Lookup") %>
+     <a class="center"><%= image_tag "https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/128/empty_filter.png", size: "20x20", :id => "filter-image"  %></a>
       <div class="hidden" id="filters-on"> <%= render "filters" %></div>
   <% end %>
