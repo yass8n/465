@@ -73,6 +73,9 @@ div {
 .float-right{
   float: right;
 }
+.float-left{
+  float: left;
+}
 .hidden{
   display: none;
 }
@@ -86,4 +89,23 @@ div {
 }
 #profile-pic{
   margin-top: -2px;
+}
+#title{
+  width: 300px;
+}
+.inline-block{
+  display: inline-block;
+}
+.relative{
+  position: relative;
+}
+#img-inside {
+    height:15px;
+    position:absolute;
+    right:0;
+    top:5px;
+}
+#title-search {
+    width:300px;
+    position:relative;
 }
