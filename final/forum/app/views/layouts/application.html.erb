@@ -1,79 +1,22 @@
 <!DOCTYPE html>
 <html>
-<div class="off-canvas-wrap" data-offcanvas>
-<div class="inner-wrap">
-<nav class="tab-bar">
-  <section class="left-small">
-    <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
-  </section>
-  <section class="middle tab-bar-section">
-    <span class="title">Forum</span>
-    <span class="float-right">
-    <a href="#" id="nav-button" class="button split"><%= render partial: "devise/images/image", locals: {resource: current_user} %> <span data-dropdown="drop"></span></a><br>
-		<ul id="drop" class="f-dropdown" data-dropdown-content>
-		<% if user_signed_in? %>
-			<li><a a href="/users/edit">Edit/View Profile</a></li>
-			<li><a data-method="delete" href="/users/sign_out" rel="nofollow">Sign out</a></li>
-		<% else %>
-			<li><a href="/users/sign_up">Sign up</a></li>
-			<li><a href="/users/sign_in">Sign In</a></li>
-		<% end %>
-		</ul>
-	</span>
-  </section>
-  <section class="right-small">
-    <a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
-  </section>
-</nav>
-<aside class="left-off-canvas-menu">
-      <ul class="off-canvas-list">
-        <li><label>Foundation</label></li>
-        <li><a href="#">Gird</a></li>
-        <li><a href="#">Off-canvas</a></li>
-        <li><a href="#">Interchange</a></li>
-        <li><a href="#">Accordion</a></li>
-        <li><a href="#">Orbit Slider</a></li> 
-      </ul>
-</aside>
-<aside class="right-off-canvas-menu">
-      <ul class="off-canvas-list">
-        <li><label>Foundation</label></li>
-        <li><a href="#">Gird</a></li>
-        <li><a href="#">Off-canvas</a></li>
-        <li><a href="#">Interchange</a></li>
-        <li><a href="#">Accordion</a></li>
-        <li><a href="#">Orbit Slider</a></li> 
-      </ul>
-    </aside>
-<section class="main-section">
-</section>
-<a class="exit-off-canvas"></a>
-<div>
-<div>
-
-
-<p class="notice" id="notice"><%= notice %></p>
-<p class="alert" id="alert"><%= alert %></p>
-<div id="user_nav">
-<% if user_signed_in? %>
-Signed in as <a href="/users/edit"><%= current_user.username %>.</a> Not you?
-<%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-<% else %>
-<%= link_to "Sign up", new_user_registration_path %> or
-<%= link_to "Sign in", new_user_session_path %>
-<% end %>
-</div>
-<head>
-  <title>Forum</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag "vendor/modernizr" %>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Forum" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Forum" %>">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%# Modernizr is required for Zurb Foundation %>
+    <%= javascript_include_tag 'vendor/modernizr' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+    <main role="main">
+       <%= render 'layouts/messages' %>
+       <%= yield %>
+    </main>
+  </body>
 </html>

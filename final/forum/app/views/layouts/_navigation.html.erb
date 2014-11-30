@@ -1,0 +1,28 @@
+<%# navigation styled for Zurb Foundation 5 %>
+<nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name"><%= link_to 'Home', root_path %></li>
+    <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+  </ul>
+   <a href="/" id="nav-button" class="button split">
+   <% if user_signed_in? %>
+		<%= render partial: "devise/images/image", locals: {resource: current_user, size: "30x30"} %> <span data-dropdown="drop">
+	<% else %>
+	    <a class="name"><%= link_to 'Home', root_path %></a>
+	<% end %>
+   </span></a><br>
+		<ul id="drop" class="f-dropdown" data-dropdown-content>
+		<% if user_signed_in? %>
+			<li><a a href="/users/edit">Edit/View Profile</a></li>
+			<li><a data-method="delete" href="/users/sign_out" rel="nofollow">Sign out</a></li>
+		<% else %>
+			<li><a href="/users/sign_up">Sign up</a></li>
+			<li><a href="/users/sign_in">Sign In</a></li>
+		<% end %>
+		</ul>
+  <div class="top-bar-section">
+    <ul>
+      <%= render 'layouts/navigation_links' %>
+    </ul>
+  </div>
+</nav>

@@ -32,7 +32,6 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
   config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
-  config.assets.precompile += %w( vendor/modernizr.js )
   config.action_controller.include_all_helpers = true
 
   # Raises error for missing translations

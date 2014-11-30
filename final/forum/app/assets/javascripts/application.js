@@ -12,11 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require turbolinks
 //= require foundation
-$(document).foundation();
-
-$(document).ready(function(){
+//= require_tree .
+$(function() {
+  $(document).foundation();
+  $(document).ready(function(){
 	set_filter_image();
 	// for states and countries
 	if ($('#user_country').val() == "US") {
@@ -41,7 +42,7 @@ $(document).ready(function(){
 
 	//to show the post comment form and the answer comment form
 	$('#comment_on_post, .comment_on_answer').on('click', function(){
-		$(this).next().next().removeClass('hidden');
+		$(this).nextUntil('div').next().removeClass('hidden');
 	});
 
 
@@ -65,4 +66,5 @@ $(document).ready(function(){
 	    });
     }
 
+});
 });

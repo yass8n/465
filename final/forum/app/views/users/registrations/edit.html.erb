@@ -5,7 +5,7 @@
 
   <% if ( !resource.filename.nil? && resource.filename != "" ) %>
   <p><%= link_to 'Delete Profile Pic',  destroy_pic_path(id: resource.id), data: { confirm: 'Are you sure you want to delete your profile pic?' }, method: :delete  %></p>
-    <%= render partial: "devise/images/image", locals: {resource: resource} %>
+    <%= render partial: "devise/images/image", locals: {resource: resource, size: "100x100"} %>
    <br>
   <% end %>
    <div>

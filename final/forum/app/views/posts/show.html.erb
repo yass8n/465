@@ -6,7 +6,7 @@
  <strong>Contributions:</strong>
   <%= current_user.posts.count + current_user.answers.count%>
 </p>
-<%= render partial: "devise/images/image", locals: {resource: @post.user} %>
+<%= render partial: "devise/images/image", locals: {resource: @post.user, size: "80x80"} %>
 <p>
   <strong>Date Created:</strong>
   <%= @post.created_at.strftime("%m/%d/%Y at %I:%M%p") %>
@@ -39,7 +39,7 @@
 	<br>
 	<a id="comment_on_post">Comment on Post</a>
 	<br>
-	<div id="post_comment_form" class="hidden"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_post_comment_path(post_id: @post.id, user_id: current_user.id)} %>
+	<div class="hidden answer_comment_form"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_post_comment_path(post_id: @post.id, user_id: current_user.id)} %>
 	</div>
 <% end %>
 
@@ -51,7 +51,7 @@
 
 <% @answers.each do |answer| %>
 	<hr>
-	<%= render partial: "devise/images/image", locals: {resource: answer.user} %>
+	<%= render partial: "devise/images/image", locals: {resource: answer.user, size: "80x80"} %>
 	<% if answer.user.nil? || answer.user.status == "deleted"%>
 		<div> <%= "DELETED" + " " + answer.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") + " " + answer.answer %> 
 		</div>
@@ -67,6 +67,7 @@
 		<%= render partial: "ratings/rating_valid", locals: {resource: answer} %>
 		<br>
 		<a class="comment_on_answer">Comment on Answer</a>
+		<br>
 		<div class="answer_comment_form hidden"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_answer_comment_path(post_id: @post.id, user_id: current_user.id, answer_id: answer.id)} %>
 		</div>
 	<% end %>
