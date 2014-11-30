@@ -86,4 +86,5 @@ Rails.application.configure do
   config.action_mailer.default :charset => "utf-8"
 
   config.action_controller.include_all_helpers = true
+  config.assets.precompile += %w( vendor/modernizr.js )
 end

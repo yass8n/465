@@ -13,6 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require foundation
+$(document).foundation();
+
 $(document).ready(function(){
 	set_filter_image();
 	// for states and countries
@@ -38,7 +41,7 @@ $(document).ready(function(){
 
 	//to show the post comment form and the answer comment form
 	$('#comment_on_post, .comment_on_answer').on('click', function(){
-		$(this).next().removeClass('hidden');
+		$(this).next().next().removeClass('hidden');
 	});
 
 

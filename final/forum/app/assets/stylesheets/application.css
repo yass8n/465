@@ -12,4 +12,14 @@
  *
  *= require_tree .
  *= require_self
+ *= require foundation 
  */
+.float-right{
+	float: right;
+}
+.hidden{
+	display: none;
+}
+.tab-bar, .tab-bar-section, #nav-button{
+	height: 70px
+}
