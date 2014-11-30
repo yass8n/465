@@ -45,6 +45,10 @@ $(function() {
 		$(this).nextUntil('div').next().removeClass('hidden');
 	});
 
+	$('#comment_on_post').on('click', function(){
+		$('#post_comment_form').removeClass('hidden');
+	});
+
 
 	$('#filter-image').on('click', function(){
 		$('#filters-on').toggleClass('hidden');

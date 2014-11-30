@@ -33,24 +33,25 @@
 		</div>
         <div class="large-10 columns">
           <p><%= @post.content %></p>
-          <ul class="inline-list">
-            <li><a href="">Reply</a></li>
-            <li><a href="">Share</a></li>
-          </ul>
- 
- 
-          <h6>2 Comments</h6>
-          <div class="row">
-            <div class="large-2 columns small-3"><img src="http://placehold.it/50x50&text=[img]"/></div>
-            <div class="large-10 columns"><p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit</p></div>
+          <% @comment_number = @post.commentarys.count%>
+          <% if @comment_number == 1 %> <h6><strong><%= @comment_number %> Comment </strong></h6> <% end %>
+          <% if @comment_number > 1 %> <h6><strong><%= @comment_number %> Comments </strong></h6> <% end %>
+          <% @post.commentarys.each do |comment| %>
+          <div class="row skinny">
+            <div class="small-12 columns"><p>
+				 <strong><%= comment.user.username + " said: "%></strong> <%= comment.comment %></p>
+			 </div>
           </div>
-          <div class="row">
-            <div class="large-2 columns small-3"><img src="http://placehold.it/50x50&text=[img]"/></div>
-            <div class="large-10 columns"><p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit</p></div>
-          </div>
-        </div>
+          <hr>
+			<% end %>
+          <% unless current_user.nil? %>
+				<ul class="inline-list">
+					<li><strong><a id="comment_on_post">Comment on Post</a></strong></li>
+				</ul>
+				<div class="hidden" id="post_comment_form"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_post_comment_path(post_id: @post.id, user_id: current_user.id)} %>
+				</div>
+		<% end %>
       </div>
-       
  
       <hr/>
  
@@ -133,18 +134,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-<% unless @post.user.nil? %>
-<%= render partial: "donate", locals: {resource: @post} %>
-<% end %>
 <% if current_user.nil? %>
 <!-- when someone is not signed in and tries to rate -->
 	<%= render partial: "ratings/rating_invalid", locals: {resource: @post} %>
