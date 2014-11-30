@@ -76,6 +76,14 @@ div {
 .hidden{
   display: none;
 }
-.tab-bar, .tab-bar-section, #nav-button{
-  height: 70px
+.tab-bar, .tab-bar-section{
+  height: 70px;
+}
+#nav-button{
+  height: 50px;
+  margin-right: 120px;
+  margin-top: -10px;
+}
+#profile-pic{
+  margin-top: -2px;
 }
