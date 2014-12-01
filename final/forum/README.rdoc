@@ -31,4 +31,5 @@ Please feel free to use a different markup language if you do not plan to run
 - change comment to 36 minutes ago
 -fix editing answer rdirect to go to the actual post
 - add ability to find your own posts and answers
+-filter button doesnt work if I come from home
 <tt>rake doc:app</tt>.

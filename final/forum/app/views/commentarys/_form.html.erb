@@ -16,6 +16,8 @@
     <%= f.text_area :comment %>
   </div>
   <div class="actions">
-    <%= f.submit "Add Comment"%>
+    <%= f.submit "Add Comment" do %>
+    <i class="step fi-comment"></i> 
+  <% end %>
   </div>
 <% end %>

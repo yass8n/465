@@ -1,5 +1,4 @@
-<i class="fi-[icon]"></i>
- <i class="step fi-crown size-48"></i>
+ <i class="step fi-die-two fa-rotate-45"></i>
   <div class="row">
       <div class="panel">
         <h1><%=@post.title%></h1>
@@ -21,7 +20,11 @@
 					<div class="text-left overflow-scroll"><strong><%= @post.user.username %></strong></div>
 				<% end %>
 			</p>
-			<p><%= render partial: "devise/images/image", locals: {resource: @post.user, size: "80x80"} %></p>
+			<div class="inline-block"><%= render partial: "devise/images/image", locals: {resource: @post.user, size: "80x80"} %></div>
+			<div class="inline-block shrink long">
+			<div class="circle inline-block">  <%= @post.rating_score %></div> 
+			<div class="inline-block center-image"><%= image_tag root_url + "/images/" + "arrow.png", :class => "fa-rotate-90 inline-block" %></div>
+			</div>
 			<p class="text-left small-text">Posts/Answers: <%= @post.user.posts.count + @post.user.answers.count%><br>
 				Join Date: <%= @post.user.created_at.strftime("%m/%d/%Y") %><br>
 				Location:  <%= @post.user.country%><%=", " + @post.user.state %>
@@ -32,17 +35,17 @@
 			<br>
 		</div>
 		<div class="large-10 columns replies">
-			<p><%= @post.content %></p>
+			<p class="font-increase"><%= @post.content %></p>
 			<hr>
 		</div>
 		<div class="large-9 columns replies">
 			<% @comment_number = @post.commentarys.count%>
-			<% if @comment_number == 1 %> <h6><strong><%= @comment_number %> Comment </strong></h6> <% end %>
-			<% if @comment_number > 1 %> <h6><strong><%= @comment_number %> Comments </strong></h6> <% end %>
+			<% if @comment_number == 1 %> <p clsss="small-text"><strong><%= @comment_number %> Comment </strong></p> <% end %>
+			<% if @comment_number > 1 %> <p clsss="small-text"><strong><%= @comment_number %> Comments </strong></p></h6> <% end %>
 			<% @post.commentarys.each do |comment| %>
 				<div class="row ">
-					<div class="small-12 columns">
-						<p><%= comment.comment %><strong><br><%= "- " + comment.user.username + " " + comment.created_at.strftime("%m/%d/%Y") %></strong> </p>
+					<div class="small-12 columns ">
+						<p class="small-text"><%= comment.comment %><strong><br><%= "- " + comment.user.username + " " + comment.created_at.strftime("%m/%d/%Y") %></strong> </p>
 					</div>
 				</div>
 				<hr>
