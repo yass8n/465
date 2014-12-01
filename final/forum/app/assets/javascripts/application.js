@@ -58,6 +58,12 @@ $(function() {
 	$('#answered_true, #answered_false, #filter_rating, #filter_views, #filter_recent').on('click', function(){ 
 		set_filter_image();
     });
+    $('#up-arrow, #down-arrow').on('mouseout', function(){
+    	$(this).attr("src", "/images/arrow_hollow.png");
+    });
+    $('#up-arrow, #down-arrow').on('mouseover', function(){
+    	$(this).attr("src", "/images/arrow.png");
+    });
     function set_filter_image(){
 	    var checked = false;
 		var src = "https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/128/empty_filter.png"

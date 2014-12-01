@@ -21,11 +21,14 @@
 				<% end %>
 			</p>
 			<div class="inline-block"><%= render partial: "devise/images/image", locals: {resource: @post.user, size: "80x80", style: "margin-top: -60px"} %></div>
-			<div class="inline-block shrink long">
-			<div class="inline-block"><%= image_tag root_url + "/images/" + "arrow.png", :class => "fa-rotate-270 inline-block" %></div>
-			<div class="circle inline-block">  <%= @post.rating_score %></div> 
-			<div class="inline-block "><%= image_tag root_url + "/images/" + "arrow.png", :class => "fa-rotate-90 inline-block" %></div>
-			</div>
+			<% if current_user.nil? %>
+			<!-- when someone is not signed in and tries to rate -->
+				<%= render partial: "ratings/rating_invalid", locals: {resource: @post} %>
+			<% else %>
+			<!-- when someone IS signed in...this user can rate -->
+			 <%= render partial: "ratings/rating_valid", locals: {resource: @post} %>
+			<% end %>
+
 			<p class="text-left small-text">Posts/Answers: <%= @post.user.posts.count + @post.user.answers.count%><br>
 				Join Date: <%= @post.user.created_at.strftime("%m/%d/%Y") %><br>
 				Location:  <%= @post.user.country%><%=", " + @post.user.state %>
@@ -143,7 +146,7 @@
 
 
 <% unless current_user.nil? || Answer.where(post_id: @post.id, user_id: current_user.id)[0] %> <!-- user already answered it before -->
-	<div class ="center"><%= render partial: 'answers/form' %></div>
+	<div><%= render partial: 'answers/form' %></div>
 <% end %>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |

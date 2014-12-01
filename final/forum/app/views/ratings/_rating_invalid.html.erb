@@ -1,3 +1,5 @@
-    <span><%= link_to ("No"), new_user_session_path, data: { confirm: 'You must sign in to rate answers...would you like to sign in?' } %></span>
-    <span><%= link_to ("Yes"), new_user_session_path, data: { confirm: 'You must sign in to rate answers...would you like to sign in?' } %></span>
-  <%= resource.rating_score %>
+      <div class="inline-block shrink long">
+      <div class="inline-block"><%= link_to((image_tag root_url + "/images/" + "arrow_hollow.png", :class => "fa-rotate-270 inline-block", id: "up-arrow"), new_user_session_path, data: { confirm: 'You must sign in to rate answers...would you like to sign in?' }) %> </div>
+      <div class="circle inline-block">  <%= @post.rating_score %></div> 
+      <div class="inline-block "><%= link_to((image_tag root_url + "/images/" + "arrow_hollow.png", :class => "fa-rotate-90 inline-block", id: "down-arrow"), new_user_session_path, data: { confirm: 'You must sign in to rate answers...would you like to sign in?' }) %></div>
+      </div>

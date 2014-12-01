@@ -17,15 +17,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
+    uploaded_pic = false
     if !params[:user].nil? && !params[:user][:uploaded_file].nil?
       resource.filename = resource.generate_filename
+      uploaded_pic = true
     end
     resource.paypal_link = resource.create_paypal_link(params[:user][:paypal_email])
     set_country_and_state
     resource_saved = resource.save
     yield resource if block_given?
     if resource_saved
-      upload_pic
+      upload_pic if uploaded_pic
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)
