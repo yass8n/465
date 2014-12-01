@@ -1,4 +1,4 @@
 <% image_name = "unknown.jpg" %>
 <% image_name = resource.filename if !resource.filename.nil? && !resource.filename.blank?  %>
-<div><%= image_tag root_url + "/images/" + image_name, size: size, id: "profile-pic"%>
+<div><%= image_tag root_url + "/images/" + image_name, size: size, style: style%>
 </div>

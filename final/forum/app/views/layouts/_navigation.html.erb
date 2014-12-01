@@ -6,7 +6,7 @@
   </ul>
   <% if user_signed_in? %>
    <a href="/users/edit" id="nav-button" class="button split secondary float-right">
-	<%= render partial: "devise/images/image", locals: {resource: current_user, size: "30x30"} %> 
+	<%= render partial: "devise/images/image", locals: {resource: current_user, size: "30x30", style: "margin-top: -2px;"} %> 
 	<span data-dropdown="drop">
 	<% else %>
    	<h1><a href="/users/sign_in" id="nav-button" class="button secondary float-right"> Sign Up/Sign In

@@ -20,10 +20,11 @@
 					<div class="text-left overflow-scroll"><strong><%= @post.user.username %></strong></div>
 				<% end %>
 			</p>
-			<div class="inline-block"><%= render partial: "devise/images/image", locals: {resource: @post.user, size: "80x80"} %></div>
+			<div class="inline-block"><%= render partial: "devise/images/image", locals: {resource: @post.user, size: "80x80", style: "margin-top: -60px"} %></div>
 			<div class="inline-block shrink long">
+			<div class="inline-block"><%= image_tag root_url + "/images/" + "arrow.png", :class => "fa-rotate-270 inline-block" %></div>
 			<div class="circle inline-block">  <%= @post.rating_score %></div> 
-			<div class="inline-block center-image"><%= image_tag root_url + "/images/" + "arrow.png", :class => "fa-rotate-90 inline-block" %></div>
+			<div class="inline-block "><%= image_tag root_url + "/images/" + "arrow.png", :class => "fa-rotate-90 inline-block" %></div>
 			</div>
 			<p class="text-left small-text">Posts/Answers: <%= @post.user.posts.count + @post.user.answers.count%><br>
 				Join Date: <%= @post.user.created_at.strftime("%m/%d/%Y") %><br>
@@ -74,7 +75,7 @@
 					<div class="text-left overflow-scroll"><strong><%= answer.user.username %></strong></div>
 				<% end %>
 			</p>
-			<p><%= render partial: "devise/images/image", locals: {resource: answer.user, size: "80x80"} %></p>
+			<p><%= render partial: "devise/images/image", locals: {resource: answer.user, size: "80x80",  style: "margin-top: -60px;"} %></p>
 			<p class="text-left small-text">Posts/Answers: <%= answer.user.posts.count + answer.user.answers.count%><br>
 				Join Date: <%= answer.user.created_at.strftime("%m/%d/%Y") %><br>
 				Location:  <%= answer.user.country%><%=", " + answer.user.state %>

@@ -166,7 +166,7 @@ div, p, h1, h2, h3, h4, h5, h6{
   width:40px;
   height:40px;
   border-radius:40px;
-  font-size:10px;
+  font-size:16px;
   color:#fff;
   line-height:40px;
   text-align:center;
@@ -179,20 +179,15 @@ div, p, h1, h2, h3, h4, h5, h6{
     -o-transform: rotate(90deg);
     transform: rotate(90deg);
 }
-.fa-rotate-180 {
-    -webkit-transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
-    transform: rotate(180deg);
+.fa-rotate-270 {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);
 }
 .shrink{
   width: 40px;
-}
-.center-image{
-  margin-left: auto;
-  margin-right: auto;
-  width: 3em;
 }
 .long{
   height: 130px;
