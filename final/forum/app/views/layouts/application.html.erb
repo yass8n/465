@@ -5,6 +5,7 @@
     <title><%= content_for?(:title) ? yield(:title) : "Forum" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Forum" %>">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <link data-turbolinks-track="true" href="/assets/foundation-icons/foundation-icons.css" media="all" rel="stylesheet">
     <%# Modernizr is required for Zurb Foundation %>
     <%= javascript_include_tag 'vendor/modernizr' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
