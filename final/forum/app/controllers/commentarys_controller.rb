@@ -27,7 +27,6 @@ class CommentarysController < ApplicationController
   end
     def create_answer_comment
     @commentary = Commentary.new(commentary_params)
-    @commentary.post_id = params[:post_id]
     @commentary.user_id = params[:user_id]
     @commentary.answer_id = params[:answer_id]
     @commentary.comment = params[:commentary][:comment]

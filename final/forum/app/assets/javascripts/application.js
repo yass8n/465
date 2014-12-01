@@ -41,12 +41,14 @@ $(function() {
 	}
 
 	//to show the post comment form and the answer comment form
-	$('#comment_on_post, .comment_on_answer').on('click', function(){
-		$(this).nextUntil('div').next().removeClass('hidden');
+	$('.comment_on_answer').on('click', function(){
+		$('.answer_comment_form').removeClass('hidden');
+		$(this).addClass('hidden');
 	});
 
 	$('#comment_on_post').on('click', function(){
 		$('#post_comment_form').removeClass('hidden');
+		$(this).addClass('hidden');
 	});
 
 

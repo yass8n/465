@@ -12,110 +12,104 @@
    
   <div class="row">
     <div class="large-12 columns">
- 
        
-      <div class="row">
-        <div class="large-2 columns small-3">
+      <div class="row relative">
+		<div class="large-2 columns small-3">
 			<p> <% if @post.user.nil? || @post.user.status == "deleted" %>
-				   <h5 class="text-left"><strong>DELETED</strong></h5>
+					<h5 class="text-left"><strong>DELETED</strong></h5>
 				<% else %>
-				  <div class="text-left overflow-scroll"><strong><%= @post.user.username %></strong></div>
+					<div class="text-left overflow-scroll"><strong><%= @post.user.username %></strong></div>
 				<% end %>
 			</p>
 			<p><%= render partial: "devise/images/image", locals: {resource: @post.user, size: "80x80"} %></p>
 			<p class="text-left small-text">Posts/Answers: <%= @post.user.posts.count + @post.user.answers.count%><br>
-			  Join Date: <%= @post.user.created_at.strftime("%m/%d/%Y") %><br>
-			  Location:  <%= @post.user.country%><%=", " + @post.user.state %>
+				Join Date: <%= @post.user.created_at.strftime("%m/%d/%Y") %><br>
+				Location:  <%= @post.user.country%><%=", " + @post.user.state %>
 			</p>
 			<% unless @post.user.nil? %>
 				<div><%= render partial: "donate", locals: {resource: @post} %></div>
 			<% end %>
+			<br>
 		</div>
-        <div class="large-10 columns">
-          <p><%= @post.content %></p>
-          <% @comment_number = @post.commentarys.count%>
-          <% if @comment_number == 1 %> <h6><strong><%= @comment_number %> Comment </strong></h6> <% end %>
-          <% if @comment_number > 1 %> <h6><strong><%= @comment_number %> Comments </strong></h6> <% end %>
-          <% @post.commentarys.each do |comment| %>
-          <div class="row skinny">
-            <div class="small-12 columns"><p>
-				 <strong><%= comment.user.username + " said: "%></strong> <%= comment.comment %></p>
-			 </div>
-          </div>
-          <hr>
-			<% end %>
-          <% unless current_user.nil? %>
-				<ul class="inline-list">
-					<li><strong><a id="comment_on_post">Comment on Post</a></strong></li>
-				</ul>
-				<div class="hidden" id="post_comment_form"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_post_comment_path(post_id: @post.id, user_id: current_user.id)} %>
+		<div class="large-10 columns replies">
+			<p><%= @post.content %></p>
+			<hr>
+		</div>
+		<div class="large-9 columns replies">
+			<% @comment_number = @post.commentarys.count%>
+			<% if @comment_number == 1 %> <h6><strong><%= @comment_number %> Comment </strong></h6> <% end %>
+			<% if @comment_number > 1 %> <h6><strong><%= @comment_number %> Comments </strong></h6> <% end %>
+			<% @post.commentarys.each do |comment| %>
+				<div class="row ">
+					<div class="small-12 columns">
+						<p><%= comment.comment %><strong><br><%= "- " + comment.user.username + " " + comment.created_at.strftime("%m/%d/%Y") %></strong> </p>
+					</div>
 				</div>
-		<% end %>
-      </div>
- 
-      <hr/>
- 
-       
-      <div class="row">
-        <div class="large-2 columns small-3"><img src="http://placehold.it/80x80&text=[img]"/></div>
-        <div class="large-10 columns">
-          <p><strong>Some Person said:</strong> Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
-          <ul class="inline-list">
-            <li><a href="">Reply</a></li>
-            <li><a href="">Share</a></li>
-          </ul>
-        </div>
-      </div>
-       
- 
-      <hr/>
- 
-       
-      <div class="row">
-        <div class="large-2 columns small-3"><img src="http://placehold.it/80x80&text=[img]"/></div>
-        <div class="large-10 columns">
-          <p><strong>Some Person said:</strong> Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
-          <ul class="inline-list">
-            <li><a href="">Reply</a></li>
-            <li><a href="">Share</a></li>
-          </ul>
- 
- 
-          <h6>2 Comments</h6>
-          <div class="row">
-            <div class="large-2 columns small-3"><img src="http://placehold.it/50x50&text=[img]"/></div>
-            <div class="large-10 columns"><p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit</p></div>
-          </div>
-        </div>
-      </div>
-       
- 
-    </div>
+				<hr>
+			<% end %>
+			<% unless current_user.nil? %>
+				<div class="large-10 columns">
+					<div class="hidden" id="post_comment_form"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_post_comment_path(post_id: @post.id, user_id: current_user.id)} %>
+					</div>
+				</div>
+				<br>
+				<br><br>
+					<ul class="inline-list absolute bottom comment-right">
+						<li><strong><a id="comment_on_post">Comment on Post</a></strong></li>
+					</ul>
+				<% end %>
+			</div>
+		</div>
+      <hr id="new-post">
 
+<% @answers.each do |answer| %>
+	<div class="row relative">
+		<div class="large-2 columns small-3 relative">
+			<p> <% if answer.user.nil? || answer.user.status == "deleted" %>
+					<h5 class="text-left"><strong>DELETED</strong></h5>
+				<% else %>
+					<div class="text-left overflow-scroll"><strong><%= answer.user.username %></strong></div>
+				<% end %>
+			</p>
+			<p><%= render partial: "devise/images/image", locals: {resource: answer.user, size: "80x80"} %></p>
+			<p class="text-left small-text">Posts/Answers: <%= answer.user.posts.count + answer.user.answers.count%><br>
+				Join Date: <%= answer.user.created_at.strftime("%m/%d/%Y") %><br>
+				Location:  <%= answer.user.country%><%=", " + answer.user.state %>
+			</p>
+			<% unless answer.user.nil? %>
+				<div><%= render partial: "donate", locals: {resource: answer} %></div>
+			<% end %>
+		</div>
+		<div class="large-10 columns">
+			<p><%= answer.answer %></p>
+			<% @comment_number = answer.commentarys.count%>
+			<% if @comment_number == 1 %> <h6><strong><%= @comment_number %> Comment </strong></h6> <% end %>
+			<% if @comment_number > 1 %> <h6><strong><%= @comment_number %> Comments </strong></h6> <% end %>
+			<% answer.commentarys.each do |comment| %>
+				<hr>
+				<div class="row">
+					<div class="small-12 columns" >
+						<p><%= comment.comment %><strong><%= "--" + comment.user.username + " " + comment.created_at.strftime("%m/%d/%Y") %></strong></p>
+					</div>
+				</div>
+			<% end %>
+		</div>
+		<div class="large-10 columns">
+			<% unless current_user.nil? %>
+				<ul class="inline-list">
+					<% if answer.user == current_user %>
+						<li><strong><%= link_to 'Edit Answer', edit_answer_path(answer) %></strong></li>
+					<% end %>
+						<li><strong><a class="comment_on_answer">Comment on Answer</a></strong></li>
+				</ul>
+				<div class="hidden answer_comment_form"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_answer_comment_path(post_id: @post.id, user_id: current_user.id, answer_id: answer.id)} %>
+				</div>
+			<% end %>
+			</div>
+	</div>
+<% end %>
  
-  </div>
- 
-  <footer class="row">
-    <div class="large-12 columns">
-      <hr/>
-      <div class="row">
-        <div class="large-5 columns">
-          <p>© Copyright no one at all. Go to town.</p>
-        </div>
-        <div class="large-7 columns">
-          <ul class="inline-list right">
-            <li><a href="#">Section 1</a></li>
-            <li><a href="#">Section 2</a></li>
-            <li><a href="#">Section 3</a></li>
-            <li><a href="#">Section 4</a></li>
-            <li><a href="#">Section 5</a></li>
-            <li><a href="#">Section 6</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
-    
+
 
 
 
@@ -140,56 +134,9 @@
 <% else %>
 <!-- when someone IS signed in...this user can rate -->
  <%= render partial: "ratings/rating_valid", locals: {resource: @post} %>
-	<br>
-	<a id="comment_on_post">Comment on Post</a>
-	<br>
-	<div class="hidden answer_comment_form"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_post_comment_path(post_id: @post.id, user_id: current_user.id)} %>
-	</div>
-<% end %>
-
-<% @post.commentarys.each do |comment| %>
-	 <%= comment.comment %>
-	 <br>
 <% end %>
 
 
-<% @answers.each do |answer| %>
-	<hr>
-	<%= render partial: "devise/images/image", locals: {resource: answer.user, size: "80x80"} %>
-	<% if answer.user.nil? || answer.user.status == "deleted"%>
-		<div> <%= "DELETED" + " " + answer.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") + " " + answer.answer %> 
-		</div>
-	<% else %>
-		<div> <%= answer.user.username + " " + answer.created_at.strftime("Created on %m/%d/%Y at %I:%M%p") + " " + answer.answer %> </div>
-	<% end %>
-
-	<% if current_user.nil? %>
-	<!-- when someone is not signed in and tries to rate -->
-		<%= render partial: "ratings/rating_invalid", locals: {resource: answer} %>
-	<% else %>
-	<!-- when someone IS signed in...this user can rate -->
-		<%= render partial: "ratings/rating_valid", locals: {resource: answer} %>
-		<br>
-		<a class="comment_on_answer">Comment on Answer</a>
-		<br>
-		<div class="answer_comment_form hidden"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_answer_comment_path(post_id: @post.id, user_id: current_user.id, answer_id: answer.id)} %>
-		</div>
-	<% end %>
-	<% unless answer.user.nil? || answer.user.status == "deleted"%>
-		<%= render partial: "posts/donate", locals: {resource: answer} %>
-		<% if answer.user == current_user %>
-			<%= link_to 'Edit Answer', edit_answer_path(answer) %>
-		<% end %>
-		<br>
-	<% end %>
-
-	<% answer.commentarys.each do |comment| %>
-	 <%= comment.comment %>
-	 <br>
-	<% end %>
-<% end %>
-<hr>
-<br>
 
 <% unless current_user.nil? || Answer.where(post_id: @post.id, user_id: current_user.id)[0] %> <!-- user already answered it before -->
 	<div class ="center"><%= render partial: 'answers/form' %></div>

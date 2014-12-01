@@ -126,3 +126,36 @@ div, p, h1, h2, h3, h4, h5, h6{
 .skinny{
   height: 10px;
 }
+.tall{
+  height: 100%;
+}
+.absolute{
+  position: absolute;
+}
+.bottom{
+  bottom: 0;
+}
+.left{
+  left: 0;
+}
+.right{
+  right:0;
+}
+.comment-right{
+  right: 0;
+  margin-right: 15px;
+}
+.top{
+  top: 0;
+}
+.replies{
+  margin-top: 2%;
+}
+.replies-form{
+  margin-top: 18%;
+}
+#new-post{
+  border-width: 3px;
+  margin: 1rem 0 1rem;
+  border: solid;
+}
