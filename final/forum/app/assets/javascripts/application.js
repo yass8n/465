@@ -16,9 +16,13 @@
 //= require foundation
 //= require_tree .
 $(function() {
-  $(document).foundation();
-  $(document).ready(function(){
-	set_filter_image();
+  initPage();
+});
+$(window).bind('page:change', function() {
+  initPage();
+});
+function initPage() {
+  set_filter_image();
 	// for states and countries
 	if ($('#user_country').val() == "US") {
 		$('#states').removeClass('hidden')
@@ -77,6 +81,4 @@ $(function() {
 	        $('#filter-image').attr("src", src);
 	    });
     }
-
-});
-});
+}
