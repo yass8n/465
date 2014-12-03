@@ -209,7 +209,7 @@ footer {
   margin-top: 6px;
 }
 .middle-nav{
-  z-index: 10;
+  z-index: 1; //so the 'filter' bar can show over the body instead of behind
   margin-left: 350px;
 }
 .shift-nav-up{

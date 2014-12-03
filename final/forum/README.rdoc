@@ -31,5 +31,7 @@ Please feel free to use a different markup language if you do not plan to run
 - change comment to 36 minutes ago
 -fix editing answer rdirect to go to the actual post
 - add ability to find your own posts and answers
+-Users shouldn't be able to rate their own answers
 -filter button doesnt work if I come from home
+-Be able to create a new question from anywhere on the website
 <tt>rake doc:app</tt>.
