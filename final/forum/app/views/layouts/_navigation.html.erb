@@ -1,8 +1,13 @@
 <%# navigation styled for Zurb Foundation 5 %>
 <nav class="top-bar" data-topbar>
-  <ul class="title-area">
-    <li class="name"><%= link_to 'Home', root_path %></li>
-  </ul>
+<ul class="title-area">
+  <li class="name"><%= link_to 'Home', root_path %></li>
+</ul>
+<ul class="left">
+<li class="has-form">
+<%= render partial: "title_search" %>
+</li>
+</ul>
   <% if user_signed_in? %>
     <!-- <a href="/users/edit" id="nav-button" class="button split secondary float-right"> -->
     <a href="#" data-dropdown="drop1" id="nav-button" class="button dropdown secondary float-right">
