@@ -41,8 +41,8 @@ function initPage() {
 	});
 
 	//adding link to end of alert when a deleted user tries to sign in again
-	if ($('.alert').html() == "Sorry, your account has previously been deleted."){
-		$('.alert').html("Sorry, your account has previously been deleted...<a href='recover'>Recover Account</a>")
+	if ($('.alert div').html() == "Sorry, your account has previously been deleted."){
+		$('.alert div').html("Sorry, your account has previously been deleted...<a href='recover'>Recover Account</a>")
 	}
 
 	//to show the post comment form and the answer comment form

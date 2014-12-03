@@ -35,7 +35,7 @@ class Users::SessionsController < Devise::SessionsController
       respond_to_on_destroy and return
     elsif params[:commit] == "Recover"
       # a deleted user is trying to recover account
-      resource = resource.where_email(params[:user][:email])
+      resource = User.new.where_email(params[:user][:email])
       resource.status = "active"
       resource.save!
       sign_in(resource_name, resource)
