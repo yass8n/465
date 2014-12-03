@@ -1,19 +1,32 @@
 <%# navigation styled for Zurb Foundation 5 %>
-<nav class="top-bar" data-topbar>
-<ul class="title-area">
-  <li class="name"><%= link_to 'Home', root_path %></li>
-</ul>
-<ul class="left">
-<li class="has-form">
-<%= render partial: "posts/title_search" %>
-</li>
-</ul>
+<nav class="top-bar" data-topbar="" role="navigation">
+  <section class="top-bar-section shift-nav-up">
+  <ul class="left">
+    <li class="name"><%= link_to 'Home', root_path %></li>
+    <li class="divider"></li>
+  </ul>
+  </section>
+  <section class="top-bar-section middle-nav shift-nav-up">
+  <ul class="left">
+    <li class="has-form">
+      <%= render partial: "posts/title_search" %>
+    </li>
+    <li class="divider"></li>
+     <li class="has-dropdown not-click"><a href="#">Item 1</a>
+        <ul class="dropdown">
+          <li><a href="#">Sub-item 1</a></li>
+          <li><a href="#">Sub-item 2</a></li>
+        </ul>
+        <li class="divider"></li>
+      </li>
+    </ul>
+  </section>
   <% if user_signed_in? %>
     <!-- <a href="/users/edit" id="nav-button" class="button split secondary float-right"> -->
     <a href="#" data-dropdown="drop1" id="nav-button" class="button dropdown secondary float-right">
       <%= render partial: "devise/images/image", locals: {resource: current_user, size: "30x30", style: "margin-top: -2px;"} %>
     </a>
-     <ul id="drop1" class="f-dropdown">
+    <ul id="drop1" class="f-dropdown">
       <li><a href="/users/edit">Edit Account</a></li>
       <li><a data-method="delete" href="/users/sign_out" rel="nofollow">Sign out</a></li>
     </ul>
