@@ -1,3 +1,5 @@
+$primary-color: #cf2a0e;
+$font: fantasy;
 * {
   margin: 0;
 }
@@ -86,13 +88,13 @@ div {
 }
 #nav-button{
   height: 50px;
-  margin-right: 120px;
-  margin-top: -10px;
+  margin-right: 150px;
+  margin-top: -9px;
 }
 #profile-pic{
   margin-top: -2px;
 }
-#title{
+#title, .filters{
   width: 300px;
 }
 .inline-block{
@@ -219,8 +221,53 @@ footer {
 .registration{
   width: 20%;
   height: 40%;
+  position: absolute;
+  right: 10%;
+  top: 10%;
 }
 input.button{
   padding: 10px 10px 10px 10px;
   border-radius: 5px;
+}
+.new-session{
+  width: 20%;
+  height: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 80px;
+  display: table;
+}
+.underline{
+  text-decoration: underline;
+}
+.full-width{
+  width: 100%;
+}
+.button.alert{
+  background-color: $primary-color;
+   &:hover {
+      background-color: #9f200b;
+    }
+}
+.fi-dollar, .fi-clipboard-pencil, .fi-comment-quotes{
+    font-size: 100px;
+    color: $primary-color;
+}
+.landing-icons{
+  position: absolute;
+  width: 60%;
+  top: 10%;
+  left: 10%;
+}
+.intro{
+  color: oil;
+  top: 15px;
+  width: 500px;
+  h1{
+  font-family: $font;
+  }
+}
+#pitch{
+  font-family: $font;
+  font-size: 60px;
 }
