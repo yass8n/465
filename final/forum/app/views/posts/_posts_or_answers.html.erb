@@ -1,0 +1,79 @@
+ <div class="row">
+    <div class="large-12 columns">
+       
+      <div class="row relative">
+		<div class="large-2 columns small-3">
+			<p> <% if resource.user.nil? || resource.user.status == "deleted" %>
+					<h5 class="text-left"><strong>DELETED</strong></h5>
+				<% else %>
+					<div class="text-left overflow-scroll"><strong><%= resource.user.username %></strong></div>
+				<% end %>
+			</p>
+			<div class="inline-block"><%= render partial: "devise/images/image", locals: {resource: resource.user, size: "80x80", style: "margin-top: -60px"} %></div>
+			<% if current_user.nil? %>
+			<!-- when someone is not signed in and tries to rate -->
+			<%= render partial: "ratings/rating_invalid", locals: {resource: resource} %>
+			<% else %>
+			<!-- when someone IS signed in...this user can rate -->
+			 <%= render partial: "ratings/rating_valid", locals: {resource: resource} %>
+			<% end %>
+
+			<p class="text-left small-text">Posts/Answers: <%= resource.user.posts.count + resource.user.answers.count%><br>
+				Join Date: <%= resource.user.created_at.strftime("%m/%d/%Y") %><br>
+				<% unless resource.user.country.nil? || resource.user.country.blank? %> 
+				Location:  <%= resource.user.country%>
+				<% end %>
+				<% unless resource.user.state.nil? || resource.user.state.blank? %> 
+				<%=", " + resource.user.state %>
+				<% end %>
+			</p>
+			<% unless resource.user.nil? %>
+				<div><%= render partial: "donate", locals: {resource: resource} %></div>
+			<% end %>
+			<br>
+		</div>
+		<div class="large-10 columns replies">
+			<% if resource.is_a?(Post) %><p class="font-increase"><%= resource.content %></p> <% end %>
+			<% if resource.is_a?(Answer) %><p class="font-increase"><%= resource.answer %></p> <% end %>
+			<hr>
+		</div>
+		<div class="large-9 columns replies">
+			<% @comment_number = resource.commentarys.count%>
+			<% if @comment_number == 1 %> <p clsss="small-text"><strong><%= @comment_number %> Comment </strong></p> <% end %>
+			<% if @comment_number > 1 %> <p clsss="small-text"><strong><%= @comment_number %> Comments </strong></p></h6> <% end %>
+			<% resource.commentarys.each do |comment| %>
+				<div class="row ">
+					<div class="small-12 columns ">
+						<p class="small-text"><%= comment.comment %><strong><br><%= "- " + comment.user.username + " " + comment.created_at.strftime("%m/%d/%Y") %></strong> </p>
+					</div>
+				</div>
+				<hr>
+			<% end %>
+			<% if resource.is_a?(Post) %>
+				<% unless current_user.nil? %>
+					<div class="large-10 columns">
+						<div class="hidden" id="post_comment_form"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_post_comment_path(post_id: resource.id, user_id: current_user.id)} %>
+						</div>
+					</div>
+					<br>
+					<br><br>
+						<ul class="inline-list absolute bottom comment-right">
+							<li><strong><a id="comment_on_post">Comment on Post</a></strong></li>
+						</ul>
+					<% end %>
+				<% end %>
+			<% if resource.is_a?(Answer) %>
+				<% unless current_user.nil? %>
+					<ul class="inline-list">
+						<% if resource.user == current_user %>
+						<li><strong><%= link_to 'Edit Answer', edit_answer_path(resource) %></strong></li>
+						<% end %>
+						<li><strong><a class="comment_on_answer">Comment on Answer</a></strong></li>
+					</ul>
+					<div class="hidden answer_comment_form"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_answer_comment_path(post_id: @post.id, user_id: current_user.id, answer_id: resource.id)} %>
+					</div>
+				<% end %>
+			<% end %>
+			</div>
+		</div>
+      <hr id="new-post">

@@ -22,8 +22,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.filename = resource.generate_filename
       uploaded_pic = true
     end
-    resource.paypal_link = resource.create_paypal_link(params[:user][:paypal_email])
-    set_country_and_state
+    resource.paypal_link = resource.create_paypal_link(params[:user][:paypal_email]) unless params[:user][:paypal_email].nil? || params[:user][:paypal_email].blank? 
+    set_country_and_state unless params[:user][:country].nil? || params[:user][:country].blank? 
     resource_saved = resource.save
     yield resource if block_given?
     if resource_saved
@@ -59,16 +59,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
-    resource.paypal_link = resource.create_paypal_link(params[:user][:paypal_email])
-    set_country_and_state
+    resource.paypal_link = resource.create_paypal_link(params[:user][:paypal_email]) unless params[:user][:paypal_email].nil? || params[:user][:paypal_email].blank? 
+    set_country_and_state unless params[:user][:country].nil? || params[:user][:country].blank? 
+    uploaded_pic = false
     if !params[:user].nil? && !params[:user][:uploaded_file].nil?
       resource.remove_image_path
       resource.filename = resource.generate_filename
+      uploaded_pic = true
     end
     resource_updated = update_resource(resource, account_update_params)
     yield resource if block_given?
     if resource_updated
-      upload_pic
+      upload_pic if uploaded_pic
       if is_flashing_format?
         flash_key = update_needs_confirmation?(resource, prev_unconfirmed_email) ?
           :update_needs_confirmation : :updated

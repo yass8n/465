@@ -11,11 +11,9 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :paypal_email, :allow_nil => true, :allow_blank => true
   validates :username, presence: true
   validates :email, presence: true
-  validates :paypal_email, presence: true
   validates_presence_of :password, :unless => Proc.new { |u| u.sign_in_count > 0 } 
   #if the count is greater than 0, the user is trying to recover account so let them keep the same password
   validates_presence_of :password_confirmation, :unless => Proc.new { |u| u.sign_in_count > 0 }
-  validates :country, presence: true
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   before_create :status_active
