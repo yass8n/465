@@ -9508,7 +9508,7 @@ div, p, h1, h2, h3, h4, h5, h6 {
 }
 
 /* line 144, /Users/yass8n/CSCI/web_programming/465/final/forum/app/assets/stylesheets/scaffolds.css.scss */
-.comment-right {
+.padding-right {
   right: 0;
   margin-right: 15px;
 }

@@ -105,6 +105,9 @@ div {
 .inline-block{
   display: inline-block;
 }
+.block{
+  display:block;
+}
 .relative{
   position: relative;
 }
@@ -145,15 +148,21 @@ div, p, h1, h2, h3, h4, h5, h6{
 .right{
   right:0;
 }
-.comment-right{
-  right: 0;
+.padding-right{
   padding: 3px 3px 3px 3px;
   margin-right: 15px;
 }
-.comment-left{
-  left: 0;
+.padding-left{
   padding: 3px 3px 3px 3px;
   margin-left: 15px;
+}
+.padding-top{
+  padding: 3px 3px 3px 3px;
+  margin-top: 15px;
+}
+.padding-bottom{
+  padding: 3px 3px 3px 3px;
+  margin-bottom: 15px;
 }
 .top{
   top: 0;
@@ -298,8 +307,8 @@ input.button{
 }
 .CSSTableGenerator {
   margin:0px;padding:0px;
-  width:90%;
-  height:90%;
+  width:75%;
+  height:75%;
   box-shadow: 10px 10px 5px #888888;
   border:1px solid #000000;
   -moz-border-radius-bottomleft:15px;
@@ -321,8 +330,8 @@ input.button{
 }.CSSTableGenerator table{
   border-collapse: collapse;
   border-spacing: 0;
-  width:90%;
-  height:90%;
+  width:75%;
+  height:75%;
   margin:0px;padding:0px;
   border-radius: 10px;
 }.CSSTableGenerator tr:hover td{
@@ -360,7 +369,7 @@ input.button{
 }
 table thead{
   border-radius: 10px;
-  background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff5656), color-stop(1, #7f0000) );
+  background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #007095), color-stop(1, $gray) );
   background:-moz-linear-gradient( center top, #ff5656 5%, #7f0000 100% );
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff5656", endColorstr="#7f0000");  background: -o-linear-gradient(top,#ff5656,7f0000);
 

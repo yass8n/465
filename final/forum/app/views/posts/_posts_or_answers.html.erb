@@ -56,7 +56,8 @@
 					</div>
 					<br>
 					<br>
-						<ul class="inline-list absolute bottom comment-right">
+					<br>
+						<ul class="inline-list absolute bottom padding-right right">
 							<li><strong><a id="comment_on_post">Comment on Post</a></strong></li>
 						</ul>
 					<% end %>
@@ -65,7 +66,7 @@
 				<% unless current_user.nil? %>
 					<br>
 					<br>
-					<ul class="inline-list absolute bottom comment-right">
+					<ul class="inline-list absolute bottom padding-right right">
 						<% if resource.user == current_user %>
 						<li><strong><%= link_to 'Edit Answer', edit_answer_path(resource) %></strong></li>
 						<% end %>
