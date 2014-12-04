@@ -36,7 +36,7 @@
       <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
     </ul>
   <% else %>
-    <a href="/users/sign_in" id="nav-button" class="button secondary float-right"><h6>Login</h6></a>
+    <h6><%=link_to("Login", new_user_session_path , {:id => "nav-button", :class => "button secondary float-right"})%></h6>
   <% end %>
   <div class="top-bar-section">
     <ul>
