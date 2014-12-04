@@ -1,7 +1,7 @@
  <div class="row">
     <div class="large-12 columns">
        
-      <div class="row relative">
+      <div class="row relative content-border">
 		<div class="large-2 columns small-3">
 			<% if resource.user.nil? || resource.user.status == "deleted" %>
 					<h5 class="text-left"><strong>DELETED</strong></h5>
@@ -55,7 +55,7 @@
 						</div>
 					</div>
 					<br>
-					<br><br>
+					<br>
 						<ul class="inline-list absolute bottom comment-right">
 							<li><strong><a id="comment_on_post">Comment on Post</a></strong></li>
 						</ul>
@@ -63,7 +63,9 @@
 				<% end %>
 			<% if resource.is_a?(Answer) %>
 				<% unless current_user.nil? %>
-					<ul class="inline-list">
+					<br>
+					<br>
+					<ul class="inline-list absolute bottom comment-right">
 						<% if resource.user == current_user %>
 						<li><strong><%= link_to 'Edit Answer', edit_answer_path(resource) %></strong></li>
 						<% end %>
@@ -75,4 +77,4 @@
 			<% end %>
 			</div>
 		</div>
-      <hr id="new-post">
+		<br>
