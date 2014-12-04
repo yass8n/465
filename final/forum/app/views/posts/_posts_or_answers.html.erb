@@ -19,15 +19,15 @@
 
 			<p class="text-left small-text">Posts/Answers: <%= resource.user.posts.count + resource.user.answers.count%><br>
 				Join Date: <%= resource.user.created_at.strftime("%m/%d/%Y") %><br>
-				<% unless resource.user.country.nil? || resource.user.country.blank? %> 
+				<% unless resource.user.country.nil? || resource.user.country.blank? || resource.user.status == "deleted" %> 
 				Location:  <%= resource.user.country%>
 				<% end %>
-				<% unless resource.user.state.nil? || resource.user.state.blank? %> 
+				<% unless resource.user.state.nil? || resource.user.state.blank? || resource.user.status == "deleted" %> 
 				<%=", " + resource.user.state %>
 				<% end %>
 			</p>
 			<% unless resource.user.nil? %>
-				<div><%= render partial: "devise/users/donate", locals: {resource: resource} %></div>
+				<div><%= render partial: "users/donate", locals: {resource: resource} %></div>
 			<% end %>
 			<br>
 		</div>

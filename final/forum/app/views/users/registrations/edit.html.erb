@@ -56,8 +56,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
+    <%= f.submit "Update", :class => "button alert" %>
 <% end %>
 
 <h3>Cancel my account</h3>
@@ -71,7 +70,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Delete Account" , data: { confirm: "Are you sure you want to delete your account?" }%>
+    <%= f.submit "Delete Account" , data: { confirm: "Are you sure you want to delete your account?" }, :class => "button alert" %>
   </div>
 <% end %>
 

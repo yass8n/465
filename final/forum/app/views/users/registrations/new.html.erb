@@ -1,55 +1,28 @@
-<h2>Sign up</h2>
-
+<div class="registration">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
   <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true %>
-  </div>
-  <div>
-  Profile Pic
-  </div>
-  <div><%= f.file_field :uploaded_file %><br></br>
+    <%= f.text_field :username, autofocus: true, placeholder: "Username" %>
   </div>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
+    <%= f.email_field :email, placeholder: "Email"  %>
   </div>
 
   <div class="field">
-    <%= f.label :paypal_email %> 
-    <br><%= " (to get donations)" %></br>
-    <%= f.email_field :paypal_email, placeholder: "optional" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% placeholder = @minimum_password_length.to_s + " characters minimum" %>
+    <% placeholder = "Password..." + @minimum_password_length.to_s + " character minimum" %>
     <br>
     <%= f.password_field :password, autocomplete: "off", placeholder: placeholder %> 
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div>
-    <%= f.label :country %><br>
-    <%= country_select("user", "country", priority_countries: ["US"]) %>
-    <br></br>
-  </div>
-
-  <div id="states">
-  <%= f.label :state %> <br>
-  <%= select_tag(:state, options_for_select(Users::RegistrationsController.new.states)) %>
-  <br></br>
+    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Re-Enter Password"  %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", :class => "button alert" %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>
