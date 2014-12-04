@@ -7,6 +7,14 @@ class Post < ActiveRecord::Base
   validates :content, presence: true
   validates :title, presence: true
   before_create :init_rating_score
+  def calculate_rating
+    ratings = Rating.all.where(post_id: self.id)
+    total = 0
+    ratings.each do |rate| 
+      total += rate.rate
+    end
+    return total
+  end
   def init_rating_score
     self.rating_score = 0
   end

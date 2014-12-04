@@ -7,7 +7,14 @@ class Answer < ActiveRecord::Base
   validates :post_id, presence: true
   validates :answer, presence: true
   before_create :init_rating_score
-  
+    def calculate_rating
+    ratings = Rating.all.where(answer_id: self.id)
+    total = 0
+    ratings.each do |rate| 
+      total += rate.rate
+    end
+    return total
+  end
   def current_user_rating(current_user, rating)
 	return nil if rating.nil?
   	return Rating.where(user_id: current_user.id, answer_id: self.id)[0].rate

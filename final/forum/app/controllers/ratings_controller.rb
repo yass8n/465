@@ -56,12 +56,12 @@ class RatingsController < ApplicationController
   # PATCH/PUT /ratings/1
   # PATCH/PUT /ratings/1.json
   def update
-    @rating.rate = params[:rate].to_i
+    @rating.rate = @rating.rate + params[:rate].to_i
     if (@answer)
-      @answer.rating_score += @rating.rate * 2
+      @answer.rating_score = @answer.calculate_rating + params[:rate].to_i
       @answer.save
     else
-      @post.rating_score += @rating.rate * 2
+      @post.rating_score = @post.calculate_rating + params[:rate].to_i
       @post.save
     end
     respond_to do |format|
