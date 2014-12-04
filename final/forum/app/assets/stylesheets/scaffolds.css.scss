@@ -302,6 +302,21 @@ input.button{
   height:90%;
   box-shadow: 10px 10px 5px #888888;
   border:1px solid #000000;
+  -moz-border-radius-bottomleft:15px;
+  -webkit-border-bottom-left-radius:15px;
+  border-bottom-left-radius:15px;
+  
+  -moz-border-radius-bottomright:15px;
+  -webkit-border-bottom-right-radius:15px;
+  border-bottom-right-radius:15px;
+  
+  -moz-border-radius-topright:15px;
+  -webkit-border-top-right-radius:15px;
+  border-top-right-radius:15px;
+  
+  -moz-border-radius-topleft:15px;
+  -webkit-border-top-left-radius:15px;
+  border-top-left-radius:15px;
   
 }.CSSTableGenerator table{
   border-collapse: collapse;
@@ -309,15 +324,24 @@ input.button{
   width:90%;
   height:90%;
   margin:0px;padding:0px;
+  border-radius: 10px;
 }.CSSTableGenerator tr:hover td{
   background-color:#F8F19F;
-    
-
+}
+.CSSTableGenerator tbody tr:last-child td:first-child{
+    -moz-border-radius-bottomleft:15px;
+  -webkit-border-bottom-left-radius:15px;
+  border-bottom-left-radius:15px;
+}
+.CSSTableGenerator tbody tr:last-child td:last-child{
+  -moz-border-radius-bottomright:15px;
+  -webkit-border-bottom-right-radius:15px;
+  border-bottom-right-radius:15px;
 }
 .CSSTableGenerator td{
   vertical-align:middle;
   
-  background-color:#ffffff;
+  background-color: $gray;
 
   border:1px solid #000000;
   border-width:0px 1px 1px 0px;
@@ -334,9 +358,9 @@ input.button{
 }.CSSTableGenerator tr:last-child td:last-child{
   border-width:0px 0px 0px 0px;
 }
-.CSSTableGenerator td:nth-child(odd){ background-color:#F8F19F; }
 table thead{
-    background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff5656), color-stop(1, #7f0000) );
+  border-radius: 10px;
+  background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff5656), color-stop(1, #7f0000) );
   background:-moz-linear-gradient( center top, #ff5656 5%, #7f0000 100% );
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff5656", endColorstr="#7f0000");  background: -o-linear-gradient(top,#ff5656,7f0000);
 
@@ -348,6 +372,12 @@ table thead{
   font-family:Arial;
   font-weight:bold;
   color:#ffffff;
+  tr th:first-child{
+    border-top-left-radius: 15px;
+  }
+  tr th:last-child{
+    border-top-right-radius: 15px;
+  }
 }
 .center{
   margin-left: auto;
