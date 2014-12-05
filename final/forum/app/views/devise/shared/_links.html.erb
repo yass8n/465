@@ -7,7 +7,7 @@
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' && params[:controller] != "users/registrations" %>
-  <%= link_to "Re-send confirmation instructions?", new_confirmation_path(resource_name), :class => "underline"  %><br />
+  <%= link_to "Re-send confirmation?", new_confirmation_path(resource_name), :class => "underline"  %><br />
 <% end -%>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
