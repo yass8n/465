@@ -51,7 +51,7 @@ function initPage() {
 
 	//to show the post comment form and the answer comment form
 	$('.comment_on_answer').on('click', function(){
-		$(this).parents('ul').next('.answer_comment_form').removeClass('hidden');
+		$(this).parents('div').next('.answer_comment_form').removeClass('hidden');
 		$(this).addClass('hidden');
 	});
 

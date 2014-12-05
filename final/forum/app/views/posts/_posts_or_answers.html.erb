@@ -66,12 +66,14 @@
 				<% unless current_user.nil? %>
 					<br>
 					<br>
-					<ul class="inline-list absolute bottom padding-right right">
+					<br>
+					<br>
+					<div class="inline-list absolute bottom padding-right right">
 						<% if resource.user == current_user %>
-						<li><strong><%= link_to 'Edit Answer', edit_answer_path(resource) %></strong></li>
+						<div class="relative"><strong><%= link_to 'Edit Answer', edit_answer_path(resource) %></strong></div>
 						<% end %>
-						<li><strong><a class="comment_on_answer">Comment on Answer</a></strong></li>
-					</ul>
+						<div class="relative"><strong><a class="comment_on_answer">Comment on Answer</a></strong></div>
+					</div>
 					<div class="hidden answer_comment_form"><%= render :partial => 'commentarys/form', locals: {comment: @post_comment, comment_path: create_answer_comment_path(post_id: @post.id, user_id: current_user.id, answer_id: resource.id)} %>
 					</div>
 				<% end %>
