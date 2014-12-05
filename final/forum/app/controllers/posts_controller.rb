@@ -23,8 +23,8 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
-    if @post.answers || @post.ratings
-      redirect_to @post, notice: "Can't edit/update post once it's been answered or rated." and return
+   if @post.answers.size > 0 || @post.ratings.size > 0
+      redirect_to @post, alert: "Can't edit/update post once it's been answered or rated." and return
     end 
   end
 
@@ -48,8 +48,8 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    if @post.answers || @post.ratings
-      redirect_to @post, notice: "Can't edit/update post once it's been answered or rated." and return
+    if @post.answers.size > 0 || @post.ratings.size > 0
+      redirect_to @post, alert: "Can't edit/update post once it's been answered or rated." and return
     end 
     respond_to do |format|
       if @post.update(post_params)

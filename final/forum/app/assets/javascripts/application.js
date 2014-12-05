@@ -73,6 +73,9 @@ function initPage() {
     $('#up-arrow, #down-arrow').on('mouseover', function(){
     	$(this).attr("src", "/images/arrow.png");
     });
+    $('.close').click(function(){
+    	$(this).parents('.alert-box').hide();
+    });
     function set_filter_image(){
 	    var checked = false;
 		var src = "https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/128/empty_filter.png"

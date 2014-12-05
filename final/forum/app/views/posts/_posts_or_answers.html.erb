@@ -6,9 +6,9 @@
 			<% if resource.user.nil? || resource.user.status == "deleted" %>
 					<h5 class="text-left"><strong>DELETED</strong></h5>
 				<% else %>
-					<div class="text-left overflow-scroll"><strong><%= resource.user.username %></strong></div>
+					<div class="text-left overflow-scroll padding-top"><strong><%= resource.user.username %></strong></div>
 				<% end %>
-			<div class="inline-block"><%= render partial: "devise/images/image", locals: {resource: resource.user, size: "80x80", style: "margin-top: -60px"} %></div>
+			<div class="inline-block"><%= render partial: "devise/images/image", locals: {resource: resource.user, size: "80x80", style: "margin-top: -85px"} %></div>
 			<% if current_user.nil? %>
 			<!-- when someone is not signed in and tries to rate -->
 			<%= render partial: "ratings/rating_invalid", locals: {resource: resource} %>
