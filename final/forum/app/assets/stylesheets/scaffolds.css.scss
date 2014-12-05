@@ -1,7 +1,8 @@
-$primary-color: #cf2a0e;
+$red: #cf2a0e;
 $blue: #0079a1;
 $gray: #e5e5e5;
 $font: fantasy;
+$oil: #333333;
 * {
   margin: 0;
 }
@@ -264,14 +265,15 @@ input.button{
   width: 100%;
 }
 .button.alert{
-  background-color: $primary-color;
+  background-color: $red;
    &:hover {
-      background-color: #9f200b;
+    background-color: $oil;
+    color: $red;
     }
 }
 .fi-dollar, .fi-clipboard-pencil, .fi-comment-quotes, .fi-dollar-bill{
     font-size: 100px;
-    color: $primary-color;
+    color: $red;
 }
 .landing-icons{
   position: absolute;
@@ -369,11 +371,11 @@ input.button{
 }
 table thead{
   border-radius: 10px;
-  background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.35, $primary-color), color-stop(1, $gray) );
+  background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.35, $red), color-stop(1, $gray) );
   background:-moz-linear-gradient( center top, #ff5656 5%, #7f0000 100% );
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff5656", endColorstr="#7f0000");  background: -o-linear-gradient(top,#ff5656,7f0000);
 
-  background-color:$primary-color;
+  background-color:$red;
   text-align:center;
   font-size:14px;
   font-family:Arial;
