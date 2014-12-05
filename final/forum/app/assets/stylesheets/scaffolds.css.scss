@@ -33,10 +33,7 @@ pre {
 }
 
 a {
-  color: #000;
-  &:visited {
-    color: #666;
-  }
+  color: #008cba;
 }
 
 div {
@@ -258,6 +255,9 @@ input.button{
   margin-top: 80px;
   display: table;
 }
+.form-for{
+   width: 80%;
+}
 .underline{
   text-decoration: underline;
 }
@@ -392,4 +392,13 @@ table thead{
   margin-left: auto;
   margin-right: auto;
   display: table;
+}
+#question_guy{
+  position: absolute;
+}
+.login{
+   &:hover {
+    background-color: $oil;
+    color: $red;
+    }
 }

@@ -32,11 +32,13 @@
 			<br>
 		</div>
 		<div class="large-10 columns replies">
+		<br>
 			<% if resource.is_a?(Post) %><p class="font-increase"><%= resource.content %></p> <% end %>
 			<% if resource.is_a?(Answer) %><p class="font-increase"><%= resource.answer %></p> <% end %>
 			<hr>
 		</div>
-		<div class="large-9 columns replies">
+		<div class="large-1 columns replies"></div> <!-- to indent the comments -->
+		<div class="large-8 columns replies">
 			<% @comment_number = resource.commentarys.count%>
 			<% if @comment_number == 1 %> <p clsss="small-text"><strong><%= @comment_number %> Comment </strong></p> <% end %>
 			<% if @comment_number > 1 %> <p clsss="small-text"><strong><%= @comment_number %> Comments </strong></p></h6> <% end %>
@@ -57,14 +59,16 @@
 					<br>
 					<br>
 					<br>
-						<ul class="inline-list absolute bottom padding-right right">
-							<li><strong><a id="comment_on_post">Comment on Post</a></strong></li>
-						</ul>
+					<div class="inline-list absolute bottom padding-right right">
+						<% if resource.user == current_user %>
+						<div class="relative"><strong><%= link_to 'Edit Post', edit_post_path(resource) %></strong></div>
+						<% end %>
+						<div class="relative"><strong><a id="comment_on_post">Comment on Post</a></strong></div>
+					</div>
 					<% end %>
 				<% end %>
 			<% if resource.is_a?(Answer) %>
 				<% unless current_user.nil? %>
-					<br>
 					<br>
 					<br>
 					<br>
@@ -80,7 +84,7 @@
 			<% end %>
 			</div>
 			    <p class="absolute top right padding-right">
-				  <%= resource.created_at.strftime("%m/%d/%Y at %I:%M%p") %>
+				  <strong><%= resource.created_at.strftime("%m/%d/%Y at %I:%M%p") %></strong>
 				</p>
 		</div>
 		<br>

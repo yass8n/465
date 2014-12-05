@@ -1,4 +1,4 @@
-<%= form_for(@post, :html => { :class => "form-for"} ) do |f| %>
+<div class="panel"><%= form_for(@post, :html => { :class => "form-for"} ) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -22,3 +22,4 @@
     <%= f.submit "Post Question", :class => "button alert" %>
   </div>
 <% end %>
+</div>

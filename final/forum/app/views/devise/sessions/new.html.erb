@@ -1,13 +1,12 @@
-<div class="new-session">
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= (image_tag root_url + "/images/question_guy.jpg", size: "450x450", :id=> "question_guy", :class => "absolute right center") %>
+<div class="new-session panel">
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'center'}) do |f| %>
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, autofocus: true, placeholder: "Email" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off", placeholder: "Password" %>
   </div>
 
   <% if devise_mapping.rememberable? &&  @submit_message == "Log in"-%>
@@ -18,8 +17,8 @@
   <% end -%>
 
   <div class="actions">
-    <%= f.submit @submit_message, :class => "button alert full-width" %>
+    <%= f.submit @submit_message, :class => "button full-width login" %>
   </div>
 <% end %>
-<%= render "devise/shared/links" %>
+<div class="center"><%= render "devise/shared/links" %></div>
 </div>

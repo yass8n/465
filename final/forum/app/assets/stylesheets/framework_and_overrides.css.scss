@@ -42,7 +42,7 @@ $gray: #e5e5e5;
 // to make views framework-neutral
 main {
   @include twelve-columns;
-  background-color: #FCFCFC;
+  background-color: white;
   min-height: 100%;
   }
 section {
@@ -108,4 +108,3 @@ hr{
 .alert-box{
   width: 75%;
 }
-
