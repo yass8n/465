@@ -34,4 +34,5 @@ Please feel free to use a different markup language if you do not plan to run
 -Users shouldn't be able to rate their own answers
 -filter button doesnt work if I come from home
 -Be able to create a new question from anywhere on the website
+-make compatible with firefox
 <tt>rake doc:app</tt>.

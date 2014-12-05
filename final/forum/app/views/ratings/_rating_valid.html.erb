@@ -17,26 +17,26 @@
 
   <% if resource.current_user_rating(current_user, rating) == nil %>
       <div class="inline-block shrink long">
-      <div class="inline-block"><%= link_to((image_tag root_url + "/images/" + "arrow_hollow.png", :class => "fa-rotate-270 inline-block", id: "up-arrow"), @create_up_rate_path, method: :post) %> </div>
+      <div class="inline-block"><%= link_to((image_tag root_url + "/images/" + "arrow_hollow.png", :class => "fa-rotate-270 inline-block", id: "up-arrow", size: "40x40"), @create_up_rate_path, method: :post) %> </div>
       <div class="circle inline-block">  <%= resource.rating_score %></div> 
-      <div class="inline-block "><%= link_to((image_tag root_url + "/images/" + "arrow_hollow.png", :class => "fa-rotate-90 inline-block", id: "down-arrow"), @create_down_rate_path, method: :post) %></div>
+      <div class="inline-block "><%= link_to((image_tag root_url + "/images/" + "arrow_hollow.png", :class => "fa-rotate-90 inline-block", id: "down-arrow", size: "40x40"), @create_down_rate_path, method: :post) %></div>
       </div>
   <% elsif resource.current_user_rating(current_user, rating) == 1 %>
         <div class="inline-block shrink long">
-        <div class="inline-block"><%= link_to((image_tag root_url + "/images/" + "arrow_hollow.png", :class => "fa-rotate-270 inline-block invisible", id: "up-arrow"), @up_path, method: :patch) %></div>
+        <div class="inline-block"><%= link_to((image_tag root_url + "/images/" + "arrow_hollow.png", :class => "fa-rotate-270 inline-block invisible", id: "up-arrow", size: "40x40"), @up_path, method: :patch) %></div>
       <div class="circle inline-block">  <%= resource.rating_score %></div> 
-      <div class="inline-block "><%= link_to((image_tag root_url + "/images/" + "arrow_hollow.png", :class => "fa-rotate-90 inline-block", id: "down-arrow"), @down_path, method: :patch )%></div>
+      <div class="inline-block "><%= link_to((image_tag root_url + "/images/" + "arrow_hollow.png", :class => "fa-rotate-90 inline-block", id: "down-arrow", size: "40x40"), @down_path, method: :patch )%></div>
       </div>
   <% elsif resource.current_user_rating(current_user, rating) == -1 %>
         <div class="inline-block shrink long">
-      <div class="inline-block"><%= link_to((image_tag root_url + "/images/" + "arrow_hollow.png", :class => "fa-rotate-270 inline-block", id: "up-arrow"), @up_path, method: :patch) %></div>
+      <div class="inline-block"><%= link_to((image_tag root_url + "/images/" + "arrow_hollow.png", :class => "fa-rotate-270 inline-block", id: "up-arrow", size: "40x40"), @up_path, method: :patch) %></div>
       <div class="circle inline-block">  <%= resource.rating_score %></div> 
-      <div class="inline-block "><%= link_to((image_tag root_url + "/images/" + "arrow_hollow.png", :class => "fa-rotate-90 inline-block invisible", id: "down-arrow"), @down_path, method: :patch )%></div>
+      <div class="inline-block "><%= link_to((image_tag root_url + "/images/" + "arrow_hollow.png", :class => "fa-rotate-90 inline-block invisible", id: "down-arrow", size: "40x40"), @down_path, method: :patch )%></div>
       </div>
   <% elsif resource.current_user_rating(current_user, rating) == 0 %>
         <div class="inline-block shrink long">
-      <div class="inline-block"><%= link_to((image_tag root_url + "/images/" + "arrow_hollow.png", :class => "fa-rotate-270 inline-block", id: "up-arrow"), @up_path, method: :patch) %></div>
+      <div class="inline-block"><%= link_to((image_tag root_url + "/images/" + "arrow_hollow.png", :class => "fa-rotate-270 inline-block", id: "up-arrow", size: "40x40"), @up_path, method: :patch) %></div>
       <div class="circle inline-block">  <%= resource.rating_score %></div> 
-      <div class="inline-block "><%= link_to((image_tag root_url + "/images/" + "arrow_hollow.png", :class => "fa-rotate-90 inline-block", id: "down-arrow"), @down_path, method: :patch )%></div>
+      <div class="inline-block "><%= link_to((image_tag root_url + "/images/" + "arrow_hollow.png", :class => "fa-rotate-90 inline-block", id: "down-arrow", size: "40x40"), @down_path, method: :patch )%></div>
       </div>
   <% end %>
