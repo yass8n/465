@@ -369,3 +369,11 @@ input.button{
   width: 100%;
   float: left;
 }
+.details{
+  overflow: hidden;
+  width: 80px;
+}
+.low-padding{
+  padding: 10px;
+  border-color: $oil;
+}

@@ -76,6 +76,14 @@ function initPage() {
     $('.close').click(function(){
     	$(this).parents('.alert-box').hide();
     });
+  $('.rating_score').each(function(){
+  	    var rating = $(this).html();
+    	if (parseInt(rating) < 0){
+    		$(this).parent().parent().parent().css("background-color", '#cf2a0e');
+    	} else if (parseInt(rating) > 0){
+    		$(this).parent().parent().parent().css("background-color", '#00FF40');
+    	}
+    });
     function set_filter_image(){
 	    var checked = false;
 		var src = "https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/128/empty_filter.png"

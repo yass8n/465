@@ -1,14 +1,14 @@
 <%= button_to 'New Post?', new_post_path, :method => :get, :class => 'button absolute top left padding-left padding-top black'%>
 <% @posts.each do |post| %>
-  <div class="row relative block panel index">
+  <div class="row relative block panel index low-padding">
     <div class="large-12 columns-nopad relative">
       <div class="large-3 columns small-3 relative">
-      <div class="inline-block relative text-center">Rating <strong><div class="rating_score"><%= post.rating_score %></div></strong></div>
-        <div class="inline-block relative text-center">Answers <strong><div><%= post.answers.count %></div></strong></div>
+      <div class="inline-block relative text-center details">Rating <strong><h3><div class="rating_score"><%= post.rating_score %></div></h3></strong></div>
+        <div class="inline-block relative text-center details">Answers <strong><h3><div><%= post.answers.count %></div></h3></strong></div>
     </div>
     <div class="large-9 columns">
-         <!-- post.title = post.title[0..40] + "..." unless post.title[40].nil? -->
-        <!-- if the post has more than 20 letters, add a ... and only show some of it -->
+         <% post.title = post.title[0..40] + "..." unless post.title[40].nil? %>
+        <!-- if the post has more than 40 letters, add a ... and only show some of it -->
         <h4><%= link_to post.title.capitalize, post_path(post) %></h4>
         <div class="relative right"><%= post.created_at.strftime("%m/%d/%Y at %I:%M%p") %></div>
   </div>

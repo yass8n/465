@@ -1,7 +1,8 @@
  <div class="row">
     <div class="large-12 columns">
-       
-      <div class="row relative content-border">
+      <% style = "row relative content-border low-padding" if resource.is_a?(Post) %>
+      <% style = "row relative content-border" if resource.is_a?(Answer) %>
+      <div class='<%= style %>' > 
 		<div class="large-2 columns small-3">
 			<% if resource.user.nil? || resource.user.status == "deleted" %>
 					<h5 class="text-left"><strong><a class="red">DELETED</a></strong></h5>
@@ -86,7 +87,7 @@
 			<% end %>
 			</div>
 			    <p class="absolute top right padding-right">
-				  <strong><%= resource.created_at.strftime("%m/%d/%Y at %I:%M%p") %></strong>
+				  <strong><%= resource.created_at.strftime("%m/%d/%Y at %I:%M%p") if resource.is_a?(Answer)%></strong>
 				</p>
 		</div>
 		<br>
