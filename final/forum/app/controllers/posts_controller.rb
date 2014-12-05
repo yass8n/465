@@ -86,6 +86,9 @@ class PostsController < ApplicationController
         if params[:filter] == "recent"
           params[:filter] = "Most Recent"
         end
+        if params[:filter] == "rating"
+          params[:filter] = "Rating"
+        end
         @filter_message += " Sorted by '#{params[:filter]}.'"
       end
     if @title.nil? || @title.blank? || @posts.size == 0
