@@ -267,6 +267,9 @@ input.button{
 .full-width{
   width: 100%;
 }
+.full-height{
+  height: 100%;
+}
 .button.alert{
   background-color: $red;
    &:hover {
@@ -322,86 +325,6 @@ input.button{
   padding: 3px;
 
 }
-.CSSTableGenerator {
-  margin:0px;padding:0px;
-  width:75%;
-  height:75%;
-  box-shadow: 10px 10px 5px #888888;
-  border:1px solid #000000;
-  -moz-border-radius-bottomleft:15px;
-  -webkit-border-bottom-left-radius:15px;
-  border-bottom-left-radius:15px;
-  
-  -moz-border-radius-bottomright:15px;
-  -webkit-border-bottom-right-radius:15px;
-  border-bottom-right-radius:15px;
-  
-  -moz-border-radius-topright:15px;
-  -webkit-border-top-right-radius:15px;
-  border-top-right-radius:15px;
-  
-  -moz-border-radius-topleft:15px;
-  -webkit-border-top-left-radius:15px;
-  border-top-left-radius:15px;
-  margin-top: 40px;
-  
-}.CSSTableGenerator table{
-  border-collapse: collapse;
-  border-spacing: 0;
-  width:75%;
-  height:75%;
-  margin:0px;padding:0px;
-  border-radius: 10px;
-}.CSSTableGenerator tr:hover td{
-  background-color:#F8F19F;
-}
-.CSSTableGenerator tbody tr:last-child td:first-child{
-    -moz-border-radius-bottomleft:15px;
-  -webkit-border-bottom-left-radius:15px;
-  border-bottom-left-radius:15px;
-}
-.CSSTableGenerator tbody tr:last-child td:last-child{
-  -moz-border-radius-bottomright:15px;
-  -webkit-border-bottom-right-radius:15px;
-  border-bottom-right-radius:15px;
-}
-.CSSTableGenerator td{
-  vertical-align:middle;
-  
-  background-color: $gray;
-
-  text-align:left;
-  padding:20px;
-  font-size:10px;
-  font-family:Arial;
-  font-weight:normal;
-  color:#000000;
-}.CSSTableGenerator tr:last-child td{
-  border-width:0px 1px 0px 0px;
-}.CSSTableGenerator tr td:last-child{
-  border-width:0px 0px 1px 0px;
-}.CSSTableGenerator tr:last-child td:last-child{
-  border-width:0px 0px 0px 0px;
-}
-table thead{
-  border-radius: 10px;
-  background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.85, $red), color-stop(1, $gray) );
-  background:-moz-linear-gradient( center top, #ff5656 5%, #7f0000 100% );
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff5656", endColorstr="#7f0000");  background: -o-linear-gradient(top,#ff5656,7f0000);
-
-  background-color:$red;
-  text-align:center;
-  font-size:14px;
-  font-family:Arial;
-  font-weight:bold;
-  color:#ffffff;
-  tr th:first-child{
-    border-top-left-radius: 15px;
-  }
-  tr th:last-child{
-    border-top-right-radius: 15px;
-  }
-}
 .center{
   margin-left: auto;
   margin-right: auto;
@@ -415,9 +338,6 @@ table thead{
     background-color: $oil;
     color: $red;
     }
-}
-#table-titles{
-  color: white;
 }
 .style-text{
  font:normal 30pt Arial;
@@ -440,4 +360,12 @@ table thead{
 }
 .oil{
   color: $oil;
+}
+.index{
+  margin-bottom: 0;
+  width: 75%;
+}
+.columns-nopad{
+  width: 100%;
+  float: left;
 }

@@ -1,30 +1,18 @@
 <%= button_to 'New Post?', new_post_path, :method => :get, :class => 'button absolute top left padding-left padding-top black'%>
-<table class="CSSTableGenerator center">
-  <thead>
-    <tr class="table-titles">
-      <th><h4>Details</h4></th>
-      <!-- <th>Views</th> -->
-      <th><h4>Title</h4></th>
-      <th><h4>Stats</h4></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><h5><%= post.rating_score %><%= post.answers.count %></h5></td>
-        <!-- <td><%= post.views %></td> -->
-        <% post.title = post.title[0..40] + "..." unless post.title[40].nil? %>
+<% @posts.each do |post| %>
+  <div class="row relative block panel index">
+    <div class="large-12 columns-nopad relative">
+      <div class="large-3 columns small-3 relative">
+      <div class="inline-block relative text-center">Rating <strong><div class="rating_score"><%= post.rating_score %></div></strong></div>
+        <div class="inline-block relative text-center">Answers <strong><div><%= post.answers.count %></div></strong></div>
+    </div>
+    <div class="large-9 columns">
+         <!-- post.title = post.title[0..40] + "..." unless post.title[40].nil? -->
         <!-- if the post has more than 20 letters, add a ... and only show some of it -->
-        <td><h5><%= post.title %></h5></td>
-        <td><%= link_to 'Show', post_path(post) %></td>
-        <% if post.user == current_user  && post.answers.size == 0 && post.ratings.size == 0%>
-          <!-- link_to 'Edit', edit_post_path(post)  -->
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+        <h4><%= link_to post.title.capitalize, post_path(post) %></h4>
+        <div class="relative right"><%= post.created_at.strftime("%m/%d/%Y at %I:%M%p") %></div>
+  </div>
+</div>
+</div>
+<% end %>
 
