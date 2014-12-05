@@ -74,8 +74,22 @@ class PostsController < ApplicationController
   def search_by_title
     @title = params[:title].downcase
     @posts = Post.new.find_by_title(@title, params[:answered], params[:filter])
+    @filter_message = ""
+    if !params[:answered].nil? 
+      if params[:answered] == "true"
+        @filter_message += "'Answered' questions only. "
+      else
+        @filter_message += "'Unanswered' questions only. "
+      end
+    end
+    if !params[:filter].nil? 
+        if params[:filter] == "recent"
+          params[:filter] = "Most Recent"
+        end
+        @filter_message += "Sorted by '#{params[:filter]}'"
+      end
     if @title.nil? || @title.blank? || @posts.size == 0
-      redirect_to posts_path, notice: "No results. Check your spelling and filters then try again." and return
+      redirect_to posts_path(filter_message: @filter_message), notice: "No results. Check your spelling and filters then try again." and return
     end
   end
   private
