@@ -1,6 +1,8 @@
+
 // import the CSS framework
 @import "foundation";
-
+$oil: #333333;
+$gray: #e5e5e5;
 // override for the 'Home' navigation link
 .top-bar .name {
   font-size: rem-calc(13);
@@ -97,7 +99,13 @@ hr{
 .button{
   padding: 10px 10px 10px 10px;
   border-radius: 5px;
+  background-color: $oil;
+  &:hover{
+    background-color: $gray;
+    color: $oil;
+  }
 }
 .alert-box{
   width: 75%;
 }
+

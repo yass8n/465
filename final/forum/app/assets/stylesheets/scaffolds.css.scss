@@ -1,4 +1,5 @@
 $primary-color: #cf2a0e;
+$blue: #0079a1;
 $gray: #e5e5e5;
 $font: fantasy;
 * {
@@ -89,7 +90,7 @@ div {
 }
 #nav-button{
   height: 50px;
-  margin-right: 150px;
+  margin-right: 50px;
   margin-top: -9px;
   background-color: #FCFCFC;
   &:hover{
@@ -326,6 +327,7 @@ input.button{
   -moz-border-radius-topleft:15px;
   -webkit-border-top-left-radius:15px;
   border-top-left-radius:15px;
+  margin-top: 40px;
   
 }.CSSTableGenerator table{
   border-collapse: collapse;
@@ -352,8 +354,6 @@ input.button{
   
   background-color: $gray;
 
-  border:1px solid #000000;
-  border-width:0px 1px 1px 0px;
   text-align:left;
   padding:20px;
   font-size:10px;
@@ -369,14 +369,12 @@ input.button{
 }
 table thead{
   border-radius: 10px;
-  background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #007095), color-stop(1, $gray) );
+  background:-o-linear-gradient(bottom, #ff5656 5%, #7f0000 100%);  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, $blue), color-stop(1, $gray) );
   background:-moz-linear-gradient( center top, #ff5656 5%, #7f0000 100% );
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff5656", endColorstr="#7f0000");  background: -o-linear-gradient(top,#ff5656,7f0000);
 
   background-color:$primary-color;
-  border:0px solid #000000;
   text-align:center;
-  border-width:0px 0px 1px 1px;
   font-size:14px;
   font-family:Arial;
   font-weight:bold;

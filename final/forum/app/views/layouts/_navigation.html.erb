@@ -2,7 +2,7 @@
 <nav class="top-bar" data-topbar="" role="navigation">
   <section class="top-bar-section shift-nav-up">
   <ul class="left">
-    <li class="name"><%= link_to 'Home', root_path %></li>
+    <li class="name"><%= link_to 'Home', posts_path %></li>
     <li class="divider"></li>
   </ul>
   </section>
@@ -26,6 +26,7 @@
       </li>
     </ul>
   </section>
+   <%= link_to((image_tag root_url + "/images/favicon.ico", size: "47x47", :class => "absoulte right"), posts_path) %>
   <% if user_signed_in? %>
     <!-- <a href="/users/edit" id="nav-button" class="button split secondary float-right"> -->
     <a href="#" data-dropdown="drop1" id="nav-button" class="button dropdown secondary float-right">

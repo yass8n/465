@@ -41,7 +41,7 @@ function initPage() {
 	});
 	//getting rid of the "you are already signed in message"...changing it to "Signed in successfully"
 	if ($('.alert div').html() == "You are already signed in."){
-			$('.alert-box').addClass('hidden');
+			$('.alert-box').hide();
 		}
 
 	//adding link to end of alert when a deleted user tries to sign in again
