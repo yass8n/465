@@ -19,7 +19,7 @@ $(function() {
   initPage();
   $(document).foundation();
 });
-$(window).bind('page:load', function() {
+$(window).bind('page:load, page:change', function() {
   initPage();
 });
 function initPage() {
