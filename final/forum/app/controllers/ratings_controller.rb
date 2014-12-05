@@ -56,6 +56,21 @@ class RatingsController < ApplicationController
   # PATCH/PUT /ratings/1
   # PATCH/PUT /ratings/1.json
   def update
+    if @answer
+      if @answer.user_id == current_user.id
+        redirect_to @post, alert: "You can't rate your own answer." and return
+      end
+        @rating.answer_id = @answer.id
+        @answer.rating_score += @rating.rate
+        @answer.save
+    else
+      if @post.user_id == current_user.id
+        redirect_to @post, alert: "You can't rate your own post." and return
+      end
+       @rating.post_id = @post.id
+       @post.rating_score += @rating.rate
+       @post.save
+    end
     @rating.rate = @rating.rate + params[:rate].to_i
     if (@answer)
       @answer.rating_score = @answer.calculate_rating + params[:rate].to_i

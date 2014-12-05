@@ -1,6 +1,6 @@
-<h2>Edit Account</h2>
+<h2 class="relatve center padding-top style-text">Edit Account</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :class => "form-for panel" }) do |f| %>
   <%= devise_error_messages! %>
 
   <% if ( !resource.filename.nil? && resource.filename != "" ) %>

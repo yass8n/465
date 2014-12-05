@@ -4,9 +4,9 @@
       <div class="row relative content-border">
 		<div class="large-2 columns small-3">
 			<% if resource.user.nil? || resource.user.status == "deleted" %>
-					<h5 class="text-left"><strong>DELETED</strong></h5>
+					<h5 class="text-left"><strong><a class="red">DELETED</a></strong></h5>
 				<% else %>
-					<div class="text-left overflow-scroll padding-top"><strong><%= resource.user.username %></strong></div>
+					<div class="text-left overflow-scroll padding-top"><strong><a><%= resource.user.username %></a></strong></div>
 				<% end %>
 			<div class="inline-block"><%= render partial: "devise/images/image", locals: {resource: resource.user, size: "80x80", style: "margin-top: -85px"} %></div>
 			<% if current_user.nil? %>
@@ -59,6 +59,7 @@
 					<br>
 					<br>
 					<br>
+					<br>
 					<div class="inline-list absolute bottom padding-right right">
 						<% if resource.user == current_user %>
 						<div class="relative"><strong><%= link_to 'Edit Post', edit_post_path(resource) %></strong></div>
@@ -69,6 +70,7 @@
 				<% end %>
 			<% if resource.is_a?(Answer) %>
 				<% unless current_user.nil? %>
+					<br>
 					<br>
 					<br>
 					<br>
