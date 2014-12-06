@@ -1,33 +1,34 @@
-<% if !@details_message.nil? && !@details_message.blank? %>
-  <h5 class="relative center curved no-shaddow black inset"><%= @details_message %></h5>
-<% end %>
-  <h5 class="up"> <p><%= @current_page %></p></h5>
+<h5 class="right-corner"> <p><%= @current_page %></p></h5>
 <%= button_to 'New Post?', new_post_path, :method => :get, :class => 'button absolute top left padding-left padding-top black'%>
-<% @posts.each do |post| %>
-  <div class="row relative block panel index low-padding">
-    <div class="large-12 columns-nopad relative">
-      <div class="large-3 columns small-3 relative">
-      <div class="inline-block relative text-center details">Rating <strong><h3><div class="rating_score"><%= post.rating_score %></div></h3></strong></div>
-        <div class="inline-block relative text-center details">Answers <strong><h3><div><%= post.answers.count %></div></h3></strong></div>
-    </div>
-    <div class="large-9 columns">
-         <% post.title = post.title[0..44] + "..." unless post.title[44].nil? %>
-        <!-- if the post has more than 40 letters, add a ... and only show some of it -->
-        <h4 class="post_title"><%= link_to post.title.capitalize, post_path(post) %></h4>
-        <div class="relative right">Asked by <a><%= post.user.username %></a> 
-        <% if (post.created_at > 2.day.ago) %>
-               <%= time_ago_in_words(post.created_at) %> ago </div>
-        <% else %>
-              on <%= post.created_at.strftime("%m/%d/%Y at %I:%M%p") %></div>
-        <% end %>
-  </div>
-</div>
-</div>
-<% end %>
-<% if @pages > 1 %>
-  <% if !@my_posts.nil? && @my_posts == true%>
-    <%= render partial: "pages", locals: {pages: @pages, current_page: @current_page, my_posts: true} %>
-  <% else %>
-    <%= render partial: "pages", locals: {pages: @pages, current_page: @current_page, my_posts: false} %>
+<div id="index-container" class="center">
+  <% if !@details_message.nil? && !@details_message.blank? %>
+    <h5 class="text-left"><%= " " + @details_message + " " %></h5>
   <% end %>
-<% end %>
+  <% @posts.each do |post| %>
+    <div class="row relative panel index low-padding">
+      <div class="large-12 columns-nopad relative">
+        <div class="large-3 columns small-3 relative">
+        <div class="inline-block relative text-center details">Rating <strong><h3><div class="rating_score"><%= post.rating_score %></div></h3></strong></div>
+          <div class="inline-block relative text-center details">Answers <strong><h3><div><%= post.answers.count %></div></h3></strong></div>
+      </div>
+      <div class="large-9 columns">
+           <% post.title = post.title[0..44] + "..." unless post.title[44].nil? %>
+          <!-- if the post has more than 40 letters, add a ... and only show some of it -->
+          <h4 class="post_title"><%= link_to post.title.capitalize, post_path(post) %></h4>
+          <div class="relative right">Asked by <a><%= post.user.username %></a> 
+          <% if (post.created_at > 2.day.ago) %>
+                 <%= time_ago_in_words(post.created_at) %> ago </div>
+          <% else %>
+                on <%= post.created_at.strftime("%m/%d/%Y at %I:%M%p") %></div>
+          <% end %>
+    </div>
+  </div>
+  </div>
+  <% end %>
+  <% if @pages > 1 %>
+    <% if !@my_posts.nil? && @my_posts == true%>
+      <%= render partial: "pages", locals: {pages: @pages, current_page: @current_page, my_posts: true} %>
+    <% else %>
+      <%= render partial: "pages", locals: {pages: @pages, current_page: @current_page, my_posts: false} %>
+    <% end %>
+  <% end %>

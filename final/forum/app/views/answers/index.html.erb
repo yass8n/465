@@ -1,7 +1,7 @@
 <% if !@details_message.nil? && !@details_message.blank? %>
   <h5 class="relative center curved no-shaddow black inset"><%= " " + @details_message + " " %></h5>
 <% end %>
- <h5 class="up"> <p><%= @current_page %></p></h5>
+ <h5 class="right-corner"> <p><%= @current_page %></p></h5>
 <%= button_to 'New Post?', new_post_path, :method => :get, :class => 'button absolute top left padding-left padding-top black'%>
 <% @answers.each do |answer| %>
   <div class="row relative block panel index low-padding">

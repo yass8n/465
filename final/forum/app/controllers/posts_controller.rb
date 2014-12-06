@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @current_page = params[:page].to_i
+    @current_page = 1 if params[:page].nil?
     @posts = Post.new.get_posts((@current_page-1)*20)
     total = Post.last.id+1
     @pages = get_pages(Array.new(total))
@@ -132,7 +133,7 @@ class PostsController < ApplicationController
     @posts = total
     @pages = get_pages(@posts)
     @current_page = params[:page].to_i
-    if (@current_page > @pages || @current_page < 1)
+    if ( (@current_page > @pages || @current_page < 1) && @pages != 0 )
       flash[:error] = "Invalid page number"
       render "posts/index" and return
     end

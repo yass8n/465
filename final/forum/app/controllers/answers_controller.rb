@@ -76,7 +76,7 @@ class AnswersController < ApplicationController
     @answers = total
     @pages = get_pages(@answers)
     @current_page = params[:page].to_i
-    if (@current_page > @pages || @current_page < 1)
+    if ( (@current_page > @pages || @current_page < 1) && @pages != 0 )
       flash[:error] = "Invalid page number"
       render "answers/index" and return
     end
