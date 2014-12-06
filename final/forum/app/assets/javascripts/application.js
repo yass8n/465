@@ -23,6 +23,9 @@ $(window).bind('page:load', function() {
   initPage();
 });
 function initPage() {
+	if ($(location).attr('href').indexOf("Lookup") > -1){ //the user just searched a title, so highlight the matches
+		highlight_matches();
+	}
   set_filter_image();
 	// for states and countries
 	if ($('#user_country').val() == "US") {
@@ -61,12 +64,12 @@ function initPage() {
 	});
 
 
-	$('#filter-image').on('click', function(){
-		$('#filters-on').toggleClass('hidden');
+	$('#filter-image').click(function(){
+		$('#filters-on').removeClass('hidden');
 	});
-	$('#answered_true, #answered_false, #filter_rating, #filter_views, #filter_recent').on('click', function(){ 
-		set_filter_image();
-    });
+	$('#title-search').focusin(function() {
+		$('#filters-on').addClass('hidden');
+	});
     $('#up-arrow, #down-arrow').on('mouseout', function(){
     	$(this).attr("src", "/images/arrow_hollow.png");
     });
@@ -84,10 +87,21 @@ function initPage() {
     		$(this).parent().parent().parent().css("background-color", '#00FF40');
     	}
     });
+  	$('#answered_true, #answered_false, #filter_rating, #filter_views, #filter_recent, #filter_oldest').on('click', function(){ 
+		set_filter_image();
+    });
+    function highlight_matches(){
+    	var search_query = $(location).attr('href').replace(/.*title=/, ""); //replaces everything before "title"
+		search_query = search_query.replace(/&.*/, ""); //replaces everything after '&' that is right after title
+		var reg = new RegExp(search_query,"gi"); //creating a regex that matches teh search query globally and case insensitive
+    	$('.post_title a').each(function(){
+    		$(this).html($(this).html().replace(reg, "<span class='highlight'>" + search_query + "</span>"));
+    	});
+    }
     function set_filter_image(){
 	    var checked = false;
 		var src = "https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/128/empty_filter.png"
-		$('#answered_true, #answered_false, #filter_rating, #filter_views, #filter_recent').each(function(){
+		$('#answered_true, #answered_false, #filter_rating, #filter_views, #filter_recent, #filter_oldest').each(function(){
 			//empty filter
 	        if((this).checked) {
 	            checked = true;

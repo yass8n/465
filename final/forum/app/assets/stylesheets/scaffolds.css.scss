@@ -98,7 +98,7 @@ div {
 #profile-pic{
   margin-top: -2px;
 }
-#title, .filters{
+#title{
   width: 300px;
 }
 .inline-block{
@@ -365,4 +365,10 @@ input.button{
 .low-padding{
   padding: 10px;
   border-color: $oil;
+}
+.filters{
+  margin-top: 6px;
+}
+.highlight{
+  background-color: #FFFF00;
 }
