@@ -136,7 +136,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         end
         @details_message += " Sorted by '#{params[:filter]}.'"
       end
-      @title_message = "Displaying Posts By '#{@username.capitalize}'"
+      @title_message = "Displaying Posts By '#{@username}'"
       @details_message = set_message(total, @current_page, @posts)
       render "posts/index", details_message: @details_message, title_message:  @title_message, current_page: @current_page, posts: @posts and return
     end

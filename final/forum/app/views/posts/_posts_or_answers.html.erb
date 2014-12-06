@@ -7,7 +7,7 @@
 			<% if resource.user.nil? || resource.user.status == "deleted" %>
 					<h5 class="text-left"><strong><a class="red">DELETED</a></strong></h5>
 				<% else %>
-					<div class="text-left padding-top"><strong><a><%= resource.user.username %></a></strong></div>
+					<div class="text-left padding-top"><strong><%= link_to resource.user.username, user_search_path(title: resource.user.username, page: 1) %></strong></div>
 				<% end %>
 			<div class="inline-block"><%= render partial: "devise/images/image", locals: {resource: resource.user, size: "80x80", style: "margin-top: -85px"} %></div>
 			<% if current_user.nil? %>
@@ -49,11 +49,11 @@
 						<p class="small-text">
 						<% if (comment.created_at > 1.day.ago) %>
 							<%= comment.comment %>
-							<strong><br> -  <a><%= comment.user.username %></a> <%= " " + time_ago_in_words(comment.created_at) %> ago
+							<strong><br> -  <%= link_to comment.user.username, user_search_path(title: comment.user.username, page: 1) %> <%= " " + time_ago_in_words(comment.created_at) %> ago
 							</strong> 
 						<% else %>
 							<%= comment.comment %>
-							<strong><br> -  <a><%= comment.user.username %></a> <%= " " + comment.created_at.strftime("%m/%d/%Y") %> 
+							<strong><br> -  <%= link_to comment.user.username, user_search_path(title: comment.user.username, page: 1) %> <%= " " + comment.created_at.strftime("%m/%d/%Y") %> 
 							</strong> 
 						<% end %>
 						</p>
