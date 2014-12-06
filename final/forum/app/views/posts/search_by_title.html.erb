@@ -1,4 +1,4 @@
-<h2 class="relative center style-text">Questions Matching '<strong><%= @title %></strong>' </h2>
+<h2 class="relative center style-text">Posts Containing '<strong><%= @title %></strong>' </h2>
 <h5 class="relative center oil panel-small"><%= @filter_message %></h5>
 <%= button_to 'New Post?', new_post_path, :method => :get, :class => 'button absolute top left padding-left padding-top black'%>
 <% @posts.each do |post| %>

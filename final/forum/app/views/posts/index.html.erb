@@ -1,4 +1,6 @@
-<h2 class="relative center style-text">Most Recent Questions</h2>
+<% if !@filter_message.nil? && !@filter_message.blank? %>
+  <h5 class="relative center oil panel-small"><%= @filter_message %></h5>
+<% end %>
 <%= button_to 'New Post?', new_post_path, :method => :get, :class => 'button absolute top left padding-left padding-top black'%>
 <% @posts.each do |post| %>
   <div class="row relative block panel index low-padding">
@@ -11,7 +13,12 @@
          <% post.title = post.title[0..40] + "..." unless post.title[40].nil? %>
         <!-- if the post has more than 40 letters, add a ... and only show some of it -->
         <h4><%= link_to post.title.capitalize, post_path(post) %></h4>
-        <div class="relative right">Asked by <a><%= post.user.username %></a> on <%= post.created_at.strftime("%m/%d/%Y at %I:%M%p") %></div>
+        <div class="relative right">Asked by <a><%= post.user.username %></a> 
+        <% if (post.created_at > 2.day.ago) %>
+               <%= time_ago_in_words(post.created_at) %> ago </div>
+        <% else %>
+              on <%= post.created_at.strftime("%m/%d/%Y at %I:%M%p") %></div>
+        <% end %>
   </div>
 </div>
 </div>

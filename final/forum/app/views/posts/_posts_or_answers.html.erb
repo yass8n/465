@@ -46,7 +46,17 @@
 			<% resource.commentarys.each do |comment| %>
 				<div class="row ">
 					<div class="small-12 columns ">
-						<p class="small-text"><%= comment.comment %><strong><br><%= "- " + comment.user.username + " " + comment.created_at.strftime("%m/%d/%Y") %></strong> </p>
+						<p class="small-text">
+						<% if (comment.created_at > 1.day.ago) %>
+							<%= comment.comment %>
+							<strong><br> -  <a><%= comment.user.username %></a> <%= " " + time_ago_in_words(comment.created_at) %> ago
+							</strong> 
+						<% else %>
+							<%= comment.comment %>
+							<strong><br> -  <a><%= comment.user.username %></a> <%= " " + comment.created_at.strftime("%m/%d/%Y") %> 
+							</strong> 
+						<% end %>
+						</p>
 					</div>
 				</div>
 				<hr>

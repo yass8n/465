@@ -35,4 +35,5 @@ Please feel free to use a different markup language if you do not plan to run
 -filter button doesnt work if I come from home
 -Be able to create a new question from anywhere on the website
 -make compatible with firefox
+- fix bug when entering '.' or '?' $ \ in search field
 <tt>rake doc:app</tt>.

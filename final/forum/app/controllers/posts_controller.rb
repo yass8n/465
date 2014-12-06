@@ -4,7 +4,8 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.order('created_at DESC')
+
   end
 
   # GET /posts/1
@@ -92,8 +93,11 @@ class PostsController < ApplicationController
         @filter_message += " Sorted by '#{params[:filter]}.'"
       end
     if @title.nil? || @title.blank? || @posts.size == 0
-      redirect_to posts_path(filter_message: @filter_message), notice: "No results. Check your spelling and filters then try again." and return
+      redirect_to posts_path(filter_message: @filter_message), alert: "No results. Check your spelling and filters then try again." and return
+    else
+      render "posts/index", filter_message: @filter_message, posts: @posts and return
     end
+
   end
   private
     # Use callbacks to share common setup or constraints between actions.
