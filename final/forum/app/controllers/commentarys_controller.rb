@@ -17,10 +17,10 @@ class CommentarysController < ApplicationController
 
     respond_to do |format|
       if @commentary.save
-        format.html { redirect_to @post, notice: 'Commentary was successfully created.' }
+        format.html { redirect_to @post, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
-        format.html { redirect_to @post, alert: 'Commentary was NOT successfully created.'  }
+        format.html { redirect_to @post, alert: 'Comment was NOT successfully created.'  }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -33,7 +33,7 @@ class CommentarysController < ApplicationController
 
     respond_to do |format|
       if @commentary.save
-        format.html { redirect_to @post, notice: 'Commentary was successfully created.' }
+        format.html { redirect_to @post, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
@@ -47,7 +47,7 @@ class CommentarysController < ApplicationController
   def update
     respond_to do |format|
       if @commentary.update(commentary_params)
-        format.html { redirect_to @commentary, notice: 'Commentary was successfully updated.' }
+        format.html { redirect_to @commentary, notice: 'Comment was successfully updated.' }
         format.json { render :show, status: :ok, location: @commentary }
       else
         format.html { render :edit }
