@@ -104,6 +104,41 @@ class Users::RegistrationsController < Devise::RegistrationsController
     redirect_to new_registration_path(resource_name)
   end
 
+  def search
+        @title = params[:title].downcase
+    @posts = Post.new.find_by_title(@title, params[:answered], params[:filter])
+    @pages = get_pages(@posts)
+    @current_page = params[:page].to_i
+    if @title.nil? || @title.blank? || @posts.size == 0 || @current_page > @pages || @current_page < 1
+      redirect_to posts_path(details_message: @details_message), alert: "No results. Check your spelling and filters then try again." and return
+    else
+    the_offset = (@current_page -1) * 20
+    if the_offset+20 >= @posts.size 
+      @posts = @posts[(@posts.size - (@posts.size - the_offset))...@posts.size]
+    else
+      @posts = @posts[the_offset...the_offset+20]
+    end
+    @details_message = ""
+    if !params[:answered].nil? 
+      if params[:answered] == "true"
+        @details_message += "'Answered' only."
+      else
+        @details_message += "'Unanswered' only. "
+      end
+    end
+    if !params[:filter].nil? 
+        if params[:filter] == "recent"
+          params[:filter] = "Most Recent"
+        end
+        if params[:filter] == "rating"
+          params[:filter] = "Rating"
+        end
+        @details_message += " Sorted by '#{params[:filter]}.'"
+      end
+      render "posts/index", details_message: @details_message, current_page: @current_page, posts: @posts and return
+    end
+  end
+
   # Need to create a module for the states function below!
   def states
     [
