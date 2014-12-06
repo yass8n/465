@@ -1,5 +1,5 @@
 <% if !@details_message.nil? && !@details_message.blank? %>
-  <h5 class="relative center oil panel-small curved no-shaddow"><%= @details_message %></h5>
+  <h5 class="relative center curved no-shaddow black"><%= @details_message %></h5>
 <% end %>
  <h5 class="up"> <p><%= @current_page %></p></h5>
 <%= button_to 'New Post?', new_post_path, :method => :get, :class => 'button absolute top left padding-left padding-top black'%>
