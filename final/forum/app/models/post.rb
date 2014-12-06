@@ -41,10 +41,11 @@ class Post < ActiveRecord::Base
       if filter == "rating"
          posts = Post.order(rating_score: :desc);
          posts = posts.select { |post| /#{title}/i =~ post.title }
-      elsif filter == "recent"
-        posts.reverse!
+      elsif filter == "oldest"
+        return posts
       end
     end
+    posts.reverse!
     return posts
   end
 end
