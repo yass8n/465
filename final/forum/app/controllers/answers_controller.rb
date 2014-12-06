@@ -76,9 +76,8 @@ class AnswersController < ApplicationController
     @answers = total
     @pages = get_pages(@answers)
     @current_page = params[:page].to_i
-    if ( (@current_page > @pages || @current_page < 1) && @pages != 0 )
-      flash[:error] = "Invalid page number"
-      render "answers/index" and return
+    if (@current_page > @pages || @current_page < 1 || @answers.nil? || @answers.blank? || @answers.size == 0)
+      redirect_to posts_path(details_message: @details_message), alert: "You haven't answered any questions yet." and return
     end
     the_offset = (@current_page -1) * 20
     if the_offset+20 >= @answers.size 
@@ -86,12 +85,8 @@ class AnswersController < ApplicationController
     else
       @answers = @answers[the_offset...the_offset+20]
     end
-     if @answers.nil? || @answers.blank? || @answers.size == 0
-      redirect_to posts_path(details_message: @details_message), alert: "You haven't answered any questions yet." and return
-    else
       @details_message = set_message(total.count, @current_page, @answers)
       render "answers/index", details_message: @details_message, current_page: @current_page, answers: @answers and return
-    end
   end
 
   private

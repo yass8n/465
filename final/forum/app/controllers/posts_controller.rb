@@ -85,10 +85,9 @@ class PostsController < ApplicationController
     @posts = Post.new.find_by_title(@title, params[:answered], params[:filter])
     @pages = get_pages(@posts)
     @current_page = params[:page].to_i
-    if (@current_page > @pages || @current_page < 1)
-      flash[:error] = "Invalid page number"
-      render "posts/index" and return
-    end
+    if @title.nil? || @title.blank? || @posts.size == 0 || @current_page > @pages || @current_page < 1
+      redirect_to posts_path(details_message: @details_message), alert: "No results. Check your spelling and filters then try again." and return
+    else
     the_offset = (@current_page -1) * 20
     if the_offset+20 >= @posts.size 
       @posts = @posts[(@posts.size - (@posts.size - the_offset))...@posts.size]
@@ -112,9 +111,6 @@ class PostsController < ApplicationController
         end
         @details_message += " Sorted by '#{params[:filter]}.'"
       end
-    if @title.nil? || @title.blank? || @posts.size == 0
-      redirect_to posts_path(details_message: @details_message), alert: "No results. Check your spelling and filters then try again." and return
-    else
       render "posts/index", details_message: @details_message, current_page: @current_page, posts: @posts and return
     end
 
