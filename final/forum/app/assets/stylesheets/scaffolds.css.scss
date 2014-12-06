@@ -122,7 +122,11 @@ div {
 }
 .small-text{
   font-size: x-small;
+  &#details-message{
+  font-size: small;
+  }
 }
+
 .overflow-scroll{
    overflow: scroll;
 }

@@ -2,7 +2,7 @@
 <%= button_to 'New Post?', new_post_path, :method => :get, :class => 'button absolute top left padding-left padding-top black'%>
 <div id="index-container" class="center">
   <% if !@details_message.nil? && !@details_message.blank? %>
-    <h5 class="text-left"><%= " " + @details_message + " " %></h5>
+    <h5 id="details-message" class="text-left small-text"><%= " " + @details_message + " " %></h5>
   <% end %>
 <% @answers.each do |answer| %>
   <div class="row relative block panel index low-padding">

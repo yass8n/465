@@ -1,16 +1,26 @@
   <div>
+  <%= radio_button_tag(:resource, "Posts", checked = true) %>
+  <%= label_tag(:posts, "Posts") %>
+  <%= radio_button_tag(:resource, "Users") %>
+  <%= label_tag(:users, "Users") %>
+  </div>
+  <br>
+  <hr>
+  <div>
   <%= radio_button_tag(:answered, "true") %>
   <%= label_tag(:answered_only, "Answered") %>
   <%= radio_button_tag(:answered, "false") %>
   <%= label_tag(:Unanswered_only, "Unanswered") %>
   </div>
+  <br>
+  <hr>
   <div>
   <%= radio_button_tag(:filter, "recent") %>
   <%= label_tag(:recent, "Most Recent") %>
   <%= radio_button_tag(:filter, "rating") %>
   <%= label_tag(:rating, "Rating") %>
   <%= radio_button_tag(:filter, "oldest") %>
-  <%= label_tag(:rating, "Oldest") %>
+  <%= label_tag(:oldest, "Oldest") %>
 <!--   <%= radio_button_tag(:filter, "views") %>
   <%= label_tag(:views, "Views") %> -->
   
