@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     @current_page = params[:page].to_i
     @current_page = 1 if params[:page].nil?
     @posts = Post.new.get_posts((@current_page-1)*20)
-    total = Post.last.id+1
+    total = Post.last.id
     @pages = get_pages(Array.new(total))
     if (@current_page > @pages || @current_page < 1)
       flash[:error] = "Invalid page number"
