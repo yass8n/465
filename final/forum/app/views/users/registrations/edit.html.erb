@@ -20,7 +20,7 @@
 
   <div class="field">
     <%= f.label :paypal_email %> </br>
-    <%= f.email_field :paypal_email, placeholder: "optional" %>
+    <%= f.email_field :paypal_email, placeholder: "To Receive Donations" %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -39,13 +39,21 @@
 
   <div>
     <%= f.label :country %><br>
-    <%= country_select("user", "country", priority_countries: ["US"]) %>
+    <% if resource.country.nil? %>
+      <%= country_select("user", "country", priority_countries: ["US"]) %>
+    <% else %>
+      <%= country_select("user", "country", priority_countries: [resource.country]) %>
+    <% end %>
     <br></br>
   </div>
-
+  
   <div id="states">
   <%= f.label :state %> <br>
-  <%= select_tag(:state, options_for_select(Users::RegistrationsController.new.states)) %>
+  <% if resource.country.nil? %>
+    <%= select_tag(:state, options_for_select(Users::RegistrationsController.new.states, "CA")) %>
+  <% else %>
+    <%= select_tag(:state, options_for_select(Users::RegistrationsController.new.states, resource.state)) %>
+  <% end %>
   <br></br>
   </div>
   
