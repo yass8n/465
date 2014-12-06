@@ -94,20 +94,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.save
     redirect_to edit_user_registration_path, notice: "Picture successfully deleted"
   end
-  # DELETE /resource
-  def destroy
-    if resource.valid_password?(params[:user][:current_password])
-      resource.remove_image_path
-      resource.set_to_deleted
-      Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
-      set_flash_message :notice, :destroyed if is_flashing_format?
-      yield resource if block_given?
-      respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
-    else
-       redirect_to edit_user_registration_path, alert: "Password was incorrect"
-    end
-  end
-
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
   # in to be expired now. This is useful if the user wants to
@@ -174,6 +160,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
       ['Wisconsin', 'WI'],
       ['Wyoming', 'WY']
     ]
+  end
+    # DELETE /resource
+  def destroy
+    if resource.valid_password?(params[:user][:current_password])
+      resource.remove_image_path
+      resource.set_to_deleted
+      Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+      set_flash_message :notice, :destroyed if is_flashing_format?
+      resource.save
+      yield resource if block_given?
+      respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
+    else
+       redirect_to edit_user_registration_path, alert: "Password was incorrect" and return
+    end
   end
 
   protected
