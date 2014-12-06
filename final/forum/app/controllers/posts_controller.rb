@@ -7,6 +7,12 @@ class PostsController < ApplicationController
     @current_page = params[:page].to_i
     @posts = Post.new.get_posts((@current_page-1)*20)
     @pages = Post.new.get_pages(Array.new(Post.last.id+1))
+    puts @pages
+    puts   @current_page 
+    if (@current_page > @pages || @current_page < 1)
+      flash[:error] = "Invalid page number"
+      render "posts/index" and return
+    end
   end
 
   # GET /posts/1
@@ -78,6 +84,10 @@ class PostsController < ApplicationController
     @posts = Post.new.find_by_title(@title, params[:answered], params[:filter])
     @pages = Post.new.get_pages(@posts)
     @current_page = params[:page].to_i
+    if (@current_page > @pages || @current_page < 1)
+      flash[:error] = "Invalid page number"
+      render "posts/index" and return
+    end
     the_offset =  (@current_page -1) * 20
     if the_offset+20 >= @posts.size 
       @posts = @posts[(@posts.size - (@posts.size - the_offset))...@posts.size]
