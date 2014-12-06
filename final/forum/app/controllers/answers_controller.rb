@@ -72,7 +72,8 @@ class AnswersController < ApplicationController
     end
   end
   def my_answers
-     @answers = Answer.new.find_by_user_id(params[:user_id])
+    total = Answer.new.find_by_user_id(params[:user_id])
+    @answers = total
     @pages = get_pages(@answers)
     @current_page = params[:page].to_i
     if (@current_page > @pages || @current_page < 1)
@@ -88,7 +89,10 @@ class AnswersController < ApplicationController
      if @answers.nil? || @answers.blank? || @answers.size == 0
       redirect_to posts_path(details_message: @details_message), alert: "You haven't answered any questions yet." and return
     else
-      @details_message = "My Answers"
+      @details_message = "Result: #{total.count} Answer"
+      if total.count > 1
+        @details_message += "s"
+      end
       render "answers/index", details_message: @details_message, current_page: @current_page, answers: @answers and return
     end
   end

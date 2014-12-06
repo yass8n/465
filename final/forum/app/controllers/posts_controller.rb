@@ -117,7 +117,8 @@ class PostsController < ApplicationController
 
   end
   def my_posts
-    @posts = Post.new.find_by_user_id(params[:user_id])
+    total = Post.new.find_by_user_id(params[:user_id])
+    @posts = total
     @pages = get_pages(@posts)
     @current_page = params[:page].to_i
     if (@current_page > @pages || @current_page < 1)
@@ -133,13 +134,20 @@ class PostsController < ApplicationController
      if @posts.nil? || @posts.blank? || @posts.size == 0
       redirect_to posts_path(details_message: @details_message), alert: "You haven't created any posts yet." and return
     else
-      @details_message = "My Posts"
-      render "posts/index", details_message: @details_message, current_page: @current_page, posts: @posts and return
+      @details_message = "Result: #{total.count} Post"
+      if total.count > 1
+        @details_message += "s"
+      end
+      @my_posts = true
+      render "posts/index", details_message: @details_message, current_page: @current_page, posts: @posts, my_posts: @my_posts and return
     end
   end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
+      if params[:id].to_i > Post.last.id || params[:id].to_i < 1
+        redirect_to posts_path, alert: "Record not found." and return
+      end
       @post = Post.find(params[:id])
     end
 
