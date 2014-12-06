@@ -13,16 +13,7 @@ class PostsController < ApplicationController
       flash[:error] = "Invalid page number"
       render "posts/index" and return
     end
-      if total == 1
-          @details_message = "Displaying the only Post"
-      elsif (((@current_page-1) * 20)+1 == ((@current_page) * 20) - ((20 - @posts.count) +1) && total == ((@current_page-1) * 20)+1)
-        @details_message = "Displaying last Post out of #{total} Posts"
-      else
-        @details_message = "Displaying #{((@current_page-1) * 20)+1} - #{((@current_page) * 20) - (20 - @posts.count)} of #{total} Post"
-      end
-      if total > 1
-        @details_message += "s"
-      end
+     @details_message = set_message(total, @current_page, @posts)
   end
 
   # GET /posts/1
@@ -146,16 +137,7 @@ class PostsController < ApplicationController
      if @posts.nil? || @posts.blank? || @posts.size == 0
       redirect_to posts_path(details_message: @details_message), alert: "You haven't created any posts yet." and return
     else
-      if total.count == 1
-        @details_message = "Displaying your only Post"
-      elsif (((@current_page-1) * 20)+1 == ((@current_page) * 20) - ((20 - @posts.count) +1) && total == ((@current_page-1) * 20)+1)
-        @details_message = "Displaying last Post out of #{total.count} Posts"
-      else
-        @details_message = "Displaying #{((@current_page-1) * 20)+1} - #{((@current_page) * 20) - (20 - @posts.count)} of #{total.count} Post"
-      end
-      if total.count > 1
-        @details_message += "s"
-      end
+      @details_message = set_message(total.count, @current_page, @posts)
       @my_posts = true
       render "posts/index", details_message: @details_message, current_page: @current_page, posts: @posts, my_posts: @my_posts and return
     end

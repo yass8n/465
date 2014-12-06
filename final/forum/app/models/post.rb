@@ -8,7 +8,7 @@ class Post < ActiveRecord::Base
   validates :title, presence: true
   before_create :init_rating_score
   def get_posts(offset_value)
-    return Post.order('created_at DESC').limit(20).offset(offset_value.to_i - 1)
+    return Post.order('created_at DESC').limit(20).offset(offset_value.to_i)
   end
   def get_pages(posts)
     return ((posts.count-1) / 20) + 1

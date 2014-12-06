@@ -89,16 +89,7 @@ class AnswersController < ApplicationController
      if @answers.nil? || @answers.blank? || @answers.size == 0
       redirect_to posts_path(details_message: @details_message), alert: "You haven't answered any questions yet." and return
     else
-      if total == 1
-        @details_message = "Displaying your only Answer"
-      elsif (((@current_page-1) * 20)+1 == ((@current_page) * 20) - ((20 - @panswers.count) +1) && total == ((@current_page-1) * 20)+1)
-        @details_message = "Displaying last Answer out of #{total.count} Answer"
-      else
-        @details_message = "Displaying #{((@current_page-1) * 20)+1} - #{((@current_page) * 20) - (20 - @answers.count)} of #{total.count} Answer"
-      end
-      if total.count > 1
-        @details_message += "s"
-      end
+      @details_message = set_message(total.count, @current_page, @answers)
       render "answers/index", details_message: @details_message, current_page: @current_page, answers: @answers and return
     end
   end
