@@ -13,10 +13,10 @@ class PostsController < ApplicationController
       flash[:error] = "Invalid page number"
       render "posts/index" and return
     end
-    if (((@current_page-1) * 20)+1 == ((@current_page) * 20) - (20 - @posts.count) && total == ((@current_page-1) * 20)+1)
+      if total == 1
+          @details_message = "Displaying the only Post"
+      elsif (((@current_page-1) * 20)+1 == ((@current_page) * 20) - ((20 - @posts.count) +1) && total == ((@current_page-1) * 20)+1)
         @details_message = "Displaying last Post out of #{total} Posts"
-      elsif total == 1
-        @details_message = "Displaying your only Post"
       else
         @details_message = "Displaying #{((@current_page-1) * 20)+1} - #{((@current_page) * 20) - (20 - @posts.count)} of #{total} Post"
       end
@@ -148,7 +148,7 @@ class PostsController < ApplicationController
     else
       if total.count == 1
         @details_message = "Displaying your only Post"
-      elsif (((@current_page-1) * 20)+1 == ((@current_page) * 20) - (20 - @posts.count) && total.count == ((@current_page-1) * 20)+1)
+      elsif (((@current_page-1) * 20)+1 == ((@current_page) * 20) - ((20 - @posts.count) +1) && total == ((@current_page-1) * 20)+1)
         @details_message = "Displaying last Post out of #{total.count} Posts"
       else
         @details_message = "Displaying #{((@current_page-1) * 20)+1} - #{((@current_page) * 20) - (20 - @posts.count)} of #{total.count} Post"
