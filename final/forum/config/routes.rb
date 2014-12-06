@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 	  delete "users/delete/pic/", to: "users/registrations#destroy_pic", as: "destroy_pic"
 	  get "users/recover/", to: "users/sessions#new", as: "recover_signin"
 	  post "users/recover/", to: "users/registrations#recover", as: "recover_user"
-      get "/user/search/", to: "users/registrations#search", as: 'user_search'
 	  root 'users/registrations#new'
 	end
 	

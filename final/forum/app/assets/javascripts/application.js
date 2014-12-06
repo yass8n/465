@@ -87,11 +87,6 @@ function initPage() {
     		$(this).parent().parent().parent().css("background-color", '#00FF40');
     	}
     });
-
-    $('#resource_Users, #resource_Posts').on('click', function(){
-	  var controller = $(this).val() == "Posts" ? "/posts" : "/user";
-	  $("#search-form").attr("action", controller + "/search/");
-    })
   	$('#answered_true, #answered_false, #filter_rating, #filter_views, #filter_recent, #filter_oldest').on('click', function(){ 
 		set_filter_image();
     });
