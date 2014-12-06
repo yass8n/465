@@ -317,6 +317,7 @@ input.button{
 .panel-small{
   order-style: solid;
   border-width: 2px;
+  border-radius: 10px;
   border-color: $oil;
   margin-bottom: 1.25rem;
   background: $gray;
@@ -371,4 +372,34 @@ input.button{
 }
 .highlight{
   background-color: #FFFF00;
+}
+.up{
+  width: 0; 
+  height: 0; 
+  //border-top: 60px solid transparent;
+  border-bottom: 60px solid transparent;
+    transform:rotate(90deg);
+  -ms-transform:rotate(90deg);
+  -moz-transform:rotate(90deg);
+  -webkit-transform:rotate(90deg);
+  -o-transform:rotate(90deg);
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  border-left: 60px solid $gray;
+    p{
+      text-align: center;
+      left: -61px;
+      position: relative;
+      width: 93px;
+      height: 93px;
+      margin: 0px;
+      font-size: 35px;
+      font-family: iniitial;
+          transform:rotate(315deg);
+    -ms-transform:rotate(315deg);
+    -moz-transform:rotate(315deg);
+    -webkit-transform:rotate(315deg);
+    -o-transform:rotate(315deg);
+    }
 }

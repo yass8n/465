@@ -1,9 +1,16 @@
-<%= link_to "<<", my_answers_path(current_user, page: 1) %>
-<%= link_to "Prev", my_answers_path(current_user, page: current_page -1 ) if current_page > 1 %>
-<% pages.times do |page| %>
-    <!-- page at this point is a number...offset is where to start looking in the database -->
-	<%= link_to page+1, my_answers_path(current_user, page: page + 1) %>
-<% end %>
-<%= link_to "Next", my_answers_path(current_user, page: current_page +1) unless current_page >= pages %>
-<%= link_to ">>", my_answers_path(current_user, page: pages) %>
+<div class="small-panel bottom padding-top center panel-small">
+<% if current_page > 1 %>
+	<%= link_to "<< ", my_answers_path(current_user, page: 1) %>
+	<%= link_to my_answers_path(current_user, page: current_page -1 ) do %>
+			<i class="step fi-rewind"></i>
+		<% end %>
+	<% end %>
+		<%= link_to current_page, my_answers_path(current_user, page: current_page) %>
+	<% unless current_page >= pages %>
+	<%= link_to my_answers_path(current_user, page: current_page + 1 ) do %>
+			<i class="step fi-fast-forward"></i>
+		<% end %>
+	<%= link_to " >>", my_answers_path(current_user, page: pages) %>
+	<% end %>
+</div>
 

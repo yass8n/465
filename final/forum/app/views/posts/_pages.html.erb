@@ -1,29 +1,45 @@
+<div class="small-panel bottom padding-top center panel-small">
 <% if my_posts == true %>
-	<%= link_to "<<", my_posts_path(current_user, page: 1) %>
-	<%= link_to "Prev", my_posts_path(current_user, page: current_page -1 ) if current_page > 1 %>
-	<% pages.times do |page| %>
-	    <!-- page at this point is a number...offset is where to start looking in the database -->
-		<%= link_to page+1, my_posts_path(current_user, page: page + 1) %>
+	<% if current_page > 1 %>
+	<%= link_to "<< ", my_posts_path(current_user, page: 1) %>
+	<%= link_to my_posts_path(current_user, page: current_page -1 ) do %>
+			<i class="step fi-rewind"></i>
+		<% end %>
 	<% end %>
-	<%= link_to "Next", my_posts_path(current_user, page: current_page +1) unless current_page >= pages %>
-	<%= link_to ">>", my_posts_path(current_user, page: pages) %>
+		<%= link_to current_page, my_posts_path(current_user, page: current_page) %>
+	<% unless current_page >= pages %>
+	<%= link_to my_posts_path(current_user, page: current_page + 1 ) do %>
+			<i class="step fi-fast-forward"></i>
+		<% end %>
+	<%= link_to " >>", my_posts_path(current_user, page: pages) %>
+	<% end %>
 <% elsif params[:title].nil? %>
-	<%= link_to "<<", posts_path(page: 1) %>
-	<%= link_to "Prev", posts_path(page: current_page-1) if current_page > 1 %>
-	<% pages.times do |page| %> 
-	    <!-- page at this point is a number...offset is where to start looking in the database -->
-		<%= link_to page+1, posts_path(page: page+1) %>
+	<% if  current_page > 1 %>
+	<%= link_to "<< ", posts_path(page: 1) %>
+		<%= link_to posts_path(page: current_page-1) do %>
+			<i class="step fi-rewind"></i>
+		<% end %>
 	<% end %>
-	<%= link_to "Next", posts_path(page: current_page+1) unless current_page >= pages %>
-	<%= link_to ">>", posts_path(page: pages) %>
+	<%= link_to current_page, posts_path(page: current_page) %>
+	<% unless  current_page >= pages %>
+		<%= link_to posts_path(page: current_page+1) do %>
+			<i class="step fi-fast-forward"></i>
+		<% end %>
+	<%= link_to " >>", posts_path(page: pages) %>
+	<% end %>
 <% elsif !params[:title].nil? %>
-	<%= link_to "<<", title_search_path(page: 1, title: params[:title], answered: params[:answered], :filter => params[:filter], commit: "Lookup") %>
-	<%= link_to "Prev", title_search_path(page: current_page-1, title: params[:title], answered: params[:answered], :filter => params[:filter], commit: "Lookup") if current_page > 1 %>
-	<% pages.times do |page| %>
-	    <!-- page at this point is a number...offset is where to start looking in the database -->
-		<%= link_to page+1, title_search_path(page: page+1, title: params[:title], answered: params[:answered], :filter => params[:filter], commit: "Lookup") %>
+	<% if current_page > 1 %>
+	<%= link_to "<< ", title_search_path(page: 1, title: params[:title], answered: params[:answered], :filter => params[:filter], commit: "Lookup") %>
+		<%= link_to title_search_path(page: current_page-1, title: params[:title], answered: params[:answered], :filter => params[:filter], commit: "Lookup") do %>
+			  <i class="step fi-rewind"></i>
+		<% end %>
 	<% end %>
-	<%= link_to "Next", title_search_path(page: current_page+1, title: params[:title], answered: params[:answered], :filter => params[:filter], commit: "Lookup") unless current_page >= pages %>
-	<%= link_to ">>", title_search_path(page: pages, title: params[:title], answered: params[:answered], :filter => params[:filter], commit: "Lookup") %>
+	<%= link_to current_page, title_search_path(page: current_page, title: params[:title], answered: params[:answered], :filter => params[:filter], commit: "Lookup") %>
+	<% unless current_page >= pages %>
+		<%= link_to title_search_path(page: current_page+1, title: params[:title], answered: params[:answered], :filter => params[:filter], commit: "Lookup") do %>
+			  <i class="step fi-fast-forward"></i>
+		<% end %>
+	<%= link_to " >>", title_search_path(page: pages, title: params[:title], answered: params[:answered], :filter => params[:filter], commit: "Lookup") %>
+	<% end %>
 <% end %>
-
+</div>
