@@ -6,11 +6,22 @@ class PostsController < ApplicationController
   def index
     @current_page = params[:page].to_i
     @posts = Post.new.get_posts((@current_page-1)*20)
-    @pages = get_pages(Array.new(Post.last.id+1))
+    total = Post.last.id+1
+    @pages = get_pages(Array.new(total))
     if (@current_page > @pages || @current_page < 1)
       flash[:error] = "Invalid page number"
       render "posts/index" and return
     end
+    if (((@current_page-1) * 20)+1 == ((@current_page) * 20) - (20 - @posts.count) && total == ((@current_page-1) * 20)+1)
+        @details_message = "Displaying last Post out of #{total} Posts"
+      elsif total == 1
+        @details_message = "Displaying your only Post"
+      else
+        @details_message = "Displaying #{((@current_page-1) * 20)+1} - #{((@current_page) * 20) - (20 - @posts.count)} of #{total} Post"
+      end
+      if total > 1
+        @details_message += "s"
+      end
   end
 
   # GET /posts/1
@@ -134,7 +145,13 @@ class PostsController < ApplicationController
      if @posts.nil? || @posts.blank? || @posts.size == 0
       redirect_to posts_path(details_message: @details_message), alert: "You haven't created any posts yet." and return
     else
-      @details_message = "Result: #{total.count} Post"
+      if (((@current_page-1) * 20)+1 == ((@current_page) * 20) - (20 - @posts.count) && total.count == ((@current_page-1) * 20)+1)
+        @details_message = "Displaying last Post out of #{total.count} Posts"
+      elsif total == 1
+        @details_message = "Displaying your only Post"
+      else
+        @details_message = "Displaying #{((@current_page-1) * 20)+1} - #{((@current_page) * 20) - (20 - @posts.count)} of #{total.count} Post"
+      end
       if total.count > 1
         @details_message += "s"
       end

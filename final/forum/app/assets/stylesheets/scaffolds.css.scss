@@ -317,14 +317,18 @@ input.button{
 .panel-small{
   order-style: solid;
   border-width: 2px;
-  border-radius: 10px;
   border-color: $oil;
   margin-bottom: 1.25rem;
   background: $gray;
   color: $gray;
   box-shadow: 5px 5px 5px #888888;
   padding: 3px;
-
+  &.curved {
+    border-radius: 10px;
+  }
+  &.no-shaddow {
+    box-shadow: 2px 2px 2px #888888;
+  }
 }
 .center{
   margin-left: auto;
@@ -387,6 +391,7 @@ input.button{
   right: 5px;
   top: 5px;
   border-left: 60px solid $gray;
+   box-shadow: 2px 2px 2px #888888;
     p{
       text-align: center;
       left: -61px;
