@@ -4,8 +4,8 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.order('created_at DESC')
-
+    @posts = Post.new.get_posts(params[:post_offset])
+    @pages = Post.new.get_pages(@posts)
   end
 
   # GET /posts/1
@@ -75,6 +75,13 @@ class PostsController < ApplicationController
   def search_by_title
     @title = params[:title].downcase
     @posts = Post.new.find_by_title(@title, params[:answered], params[:filter])
+    @pages = Post.new.get_pages(@posts)
+    offset = params[:page_offset].to_i
+    if offset+20 >= @posts.size 
+      @posts = @posts[(@posts.size - (@posts.size - offset))...@posts.size]
+    else
+      @posts = @posts[offset...offset+20]
+    end
     @details_message = ""
     if !params[:answered].nil? 
       if params[:answered] == "true"

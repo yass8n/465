@@ -1,0 +1,16 @@
+<% if params[:title].nil? %>
+	<%= link_to "<<", posts_path(post_offset: 0) %>
+	<% pages.times do |page| %>
+	    <!-- page at this point is a number...offset is where to start looking in the database -->
+		<%= link_to page+1, posts_path(post_offset: page*20) %>
+	<% end %>
+	<%= link_to ">>", posts_path(post_offset: (pages-1)*20) %>
+<% elsif !params[:title].nil? %>
+	<%= link_to "<<", title_search_path(page_offset: 0, title: params[:title], answered: params[:answered], :filter => params[:filter], commit: "Lookup") %>
+	<% pages.times do |page| %>
+	    <!-- page at this point is a number...offset is where to start looking in the database -->
+		<%= link_to page+1, title_search_path(page_offset: page*20, title: params[:title], answered: params[:answered], :filter => params[:filter], commit: "Lookup") %>
+	<% end %>
+	<%= link_to ">>", title_search_path(page_offset: (pages-1)*20, title: params[:title], answered: params[:answered], :filter => params[:filter], commit: "Lookup") %>
+<% end %>
+

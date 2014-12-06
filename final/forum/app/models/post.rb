@@ -7,6 +7,12 @@ class Post < ActiveRecord::Base
   validates :content, presence: true
   validates :title, presence: true
   before_create :init_rating_score
+  def get_posts(offset_value)
+    return Post.order('created_at DESC').limit(20).offset(offset_value.to_i - 1)
+  end
+  def get_pages(posts)
+    return ((posts.count-1) / 20) + 1
+  end
   def calculate_rating
     ratings = Rating.all.where(post_id: self.id)
     total = 0
@@ -26,7 +32,7 @@ class Post < ActiveRecord::Base
     return Rating.where(user_id: current_user.id, post_id: self.id)[0].rate
   end
   def find_by_user_id(user_id)
-    return Post.where(user_id: user_id).reverse
+    return Post.where(user_id: user_id).limit(20).reverse
   end
   def find_by_title(title, answered, filter)
     posts = Post.all.select { |post| /#{title}/i =~ post.title}
