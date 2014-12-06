@@ -145,10 +145,10 @@ class PostsController < ApplicationController
      if @posts.nil? || @posts.blank? || @posts.size == 0
       redirect_to posts_path(details_message: @details_message), alert: "You haven't created any posts yet." and return
     else
-      if (((@current_page-1) * 20)+1 == ((@current_page) * 20) - (20 - @posts.count) && total.count == ((@current_page-1) * 20)+1)
-        @details_message = "Displaying last Post out of #{total.count} Posts"
-      elsif total == 1
+      if total.count == 1
         @details_message = "Displaying your only Post"
+      elsif (((@current_page-1) * 20)+1 == ((@current_page) * 20) - (20 - @posts.count) && total.count == ((@current_page-1) * 20)+1)
+        @details_message = "Displaying last Post out of #{total.count} Posts"
       else
         @details_message = "Displaying #{((@current_page-1) * 20)+1} - #{((@current_page) * 20) - (20 - @posts.count)} of #{total.count} Post"
       end
