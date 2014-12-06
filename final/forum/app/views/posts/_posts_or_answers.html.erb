@@ -7,7 +7,7 @@
 			<% if resource.user.nil? || resource.user.status == "deleted" %>
 					<h5 class="text-left"><strong><a class="red">DELETED</a></strong></h5>
 				<% else %>
-					<div class="text-left overflow-scroll padding-top"><strong><a><%= resource.user.username %></a></strong></div>
+					<div class="text-left padding-top"><strong><a><%= resource.user.username %></a></strong></div>
 				<% end %>
 			<div class="inline-block"><%= render partial: "devise/images/image", locals: {resource: resource.user, size: "80x80", style: "margin-top: -85px"} %></div>
 			<% if current_user.nil? %>
