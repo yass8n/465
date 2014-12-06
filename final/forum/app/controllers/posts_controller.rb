@@ -4,9 +4,9 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.new.get_posts(params[:page_offset])
+    @current_page = params[:page].to_i
+    @posts = Post.new.get_posts((@current_page-1)*20)
     @pages = Post.new.get_pages(Array.new(Post.last.id+1))
-    @the_offset = params[:page_offset].to_i
   end
 
   # GET /posts/1
@@ -77,11 +77,12 @@ class PostsController < ApplicationController
     @title = params[:title].downcase
     @posts = Post.new.find_by_title(@title, params[:answered], params[:filter])
     @pages = Post.new.get_pages(@posts)
-    @the_offset = params[:page_offset].to_i
-    if @the_offset+20 >= @posts.size 
-      @posts = @posts[(@posts.size - (@posts.size - @the_offset))...@posts.size]
+    @current_page = params[:page].to_i
+    the_offset =  (@current_page -1) * 20
+    if the_offset+20 >= @posts.size 
+      @posts = @posts[(@posts.size - (@posts.size - the_offset))...@posts.size]
     else
-      @posts = @posts[@the_offset...@the_offset+20]
+      @posts = @posts[the_offset...the_offset+20]
     end
     @details_message = ""
     if !params[:answered].nil? 
@@ -103,7 +104,7 @@ class PostsController < ApplicationController
     if @title.nil? || @title.blank? || @posts.size == 0
       redirect_to posts_path(details_message: @details_message), alert: "No results. Check your spelling and filters then try again." and return
     else
-      render "posts/index", details_message: @details_message, the_offset: @the_offset, posts: @posts and return
+      render "posts/index", details_message: @details_message, current_page: @current_page, posts: @posts and return
     end
 
   end
