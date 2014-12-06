@@ -32,7 +32,7 @@ class Post < ActiveRecord::Base
     return Rating.where(user_id: current_user.id, post_id: self.id)[0].rate
   end
   def find_by_user_id(user_id)
-    return Post.where(user_id: user_id).limit(20).reverse
+    return Post.where(user_id: user_id).reverse
   end
   def find_by_title(title, answered, filter)
     posts = Post.all.select { |post| /#{title}/i =~ post.title}

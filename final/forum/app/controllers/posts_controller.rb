@@ -6,9 +6,7 @@ class PostsController < ApplicationController
   def index
     @current_page = params[:page].to_i
     @posts = Post.new.get_posts((@current_page-1)*20)
-    @pages = Post.new.get_pages(Array.new(Post.last.id+1))
-    puts @pages
-    puts   @current_page 
+    @pages = get_pages(Array.new(Post.last.id+1))
     if (@current_page > @pages || @current_page < 1)
       flash[:error] = "Invalid page number"
       render "posts/index" and return
@@ -82,13 +80,13 @@ class PostsController < ApplicationController
   def search_by_title
     @title = params[:title].downcase
     @posts = Post.new.find_by_title(@title, params[:answered], params[:filter])
-    @pages = Post.new.get_pages(@posts)
+    @pages = get_pages(@posts)
     @current_page = params[:page].to_i
     if (@current_page > @pages || @current_page < 1)
       flash[:error] = "Invalid page number"
       render "posts/index" and return
     end
-    the_offset =  (@current_page -1) * 20
+    the_offset = (@current_page -1) * 20
     if the_offset+20 >= @posts.size 
       @posts = @posts[(@posts.size - (@posts.size - the_offset))...@posts.size]
     else
@@ -119,12 +117,24 @@ class PostsController < ApplicationController
 
   end
   def my_posts
-     @posts = Post.new.find_by_user_id(params[:user_id])
+    @posts = Post.new.find_by_user_id(params[:user_id])
+    @pages = get_pages(@posts)
+    @current_page = params[:page].to_i
+    if (@current_page > @pages || @current_page < 1)
+      flash[:error] = "Invalid page number"
+      render "posts/index" and return
+    end
+    the_offset = (@current_page -1) * 20
+    if the_offset+20 >= @posts.size 
+      @posts = @posts[(@posts.size - (@posts.size - the_offset))...@posts.size]
+    else
+      @posts = @posts[the_offset...the_offset+20]
+    end
      if @posts.nil? || @posts.blank? || @posts.size == 0
       redirect_to posts_path(details_message: @details_message), alert: "You haven't created any posts yet." and return
     else
       @details_message = "My Posts"
-      render "posts/index", details_message: @details_message, posts: @posts and return
+      render "posts/index", details_message: @details_message, current_page: @current_page, posts: @posts and return
     end
   end
   private

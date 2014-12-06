@@ -73,11 +73,23 @@ class AnswersController < ApplicationController
   end
   def my_answers
      @answers = Answer.new.find_by_user_id(params[:user_id])
+    @pages = get_pages(@answers)
+    @current_page = params[:page].to_i
+    if (@current_page > @pages || @current_page < 1)
+      flash[:error] = "Invalid page number"
+      render "answers/index" and return
+    end
+    the_offset = (@current_page -1) * 20
+    if the_offset+20 >= @answers.size 
+      @answers = @answers[(@answers.size - (@answers.size - the_offset))...@answers.size]
+    else
+      @answers = @answers[the_offset...the_offset+20]
+    end
      if @answers.nil? || @answers.blank? || @answers.size == 0
       redirect_to posts_path(details_message: @details_message), alert: "You haven't answered any questions yet." and return
     else
       @details_message = "My Answers"
-      render "answers/index", details_message: @details_message, answers: @answers and return
+      render "answers/index", details_message: @details_message, current_page: @current_page, answers: @answers and return
     end
   end
 

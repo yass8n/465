@@ -23,4 +23,8 @@
 </div>
 </div>
 <% end %>
+<% if @pages > 1 %>
+  <%= render partial: "pages", locals: {pages: @pages, current_page: @current_page} %>
+<% end %>
+
 
