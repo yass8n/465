@@ -85,8 +85,9 @@ class AnswersController < ApplicationController
     else
       @answers = @answers[the_offset...the_offset+20]
     end
+      @title_message = "Displaying your Answers:"
       @details_message = set_message(total.count, @current_page, @answers)
-      render "answers/index", details_message: @details_message, current_page: @current_page, answers: @answers and return
+      render "answers/index", details_message: @details_message, title_message:  @title_message, current_page: @current_page, answers: @answers and return
   end
 
   private

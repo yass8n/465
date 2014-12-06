@@ -105,11 +105,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def search
-        @title = params[:title].downcase
-    @posts = Post.new.find_by_title(@title, params[:answered], params[:filter])
+    @username = params[:title].downcase
+    @posts = Post.new.find_by_user(@username.downcase, params[:answered], params[:filter])
+    total =  @posts.count
     @pages = get_pages(@posts)
     @current_page = params[:page].to_i
-    if @title.nil? || @title.blank? || @posts.size == 0 || @current_page > @pages || @current_page < 1
+    if @username.nil? || @username.blank? || @posts.size == 0 || @current_page > @pages || @current_page < 1
       redirect_to posts_path(details_message: @details_message), alert: "No results. Check your spelling and filters then try again." and return
     else
     the_offset = (@current_page -1) * 20
@@ -135,7 +136,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
         end
         @details_message += " Sorted by '#{params[:filter]}.'"
       end
-      render "posts/index", details_message: @details_message, current_page: @current_page, posts: @posts and return
+      @title_message = "Displaying Posts By '#{@username.capitalize}'"
+      @details_message = set_message(total, @current_page, @posts)
+      render "posts/index", details_message: @details_message, title_message:  @title_message, current_page: @current_page, posts: @posts and return
     end
   end
 

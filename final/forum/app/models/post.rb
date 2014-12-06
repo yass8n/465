@@ -54,4 +54,24 @@ class Post < ActiveRecord::Base
     posts.reverse!
     return posts
   end
+    def find_by_user(name, answered, filter)
+    posts = Post.all.select { |post| name == post.user.username.downcase}
+    unless answered.nil?
+      if answered == "true"
+         posts = posts.select { |post| post.answers.size > 0 }
+      else
+         posts = posts.select { |post| post.answers.size == 0 }
+      end 
+    end
+    unless filter.nil?
+      if filter == "rating"
+         posts = Post.order(rating_score: :asc);
+         posts = posts.select { |post| /#{title}/i =~ post.title }
+      elsif filter == "oldest"
+        return posts
+      end
+    end
+    posts.reverse!
+    return posts
+  end
 end

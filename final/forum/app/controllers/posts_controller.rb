@@ -84,6 +84,7 @@ class PostsController < ApplicationController
     @title = params[:title].downcase
     @posts = Post.new.find_by_title(@title, params[:answered], params[:filter])
     @pages = get_pages(@posts)
+    total = @posts.size
     @current_page = params[:page].to_i
     if @title.nil? || @title.blank? || @posts.size == 0 || @current_page > @pages || @current_page < 1
       redirect_to posts_path(details_message: @details_message), alert: "No results. Check your spelling and filters then try again." and return
@@ -94,12 +95,12 @@ class PostsController < ApplicationController
     else
       @posts = @posts[the_offset...the_offset+20]
     end
-    @details_message = ""
+    @title_message = ""
     if !params[:answered].nil? 
       if params[:answered] == "true"
-        @details_message += "'Answered' only."
+        @title_message += "'Answered' only."
       else
-        @details_message += "'Unanswered' only. "
+        @title_message += "'Unanswered' only. "
       end
     end
     if !params[:filter].nil? 
@@ -109,9 +110,10 @@ class PostsController < ApplicationController
         if params[:filter] == "rating"
           params[:filter] = "Rating"
         end
-        @details_message += " Sorted by '#{params[:filter]}.'"
       end
-      render "posts/index", details_message: @details_message, current_page: @current_page, posts: @posts and return
+      @title_message = "Search Results for '#{@title.capitalize}':"
+      @details_message = set_message(total, @current_page, @posts)
+      render "posts/index", details_message: @details_message, title_message:  @title_message, current_page: @current_page, posts: @posts and return
     end
 
   end
@@ -134,8 +136,9 @@ class PostsController < ApplicationController
       redirect_to posts_path(details_message: @details_message), alert: "You haven't created any posts yet." and return
     else
       @details_message = set_message(total.count, @current_page, @posts)
+      @title_message = "Displaying Your Posts:"
       @my_posts = true
-      render "posts/index", details_message: @details_message, current_page: @current_page, posts: @posts, my_posts: @my_posts and return
+      render "posts/index", details_message: @details_message, title_message:  @title_message, current_page: @current_page, posts: @posts, my_posts: @my_posts and return
     end
   end
   private

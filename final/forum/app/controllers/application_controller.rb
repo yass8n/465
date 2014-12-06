@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 	protect_from_forgery with: :exception
 	before_action :configure_permitted_parameters, if: :devise_controller?
 	before_filter :authenticate!
-	helper_method :get_rating, :get_pages, :set_message #so the rating_form can call this function
+	helper_method :get_rating #so the rating_form can call this function
 
 	def authenticate!
 		# :authenticate_user!
@@ -58,9 +58,9 @@ class ApplicationController < ActionController::Base
 	  if total == 1
         @details_message = "Only 1 " + type
 	  elsif (((current_page-1) * 20)+1 == ((current_page) * 20) - (20 - resources.count) && total == ((current_page-1) * 20)+1)
-        @details_message = "Displaying last " + type + " out of #{total} " + type
+        @details_message = "Last " + type + " out of #{total} " + type
       else
-        @details_message = "Displaying #{((current_page-1) * 20)+1} - #{((current_page) * 20) - (20 - resources.count)} of #{total} " + type
+        @details_message = "#{((current_page-1) * 20)+1} - #{((current_page) * 20) - (20 - resources.count)} of #{total} " + type
       end
       if total > 1
         @details_message += "s"

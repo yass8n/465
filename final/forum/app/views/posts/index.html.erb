@@ -1,6 +1,9 @@
 <h5 class="right-corner"> <p><%= @current_page %></p></h5>
 <%= button_to 'New Post?', new_post_path, :method => :get, :class => 'button absolute top left padding-left padding-top black'%>
 <div id="index-container" class="center">
+  <% if !@title_message.nil? && !@title_message.blank? %>
+    <h5 class="text-left"><%= " " + @title_message + " " %></h5>
+  <% end %>
   <% if !@details_message.nil? && !@details_message.blank? %>
     <h5 id="details-message" class="text-left small-text"><%= " " + @details_message + " " %></h5>
   <% end %>
@@ -27,8 +30,8 @@
   <% end %>
   <% if @pages > 1 %>
     <% if !@my_posts.nil? && @my_posts == true%>
-      <%= render partial: "pages", locals: {pages: @pages, current_page: @current_page, my_posts: true} %>
+      <%= render partial: "posts/pages", locals: {pages: @pages, current_page: @current_page, my_posts: true} %>
     <% else %>
-      <%= render partial: "pages", locals: {pages: @pages, current_page: @current_page, my_posts: false} %>
+      <%= render partial: "posts/pages", locals: {pages: @pages, current_page: @current_page, my_posts: false} %>
     <% end %>
   <% end %>
