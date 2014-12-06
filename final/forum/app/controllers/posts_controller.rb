@@ -75,12 +75,12 @@ class PostsController < ApplicationController
   def search_by_title
     @title = params[:title].downcase
     @posts = Post.new.find_by_title(@title, params[:answered], params[:filter])
-    @filter_message = ""
+    @details_message = ""
     if !params[:answered].nil? 
       if params[:answered] == "true"
-        @filter_message += "'Answered' only."
+        @details_message += "'Answered' only."
       else
-        @filter_message += "'Unanswered' only. "
+        @details_message += "'Unanswered' only. "
       end
     end
     if !params[:filter].nil? 
@@ -90,14 +90,23 @@ class PostsController < ApplicationController
         if params[:filter] == "rating"
           params[:filter] = "Rating"
         end
-        @filter_message += " Sorted by '#{params[:filter]}.'"
+        @details_message += " Sorted by '#{params[:filter]}.'"
       end
     if @title.nil? || @title.blank? || @posts.size == 0
-      redirect_to posts_path(filter_message: @filter_message), alert: "No results. Check your spelling and filters then try again." and return
+      redirect_to posts_path(details_message: @details_message), alert: "No results. Check your spelling and filters then try again." and return
     else
-      render "posts/index", filter_message: @filter_message, posts: @posts and return
+      render "posts/index", details_message: @details_message, posts: @posts and return
     end
 
+  end
+  def my_posts
+     @posts = Post.new.find_by_user_id(params[:user_id])
+     if @posts.nil? || @posts.blank? || @posts.size == 0
+      redirect_to posts_path(details_message: @details_message), alert: "You haven't created any posts yet." and return
+    else
+      @details_message = "My Posts"
+      render "posts/index", details_message: @details_message, posts: @posts and return
+    end
   end
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -71,6 +71,15 @@ class AnswersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def my_answers
+     @answers = Answer.new.find_by_user_id(params[:user_id])
+     if @answers.nil? || @answers.blank? || @answers.size == 0
+      redirect_to posts_path(details_message: @details_message), alert: "You haven't answered any questions yet." and return
+    else
+      @details_message = "My Answers"
+      render "answers/index", details_message: @details_message, answers: @answers and return
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

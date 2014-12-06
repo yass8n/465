@@ -15,8 +15,8 @@
      <li class="has-dropdown not-click"><a href="#">Personal</a>
         <ul class="dropdown">
         <% if user_signed_in? %>
-<!--             link_to "My Posts", my_posts_path(current_user) 
-             link_to "My Answers", my_answers_path(current_user)  -->
+           <li><%= link_to "My Posts", my_posts_path(current_user) %></li>
+           <li><%= link_to "My Answers", my_answers_path(current_user) %></li>
           <% else %>
             <li><%=link_to("My Posts", new_user_session_path, data: { confirm: 'You must sign in to see your posts...would you like to sign in?' }) %></li>
             <li><%=link_to("My Answers", new_user_session_path, data: { confirm: 'You must sign in to see your answers...would you like to sign in?' }) %></li>

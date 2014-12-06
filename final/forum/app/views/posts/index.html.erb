@@ -1,5 +1,5 @@
-<% if !@filter_message.nil? && !@filter_message.blank? %>
-  <h5 class="relative center oil panel-small"><%= @filter_message %></h5>
+<% if !@details_message.nil? && !@details_message.blank? %>
+  <h5 class="relative center oil panel-small"><%= @details_message %></h5>
 <% end %>
 <%= button_to 'New Post?', new_post_path, :method => :get, :class => 'button absolute top left padding-left padding-top black'%>
 <% @posts.each do |post| %>

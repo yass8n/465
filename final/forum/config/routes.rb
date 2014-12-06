@@ -9,9 +9,9 @@ Rails.application.routes.draw do
 	devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions'}
 
 	# root 'posts#index'
-    # get  "/comment/:id/edit", to: "commentarys#edit", as: "edit_comment" 
-    # get  "/posts/:user_id/", to: "posts#mine", as: "my_posts" 
-    get  "/answers/:user_id/", to: "answers#mine", as: "my_answers" 
+    get  "/comment/:id/edit", to: "commentarys#edit", as: "edit_comment" 
+    get  "/posts/user/:user_id/", to: "posts#my_posts", as: "my_posts" 
+    get  "/answers/user/:user_id/", to: "answers#my_answers", as: "my_answers" 
     post  "/users/:user_id/post/:post_id/comment/create", to: "commentarys#create_post_comment", as: "create_post_comment"
 	post  "/users/:user_id/post/:post_id/answer/:answer_id/comment/create", to: "commentarys#create_answer_comment", as: "create_answer_comment" 
     get "/posts/search/", to: 'posts#search_by_title', as: 'title_search'

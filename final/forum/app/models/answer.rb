@@ -27,6 +27,9 @@ class Answer < ActiveRecord::Base
     return true if answered
     return false if !answered
   end
+  def find_by_user_id(user_id)
+    return Answer.where(user_id: user_id).reverse
+  end
   private
   def init_rating_score
   	self.rating_score = 0
