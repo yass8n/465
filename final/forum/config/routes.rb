@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     get  "/answers/user/:user_id/", to: "answers#my_answers", as: "my_answers" 
     post  "/users/:user_id/post/:post_id/comment/create", to: "commentarys#create_post_comment", as: "create_post_comment"
 	post  "/users/:user_id/post/:post_id/answer/:answer_id/comment/create", to: "commentarys#create_answer_comment", as: "create_answer_comment" 
-    get "/posts/search/", to: 'posts#search_by_title', as: 'title_search'
+    get "/posts/search/", to: 'posts#search', as: 'search'
 	# adding post id above so I can redirect to the post after creation
     patch "/comment/:id", to: "commentarys#update", as: "edit_commentary" 
     post   "/ratings/create", to: "ratings#create", as: "create_rating"

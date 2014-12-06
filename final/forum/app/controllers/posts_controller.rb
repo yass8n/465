@@ -80,7 +80,7 @@ class PostsController < ApplicationController
   #     format.json { head :no_content }
   #   end
   # end
-  def search_by_title
+  def search
     @title = params[:title].downcase
     @posts = Post.new.find_by_title(@title, params[:answered], params[:filter])
     @pages = get_pages(@posts)
