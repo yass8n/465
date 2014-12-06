@@ -45,7 +45,7 @@ class Post < ActiveRecord::Base
     end
     unless filter.nil?
       if filter == "rating"
-         posts = Post.order(rating_score: :desc);
+         posts = Post.order(rating_score: :asc);
          posts = posts.select { |post| /#{title}/i =~ post.title }
       elsif filter == "oldest"
         return posts
