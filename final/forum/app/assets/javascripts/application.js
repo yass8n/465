@@ -160,13 +160,18 @@ function initPage() {
 		        .css({ top: mousey, left: mousex })
 		});
 		if ($('.first-login').length){
-	        $('#nav-button')
-	        .after('<p class="tooltip smalltip" id="instruction"><i class="step fi-fast-forward"></i><br><span class="float-left">Edit Account and add a paypal email to start making MONEY! <span></p>');
-	        $('#instruction').hide();
-	        setTimeout(function(){ $('#instruction').show('highlight', 1000) }, 3000);
-	        setTimeout(function(){ $('#instruction').hide('explode', 1000) }, 11000);
-	    };
-	    $('#instruction').click(function(){
-	    	setTimeout(function(){ $('#instruction').hide('explode', 1000) }, 1000);
+			        $('top-bar').addClass('no-more');
+			        $('#nav-button')
+			        .after('<p class="tooltip smalltip instruction"><i class="step fi-fast-forward"></i><br><span class="float-left">Edit Account and add a paypal email to start making MONEY! <span></p>');
+			        $('.instruction').hide();
+			        setTimeout(function(){ $('.instruction').show('highlight', 1000) }, 3000);
+			        setTimeout(function(){ 
+			        	$('.instruction').hide('explode', 1000) 
+			    }, 11000);
+		    };
+	    $('.instruction').click(function(){
+	    	setTimeout(function(){ 
+	    		$('.instruction').hide('explode', 1000);
+	    	}, 500);
 	    });
 }

@@ -31,7 +31,7 @@
     <a href="#" data-dropdown="drop1" id="nav-button" class="button dropdown secondary float-right">
       <%= render partial: "devise/images/image", locals: {resource: current_user, size: "30x30", style: "margin-top: -2px;"} %>
     </a>
-    <% if (current_user.sign_in_count == 1) %>
+    <% if (current_user.sign_in_count == 1 && current_user.created_at > 3.seconds.ago) %>
       <ul id="drop1" class="f-dropdown first-login" title="Edit account by adding a paypal email to start making MONEY!">
     <% else %>
       <ul id="drop1" class="f-dropdown">
