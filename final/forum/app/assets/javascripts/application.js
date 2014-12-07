@@ -141,29 +141,30 @@ function initPage() {
 		        $('.tooltip')
 		        .css({ top: mousey, left: mousex })
 		});
-	$('.right-corner').hover(function(){
-		        // Hover over code
-		        var title = $(this).attr('title');
-		        $(this).data('tipText', title).removeAttr('title');
-		        $('<p class="tooltip smalltip"></p>')
-		        .text(title)
-		        .appendTo('body')
-		        .fadeIn(1000);
-		}, function() {
-		        // Hover out code
-		        $(this).attr('title', $(this).data('tipText'));
-		        $('.tooltip').remove();
-		}).mousemove(function(e) {
-		        var mousex = e.pageX - 100; //Get X coordinates
-		        var mousey = e.pageY + 10; //Get Y coordinates
-		        $('.tooltip')
-		        .css({ top: mousey, left: mousex })
-		});
+		// below code causes the sign up div to dissapear
+	// $('.right-corner').hover(function(){
+	// 	        // Hover over code
+	// 	        var title = $(this).attr('title');
+	// 	        $(this).data('tipText', title).removeAttr('title');
+	// 	        $('<p class="tooltip smalltip"></p>')
+	// 	        .text(title)
+	// 	        .appendTo('body')
+	// 	        .fadeIn(1000);
+	// 	}, function() {
+	// 	        // Hover out code
+	// 	        $(this).attr('title', $(this).data('tipText'));
+	// 	        $('.tooltip').remove();
+	// 	}).mousemove(function(e) {
+	// 	        var mousex = e.pageX - 100; //Get X coordinates
+	// 	        var mousey = e.pageY + 10; //Get Y coordinates
+	// 	        $('.tooltip')
+	// 	        .css({ top: mousey, left: mousex })
+	// 	});
 		if ($('.first-login').length){
 			        $('#nav-button')
 			        .after('<p class="tooltip smalltip instruction"><i class="step fi-fast-forward bigger-arrow "></i><br><span class="float-left">Edit Account and add a paypal email to start making MONEY! <span></p>');
 			        $('.instruction').hide();
-			        setTimeout(function(){ $('.instruction').show('highlight', 1000) }, 1000);
+			        setTimeout(function(){ $('.instruction').show('highlight', 1000) }, 500);
 			        setTimeout(function(){ 
 			        	$('.instruction').hide('explode', 1000) 
 			    }, 11000);
