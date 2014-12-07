@@ -84,10 +84,11 @@ class PostsController < ApplicationController
   # end
   def search
     if params[:resource].downcase == "posts"
-      render "posts/index", details_message: @details_message, title_message:  @title_message, current_page: @current_page, posts: @posts and return
+      render "posts/index", filter_message: @filter_message, details_message: @details_message, title_message:  @title_message, current_page: @current_page, posts: @posts and return
     else
-      render "posts/index", details_message: @details_message, title_message:  @title_message, current_page: @current_page, posts: @posts and return
+      render "posts/index", filter_message: @filter_message, details_message: @details_message, title_message:  @title_message, current_page: @current_page, posts: @posts and return
     end
+  end
     def my_posts
       total = Post.new.find_by_user_id(params[:user_id])
       @posts = total
@@ -112,7 +113,6 @@ class PostsController < ApplicationController
         render "posts/index", details_message: @details_message, title_message:  @title_message, current_page: @current_page, posts: @posts, my_posts: @my_posts and return
       end
     end
-  end
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_post
@@ -142,20 +142,23 @@ class PostsController < ApplicationController
       else
         @posts = @posts[the_offset...the_offset+20]
       end
-      @title_message = ""
+      @filter_message = ""
       if !params[:answered].nil? 
         if params[:answered] == "true"
-          @title_message += "'Answered' only."
+          @filter_message += "'Answered' only."
         else
-          @title_message += "'Unanswered' only. "
+          @filter_message += "'Unanswered' only. "
         end
       end
       if !params[:filter].nil? 
-        if params[:filter] == "recent"
-          params[:filter] = "Most Recent"
+        if params[:filter].downcase == "recent"
+          @filter_message += " Sorted by Most Recent."
         end
-        if params[:filter] == "rating"
-          params[:filter] = "Rating"
+        if params[:filter].downcase == "rating"
+          @filter_message += " Sorted by Rating."
+        end
+        if params[:filter].downcase == "oldest"
+          @filter_message += " Sorted by Oldest."
         end
       end
       @title_message = "Search Results for '#{@title.capitalize}':"
@@ -177,24 +180,26 @@ class PostsController < ApplicationController
       else
         @posts = @posts[the_offset...the_offset+20]
       end
-      @details_message = ""
+      @filter_message = ""
       if !params[:answered].nil? 
         if params[:answered] == "true"
-          @details_message += "'Answered' only."
+          @filter_message += "'Answered' only."
         else
-          @details_message += "'Unanswered' only. "
+          @filter_message += "'Unanswered' only. "
         end
       end
       if !params[:filter].nil? 
-        if params[:filter] == "recent"
-          params[:filter] = "Most Recent"
+        if params[:filter].downcase == "recent"
+          @filter_message += " Sorted by Most Recent."
         end
-        if params[:filter] == "rating"
-          params[:filter] = "Rating"
+        if params[:filter].downcase == "rating"
+          @filter_message += " Sorted by Rating."
         end
-        @details_message += " Sorted by '#{params[:filter]}.'"
+        if params[:filter].downcase == "oldest"
+          @filter_message += " Sorted by Oldest."
+        end
       end
-      @title_message = "Displaying Posts By '#{@username}'"
+      @title_message = "Displaying Posts By '#{@username}':"
       @details_message = set_message(total, @current_page, @posts)
     end
   end

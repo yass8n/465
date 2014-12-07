@@ -1,11 +1,14 @@
  <h5 class="right-corner"> <p><%= @current_page %></p></h5>
 <%= button_to 'New Post?', new_post_path, :method => :get, :class => 'button absolute top left padding-left padding-top black'%>
 <div id="index-container" class="center">
-  <% if !@title_message.nil? && !@title_message.blank? %>
-    <h5 class="text-left"><%= " " + @title_message + " " %></h5>
-  <% end %>
   <% if !@details_message.nil? && !@details_message.blank? %>
     <h5 id="details-message" class="text-left small-text"><%= " " + @details_message + " " %></h5>
+  <% end %>
+  <% if !@filter_message.nil? && !@filter_message.blank? %>
+    <h5 id="details-message" class="float-right small-text"><%= " " + @filter_message + " " %></h5>
+  <% end %>
+  <% if !@title_message.nil? && !@title_message.blank? %>
+    <h5 class="text-left"><%= " " + @title_message + " " %></h5>
   <% end %>
 <% @answers.each do |answer| %>
   <div class="row relative block panel index low-padding">

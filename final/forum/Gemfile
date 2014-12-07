@@ -33,6 +33,7 @@ group :development do
   gem 'rails_layout'
 end
 gem 'foundation-icons-sass-rails'
+gem 'ruby-beautify'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
