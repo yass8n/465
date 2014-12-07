@@ -32,7 +32,7 @@ function initPage() {
 		$('#sign-up').show('highlight');
 	}
 	if ($('#sign-in').hasClass('hidden')){
-		$('#sign-in').show('highlight');
+		$('#sign-in').show('highlight', 1500);
 	}
   set_filter_image();
 	// for states and countries
@@ -99,6 +99,29 @@ function initPage() {
 		set_filter_image();
     });
 
+    function highlight_matches(){
+    	var search_query = $(location).attr('href').replace(/.*title=/, ""); //replaces everything before "title"
+		search_query = search_query.replace(/&.*/, ""); //replaces everything after '&' that is right after title
+		var reg = new RegExp(search_query,"gi"); //creating a regex that matches teh search query globally and case insensitive
+    	$('.post_title a').each(function(){
+    		$(this).html($(this).html().replace(reg, "<span class='highlight'>" + search_query + "</span>"));
+    	});
+    }
+    function set_filter_image(){
+	    var checked = false;
+		var src = "https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/128/empty_filter.png"
+		$('#answered_true, #answered_false, #filter_rating, #filter_views, #filter_recent, #filter_oldest').each(function(){
+			//empty filter
+	        if((this).checked) {
+	            checked = true;
+				src = "https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/128/filled_filter.png"
+				//full filter
+	        }
+	        $('#filter-image').attr("src", src);
+	    });
+    }
+
+
     // Tooltip only Text
 	$('#filter-image').hover(function(){
 		        // Hover over code
@@ -136,25 +159,9 @@ function initPage() {
 		        $('.tooltip')
 		        .css({ top: mousey, left: mousex })
 		});
-    function highlight_matches(){
-    	var search_query = $(location).attr('href').replace(/.*title=/, ""); //replaces everything before "title"
-		search_query = search_query.replace(/&.*/, ""); //replaces everything after '&' that is right after title
-		var reg = new RegExp(search_query,"gi"); //creating a regex that matches teh search query globally and case insensitive
-    	$('.post_title a').each(function(){
-    		$(this).html($(this).html().replace(reg, "<span class='highlight'>" + search_query + "</span>"));
-    	});
-    }
-    function set_filter_image(){
-	    var checked = false;
-		var src = "https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/128/empty_filter.png"
-		$('#answered_true, #answered_false, #filter_rating, #filter_views, #filter_recent, #filter_oldest').each(function(){
-			//empty filter
-	        if((this).checked) {
-	            checked = true;
-				src = "https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/128/filled_filter.png"
-				//full filter
-	        }
-	        $('#filter-image').attr("src", src);
-	    });
-    }
+		if ($('.first-login').length){
+	        $('#nav-button')
+	        .after('<p class="tooltip smalltip" id="instruction">Edit account by adding a paypal email to start making MONEY!</p>').fadeIn(1000);
+	        setTimeout(function(){ $('#instruction').show('highlight', 1000) }, 2000);
+	    };
 }
