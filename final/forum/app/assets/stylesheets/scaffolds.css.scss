@@ -282,7 +282,7 @@ input.button{
     font-size: 100px;
     color: $red;
 }
-.fi-fast-forward {
+.bigger-arrow {
   font-size: 50px;
   color: white;
   float: right;
@@ -438,7 +438,7 @@ input.button{
   font-size:12px Arial;
   width: 200px;
   cursor: pointer;
-  z-index: -10;
+  z-index: 10;
   box-shadow: 0px 0px 8px 1px black;
   -moz-box-shadow: 0px 0px 8px 1px black;
   -webkit-box-shadow: 0px 0px 8px 1px black;
