@@ -418,3 +418,15 @@ input.button{
 .hidden{
   display: none;
 }
+.tooltip {
+  display:none;
+  position:absolute;
+  border:1px solid $oil;
+  background-color:#F0D8C0;
+  border-radius:5px;
+  padding:10px;
+  color:$oil;
+  font-size:12px Arial;
+  width: 200px;
+  cursor: pointer;
+}
