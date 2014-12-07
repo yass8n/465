@@ -118,6 +118,24 @@ function initPage() {
 		        $('.tooltip')
 		        .css({ top: mousey, left: mousex })
 		});
+	$('.right-corner').hover(function(){
+		        // Hover over code
+		        var title = $(this).attr('title');
+		        $(this).data('tipText', title).removeAttr('title');
+		        $('<p class="tooltip smalltip"></p>')
+		        .text(title)
+		        .appendTo('body')
+		        .fadeIn(1000);
+		}, function() {
+		        // Hover out code
+		        $(this).attr('title', $(this).data('tipText'));
+		        $('.tooltip').remove();
+		}).mousemove(function(e) {
+		        var mousex = e.pageX - 100; //Get X coordinates
+		        var mousey = e.pageY + 10; //Get Y coordinates
+		        $('.tooltip')
+		        .css({ top: mousey, left: mousex })
+		});
     function highlight_matches(){
     	var search_query = $(location).attr('href').replace(/.*title=/, ""); //replaces everything before "title"
 		search_query = search_query.replace(/&.*/, ""); //replaces everything after '&' that is right after title

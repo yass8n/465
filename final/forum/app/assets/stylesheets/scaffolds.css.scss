@@ -429,4 +429,7 @@ input.button{
   font-size:12px Arial;
   width: 200px;
   cursor: pointer;
+  &.smalltip{
+     width: 120px;
+  }
 }

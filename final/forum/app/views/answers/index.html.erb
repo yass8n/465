@@ -1,4 +1,4 @@
- <h5 class="right-corner"> <p><%= @current_page %></p></h5>
+ <h5 class="right-corner" title="page number"> <p><%= @current_page %></p></h5>
 <%= button_to 'New Post?', new_post_path, :method => :get, :class => 'button absolute top left padding-left padding-top black'%>
 <div id="index-container" class="center">
   <% if !@details_message.nil? && !@details_message.blank? %>
