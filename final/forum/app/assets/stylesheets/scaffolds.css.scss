@@ -282,6 +282,14 @@ input.button{
     font-size: 100px;
     color: $red;
 }
+.fi-fast-forward {
+  font-size: 50px;
+  color: white;
+  float: right;
+  padding: 0;
+  margin-bottom: -20px;
+  margin-top: -15px;
+}
 .landing-icons{
   position: absolute;
   width: 60%;
@@ -425,11 +433,15 @@ input.button{
   border:1px solid $oil;
   background-color: #EBE0D5;
   border-radius:5px;
-  padding:4px;
+  padding:6px;
   color:$oil;
   font-size:12px Arial;
   width: 200px;
   cursor: pointer;
+  z-index: -10;
+  box-shadow: 0px 0px 8px 1px black;
+  -moz-box-shadow: 0px 0px 8px 1px black;
+  -webkit-box-shadow: 0px 0px 8px 1px black;
   &.smalltip{
      width: 120px;
   }
