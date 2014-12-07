@@ -129,11 +129,14 @@ class PostsController < ApplicationController
       
   def search_posts
     @title = params[:title].downcase
+    if @title =="." || @title == "?" || @title == "*"
+      redirect_to posts_path(details_message: @details_message), alert: "No results. Check your spelling and filters then try again." and return
+    end
     @posts = Post.new.find_by_title(@title, params[:answered], params[:filter])
     @pages = get_pages(@posts)
     total = @posts.size
     @current_page = params[:page].to_i
-    if @title.nil? || @title.blank? || @posts.size == 0 || @current_page > @pages || @current_page < 1
+    if @title.nil? || @title.blank? || @posts.size == 0 || @current_page > @pages || @current_page < 1 
       redirect_to posts_path(details_message: @details_message), alert: "No results. Check your spelling and filters then try again." and return
     else
       the_offset = (@current_page -1) * 20
