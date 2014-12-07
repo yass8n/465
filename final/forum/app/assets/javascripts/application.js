@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/effect.all
 //= require turbolinks
 //= require foundation
 //= require_tree .
@@ -23,8 +24,15 @@ $(window).bind('page:load', function() {
   initPage();
 });
 function initPage() {
-	if ($(location).attr('href').indexOf("Lookup") > -1){ //the user just searched a title, so highlight the matches
+	url = $(location).attr('href');
+	if (url.indexOf("Lookup") > -1){ //the user just searched a title, so highlight the matches
 		highlight_matches();
+	}
+	if ($('#sign-up').hasClass('hidden')){
+		$('#sign-up').show('highlight');
+	}
+	if ($('#sign-in').hasClass('hidden')){
+		$('#sign-in').show('highlight');
 	}
   set_filter_image();
 	// for states and countries
@@ -54,13 +62,13 @@ function initPage() {
 
 	//to show the post comment form and the answer comment form
 	$('.comment_on_answer').on('click', function(){
-		$(this).parents('div').next('.answer_comment_form').removeClass('hidden');
-		$(this).addClass('hidden');
+		$(this).parents('div').next('.answer_comment_form').show('blind')
+		$(this).hide();
 	});
 
 	$('#comment_on_post').on('click', function(){
-		$('#post_comment_form').removeClass('hidden');
-		$(this).addClass('hidden');
+		$('#post_comment_form').show('blind')
+		$(this).hide();
 	});
 
 
@@ -77,7 +85,7 @@ function initPage() {
     	$(this).attr("src", "/images/arrow.png");
     });
     $('.close').click(function(){
-    	$(this).parents('.alert-box').hide();
+    	$(this).parents('.alert-box').hide('blind');
     });
   $('.rating_score').each(function(){
   	    var rating = $(this).html();

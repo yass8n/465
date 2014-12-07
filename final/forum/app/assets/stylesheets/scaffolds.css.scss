@@ -80,9 +80,6 @@ div {
 .float-left{
   float: left;
 }
-.hidden{
-  display: none;
-}
 .tab-bar, .tab-bar-section{
   height: 70px;
 }
@@ -417,4 +414,7 @@ input.button{
 }
 #index-container{
   width: 75%;
+}
+.hidden{
+  display: none;
 }

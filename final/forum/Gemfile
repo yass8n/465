@@ -34,6 +34,7 @@ group :development do
 end
 gem 'foundation-icons-sass-rails'
 gem 'ruby-beautify'
+gem 'jquery-ui-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
