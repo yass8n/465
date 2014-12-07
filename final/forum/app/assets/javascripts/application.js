@@ -160,7 +160,6 @@ function initPage() {
 		        .css({ top: mousey, left: mousex })
 		});
 		if ($('.first-login').length){
-			        $('top-bar').addClass('no-more');
 			        $('#nav-button')
 			        .after('<p class="tooltip smalltip instruction"><i class="step fi-fast-forward"></i><br><span class="float-left">Edit Account and add a paypal email to start making MONEY! <span></p>');
 			        $('.instruction').hide();
