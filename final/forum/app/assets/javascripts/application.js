@@ -161,9 +161,9 @@ function initPage() {
 		});
 		if ($('.first-login').length){
 	        $('#nav-button')
-	        .after('<p class="tooltip smalltip" id="instruction"><i class="step fi-fast-forward"></i><br><span class="float-left">Add a paypal email to start making MONEY! <span></p>');
+	        .after('<p class="tooltip smalltip" id="instruction"><i class="step fi-fast-forward"></i><br><span class="float-left">Edit Account and add a paypal email to start making MONEY! <span></p>');
 	        $('#instruction').hide();
-	        setTimeout(function(){ $('#instruction').show('highlight', 1000) }, 4000);
+	        setTimeout(function(){ $('#instruction').show('highlight', 1000) }, 3000);
 	    };
 	    $('#instruction').click(function(){
 	    	$('#instruction').hide('explode', 700);
