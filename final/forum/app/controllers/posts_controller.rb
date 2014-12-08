@@ -172,7 +172,7 @@ class PostsController < ApplicationController
   end
   def search_users
     @username = params[:title].downcase
-    redirect_to posts_path(details_message: @details_message), alert: "Must enter a phrase to Search." and return  if @username.gsub(/\s+/, "") == ""
+    redirect_to posts_path(details_message: @details_message), alert: "Must enter a username to search." and return  if @username.gsub(/\s+/, "") == ""
     @posts = Post.new.find_by_user(@username.downcase, params[:answered], params[:filter])
     total =  @posts.count
     @pages = get_pages(@posts)
