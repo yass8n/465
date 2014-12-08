@@ -47,14 +47,26 @@
 				<div class="row ">
 					<div class="small-12 columns ">
 						<p class="small-text">
-						<% if (comment.created_at > 1.day.ago) %>
-							<%= comment.comment %>
-							<strong><br> -  <%= link_to comment.user.username, title_search_path(resource: "users", title: comment.user.username, page: 1) %> <%= " " + time_ago_in_words(comment.created_at) %> ago
-							</strong> 
+						<% if comment.user.status != "deleted" %>
+							<% if (comment.created_at > 1.day.ago) %>
+								<%= comment.comment %>
+								<strong><br> -  <%= link_to comment.user.username, title_search_path(resource: "users", title: comment.user.username, page: 1) %> <%= " " + time_ago_in_words(comment.created_at) %> ago
+								</strong> 
+							<% else %>
+								<%= comment.comment %>
+								<strong><br> -  <%= link_to comment.user.username, title_search_path(resource: "users", title: comment.user.username, page: 1) %> <%= " " + comment.created_at.strftime("%m/%d/%Y") %> 
+								</strong> 
+							<% end %>
 						<% else %>
-							<%= comment.comment %>
-							<strong><br> -  <%= link_to comment.user.username, title_search_path(resource: "users", title: comment.user.username, page: 1) %> <%= " " + comment.created_at.strftime("%m/%d/%Y") %> 
-							</strong> 
+							<% if (comment.created_at > 1.day.ago) %>
+								<%= comment.comment %>
+								<strong><br> -  <span class="red">DELETED</span> <%= " " + time_ago_in_words(comment.created_at) %> ago
+								</strong> 
+							<% else %>
+								<%= comment.comment %>
+								<strong><br> -  <span class="red">DELETED</span> <%= " " + comment.created_at.strftime("%m/%d/%Y") %> 
+								</strong> 
+							<% end %>
 						<% end %>
 						</p>
 					</div>
