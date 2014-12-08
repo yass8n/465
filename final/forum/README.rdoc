@@ -36,4 +36,5 @@ Please feel free to use a different markup language if you do not plan to run
 -Be able to create a new question from anywhere on the website
 -make compatible with firefox
 - fix bug when entering '.' or '?' $ \ in search field
+-create partial for comments 
 <tt>rake doc:app</tt>.

@@ -27,7 +27,7 @@
 				<%=", " + resource.user.state %>
 				<% end %>
 			</p>
-			<% unless resource.user.nil? %>
+			<% unless resource.user.nil? || resource.user.status == "deleted"%>
 				<div><%= render partial: "users/donate", locals: {resource: resource} %></div>
 			<% end %>
 			<br>
