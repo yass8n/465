@@ -45,9 +45,9 @@ class User < ActiveRecord::Base
 	    link += paypal_email
 	    link += "&lc=US&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest"
 	    return link
+	end
 	def is_nil
 		return paypal_email.nil?
-	end
 	end
 	def generate_filename
 		filename = SecureRandom.hex + ".jpg"

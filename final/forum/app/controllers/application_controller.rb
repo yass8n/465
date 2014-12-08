@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 	protect_from_forgery with: :exception
 	before_action :configure_permitted_parameters, if: :devise_controller?
 	before_filter :authenticate!
-	helper_method :get_rating #so the rating_form can call this function
+	helper_method :get_rating, :get_usernames #so the rating_form can call this function
 
 	def authenticate!
 		# :authenticate_user!
@@ -46,6 +46,10 @@ class ApplicationController < ActionController::Base
 		elsif resource.is_a?(Post)
 			return Rating.where(post_id: resource.id, user_id: current_user_id)[0]
 		end
+	end
+	def get_usernames
+		usernames = User.all
+		usernames = usernames.map do |u| u.username end
 	end
 	def get_pages(array)
 		return (((array.count) -1) / 20) +1
