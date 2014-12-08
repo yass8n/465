@@ -1,63 +1,88 @@
-user = User.new
-user.email = "yass8n@yahoo.com"
-user.paypal_email = "yass8n@yahoo.com"
-user.username = "yaseen"
-user.password = 'y'
-user.password_confirmation = 'y'
-user.save!
-
-user = User.new
-user.email = "a@a.com"
-user.paypal_email = "a@a.com"
-user.username = "alex"
-user.password = 'a'
-user.password_confirmation = 'a'
-user.save!
-
-user = User.new
-user.email = 'b@b.com'
-user.paypal_email = 'b@b.com'
-user.username = "bob"
-user.password = 'b'
-user.password_confirmation = 'b'
-user.save!
-
-user = User.new
-user.email = 'm@m.com'
-user.paypal_email = 'm@m.com'
-user.username = "mom"
-user.password = 'm'
-user.password_confirmation = 'm'
-user.save!
-
-user = User.new
-user.email = 'h@h.com'
-user.paypal_email = 'h@h.com'
-user.username = "harry"
-user.password = 'h'
-user.password_confirmation = 'h'
-user.save!
-
-user = User.new
-user.email = 'empty@empty.com'
-user.paypal_email = 'empty@empty.com'
-user.username = "empty"
-user.password = 'e'
-user.password_confirmation = 'e'
-user.save!
-
-user = User.new
-user.email = 'tim@tim.com'
-user.paypal_email = 'tim@tim.com'
-user.username = "tim"
-user.password = 't'
-user.password_confirmation = 't'
-user.save!
-
-user = User.new
-user.email = 'c@c.com'
-user.paypal_email = 'c@c.com'
-user.password = 'c'
-user.password_confirmation = 'c'
-user.username = "cassy"
-user.save!
+User.create!([
+  {email: "a@a.com", encrypted_password: "$2a$10$ke68QoPNkRXJ8OnH6jLdve5W32eNI1glOHD3Tx/HmyBI.giFja0tu", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 8, current_sign_in_at: "2014-12-07 09:13:52", last_sign_in_at: "2014-12-07 06:11:46", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "a", paypal_email: "", paypal_link: nil, country: "US", state: "DE", filename: nil, status: "active", confirmation_token: "eb15e58410c1c0f661e4c7502bc7adbc445a071a6c70b2184f421803b7091170", confirmed_at: nil, confirmation_sent_at: "2014-12-06 14:36:54"},
+  {email: "y@y.com", encrypted_password: "$2a$10$TlhjxVf0vfIqk2ug9XPZmuWLc.yQHRpPx9OQYZG06dUOJBuu5Tt/i", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 2, current_sign_in_at: "2014-12-07 00:14:02", last_sign_in_at: "2014-12-07 00:02:11", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "yass8n", paypal_email: nil, paypal_link: nil, country: nil, state: nil, filename: nil, status: "active", confirmation_token: "417343c0a3405a2e5eb071364a7f61d8b8113630df4af6b667888bf0e2e1e6cf", confirmed_at: nil, confirmation_sent_at: "2014-12-07 00:02:11"},
+  {email: "d@d.com", encrypted_password: "$2a$10$/iba0GvZGZQkkKiQWEr0k.pCj1h3ffzucB4yZcJ2MmaHcXghLOOlW", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 2, current_sign_in_at: "2014-12-07 06:11:50", last_sign_in_at: "2014-12-07 06:11:00", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "dddddd", paypal_email: nil, paypal_link: nil, country: nil, state: nil, filename: nil, status: "active", confirmation_token: "60e11abaa10dc4be0a5066a635f23a4f79be70009c56e9c97ad80f3b514e77d6", confirmed_at: nil, confirmation_sent_at: "2014-12-07 06:11:00"},
+  {email: "c@c.com", encrypted_password: "$2a$10$mfMFs2Lbbmx2I8FbJ6NgZutkKtaAsZaX5/qDfugumON03NKeujwu.", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2014-12-07 06:13:11", last_sign_in_at: "2014-12-07 06:13:11", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "c", paypal_email: nil, paypal_link: nil, country: nil, state: nil, filename: nil, status: "active", confirmation_token: "e50824ad282723ca3204e0b13c4732a4863995c71beafc4b0b701c54d6e48210", confirmed_at: nil, confirmation_sent_at: "2014-12-07 06:13:11"},
+  {email: "v@c.com", encrypted_password: "$2a$10$9ZothfA4M8FYjA5vQHBCfex9DkWph9r53fv8it.Hbo1HUXaJvNL2a", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2014-12-07 06:16:36", last_sign_in_at: "2014-12-07 06:16:36", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "vm", paypal_email: nil, paypal_link: nil, country: nil, state: nil, filename: nil, status: "active", confirmation_token: "d49ac89275c60420511e542da007553514910f17e1dbe6f65852961a57382fd0", confirmed_at: nil, confirmation_sent_at: "2014-12-07 06:16:36"},
+  {email: "kmn@kmn.com", encrypted_password: "$2a$10$ThRWGIM9ZiyIxySDUXhSPeEJIMnpUs9HBVshqfdxF6ABhmmmvxCj.", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 2, current_sign_in_at: "2014-12-07 07:38:48", last_sign_in_at: "2014-12-07 07:38:20", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "kmn", paypal_email: nil, paypal_link: nil, country: nil, state: nil, filename: nil, status: "active", confirmation_token: "9761d608f1446cf36332f54c45d41b5f46807e1b2173f0d113c6fc34c5990624", confirmed_at: nil, confirmation_sent_at: "2014-12-07 07:38:19"},
+  {email: "kaka@kaka.com", encrypted_password: "$2a$10$PwxIP0WmVEscdZphS6supu5Dnc8rBlDlIvx0FI6JUJNvRlaTufGvm", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2014-12-07 07:41:52", last_sign_in_at: "2014-12-07 07:41:52", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "kaka", paypal_email: nil, paypal_link: nil, country: nil, state: nil, filename: nil, status: "active", confirmation_token: "7b43493c17798b28d6ebebcc4a0b951e4ad84204ed696d3c0bdf36d1dba2c7d7", confirmed_at: nil, confirmation_sent_at: "2014-12-07 07:41:52"},
+  {email: "yass8n@yahoo.com", encrypted_password: "$2a$10$4imp8avP/k.pOqCFnZGcYut6kJFcfMaiRrQFaBOp5kT77e3ddYEXi", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil, username: "yaseen", paypal_email: "yass8n@yahoo.com", paypal_link: nil, country: nil, state: nil, filename: nil, status: "active", confirmation_token: "a3e75ac0a31784ba1a874e6c415e6cea62bf4c6cd85a1e25be429d29542b7179", confirmed_at: nil, confirmation_sent_at: "2014-12-07 07:57:47"},
+  {email: "bobby@bobby.com", encrypted_password: "$2a$10$2k8bTM6iLQ3uPrBSU0CSdOOBi.97BQdP3cONPkXRe1RfVgFVrlos.", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2014-12-07 08:04:45", last_sign_in_at: "2014-12-07 08:04:45", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "bobby", paypal_email: nil, paypal_link: nil, country: nil, state: nil, filename: nil, status: "active", confirmation_token: "8e4bff7949f966af5db4afcc162430d91ff2a46d67bc614116d47f7aa43d0603", confirmed_at: nil, confirmation_sent_at: "2014-12-07 08:04:45"},
+  {email: "jijiji@j.com", encrypted_password: "$2a$10$kOZ8nn.oy89MkiJ0NR6XG.w/X/yjxbBrRad7sIQd157hHPXowe9Mi", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2014-12-07 08:05:17", last_sign_in_at: "2014-12-07 08:05:17", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "jijiji", paypal_email: nil, paypal_link: nil, country: nil, state: nil, filename: nil, status: "active", confirmation_token: "de413f074e7c170bd408f78a86eb7311b7ff4d8f556796b20e1d351c0a181222", confirmed_at: nil, confirmation_sent_at: "2014-12-07 08:05:17"},
+  {email: "zz@x.com", encrypted_password: "$2a$10$qqN9uUPPe56sRGkV1IM7GuhYKQljeqGvekTqMmLp4UIpScFonnmpS", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2014-12-07 08:06:19", last_sign_in_at: "2014-12-07 08:06:19", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "zz", paypal_email: nil, paypal_link: nil, country: nil, state: nil, filename: nil, status: "active", confirmation_token: "e89d8114326e25c70e3c702dc97bdf43ab3417012a49fe053109d0ab055db5ec", confirmed_at: nil, confirmation_sent_at: "2014-12-07 08:06:19"},
+  {email: "iiiii@i.com", encrypted_password: "$2a$10$q0QRF9QiByuZbtpg/vbpE.V5H93vMNX/j90xRW2GXkl/ii8mP8HIy", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2014-12-07 08:51:17", last_sign_in_at: "2014-12-07 08:51:17", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "iiiii", paypal_email: nil, paypal_link: nil, country: nil, state: nil, filename: nil, status: "active", confirmation_token: "009cde4dfa20bc42f3d47510fb7581aad4f2c95026e4a0c0c21d4a956bb4b54c", confirmed_at: nil, confirmation_sent_at: "2014-12-07 08:51:16"},
+  {email: "pl2@ii.com", encrypted_password: "$2a$10$cs9CLs.eSeb59.78avMeDO1OrTuwpGy78cF//HquBLZJ9rzwmsoyW", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2014-12-07 09:16:34", last_sign_in_at: "2014-12-07 09:16:34", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "jijijijijijijiji2", paypal_email: nil, paypal_link: nil, country: nil, state: nil, filename: nil, status: "active", confirmation_token: "773da0e63036b0b4cbdfd9d4380c58eaead446d4617e5f7bbd897d47c73498d9", confirmed_at: nil, confirmation_sent_at: "2014-12-07 09:16:33"},
+  {email: "kkjaaaa@d.com", encrypted_password: "$2a$10$cCoAsJgXUWtKvzvavuRI6OSP9k.Byp4B9PObDbDA4mlWbPq5Wuqoa", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2014-12-07 10:05:32", last_sign_in_at: "2014-12-07 10:05:32", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "plplpokokoko", paypal_email: nil, paypal_link: nil, country: nil, state: nil, filename: nil, status: "active", confirmation_token: "9323428eed3143b85187b7cbb832b9b14509173f118e95e212534c08d68456c4", confirmed_at: nil, confirmation_sent_at: "2014-12-07 10:05:32"},
+  {email: "hhhhh@hh.com", encrypted_password: "$2a$10$IGFzg9WtOvCRRNmohBDcPeLEeDqBVgnb1VpViV850qPnd96seInDa", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2014-12-07 10:07:13", last_sign_in_at: "2014-12-07 10:07:13", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "jdjdjdjdjd", paypal_email: nil, paypal_link: nil, country: nil, state: nil, filename: nil, status: "active", confirmation_token: "bb4df60c486fa1c98d133fa6f6ffa11d6d0500ecb0c174f0c0de6488a16cc2ce", confirmed_at: nil, confirmation_sent_at: "2014-12-07 10:07:13"},
+  {email: "ppppp@pppp.com", encrypted_password: "$2a$10$hK6EgUeYgAtFl3e6GdR1q.aNk2CRX9e/ZCQl96.vwax.bsMAimARa", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2014-12-07 12:06:35", last_sign_in_at: "2014-12-07 12:06:35", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "ppppp", paypal_email: nil, paypal_link: nil, country: nil, state: nil, filename: nil, status: "active", confirmation_token: "35a63a1a94e767648b80db9cf4caa5193a21807d4ddd8a6011871751f19bcaa4", confirmed_at: nil, confirmation_sent_at: "2014-12-07 12:06:35"}
+])
+Answer.create!([
+  {user_id: 1, post_id: 2, answer: "a", rating_score: 0},
+  {user_id: 1, post_id: 23, answer: "q", rating_score: 0},
+  {user_id: 1, post_id: 22, answer: "q", rating_score: 0},
+  {user_id: 1, post_id: 21, answer: "q", rating_score: 0},
+  {user_id: 1, post_id: 20, answer: "a", rating_score: 0},
+  {user_id: 1, post_id: 19, answer: "a", rating_score: 0},
+  {user_id: 1, post_id: 18, answer: "a", rating_score: 0},
+  {user_id: 1, post_id: 17, answer: "a", rating_score: 0},
+  {user_id: 1, post_id: 16, answer: "a", rating_score: 0},
+  {user_id: 1, post_id: 15, answer: "a", rating_score: 0},
+  {user_id: 1, post_id: 14, answer: "a", rating_score: 0},
+  {user_id: 1, post_id: 13, answer: "a", rating_score: 0},
+  {user_id: 1, post_id: 12, answer: "a", rating_score: 0},
+  {user_id: 1, post_id: 11, answer: "a", rating_score: 0},
+  {user_id: 1, post_id: 10, answer: "a", rating_score: 0},
+  {user_id: 1, post_id: 9, answer: "a", rating_score: 0},
+  {user_id: 1, post_id: 8, answer: "a", rating_score: 0},
+  {user_id: 1, post_id: 7, answer: "a", rating_score: 0},
+  {user_id: 1, post_id: 5, answer: "a", rating_score: 0},
+  {user_id: 1, post_id: 4, answer: "a", rating_score: 0},
+  {user_id: 1, post_id: 6, answer: "a", rating_score: 0},
+  {user_id: 1, post_id: 1, answer: "a", rating_score: 0},
+  {user_id: 2, post_id: 24, answer: "asd", rating_score: 0},
+  {user_id: 2, post_id: 27, answer: "asd", rating_score: 0},
+  {user_id: 1, post_id: 28, answer: "asd", rating_score: 0},
+  {user_id: 15, post_id: 26, answer: "asd", rating_score: 0}
+])
+Commentary.create!([
+  {post_id: nil, answer_id: 2, user_id: 1, comment: "a"},
+  {post_id: 28, answer_id: nil, user_id: 1, comment: "a"}
+])
+Post.create!([
+  {user_id: 1, content: "1", views: nil, title: "1", rating_score: 0},
+  {user_id: 1, content: "2", views: nil, title: "2", rating_score: 0},
+  {user_id: 1, content: "3", views: nil, title: "3", rating_score: 0},
+  {user_id: 1, content: "4", views: nil, title: "4", rating_score: 0},
+  {user_id: 1, content: "5", views: nil, title: "5", rating_score: 1},
+  {user_id: 1, content: "6", views: nil, title: "6", rating_score: 0},
+  {user_id: 1, content: "7", views: nil, title: "7", rating_score: 0},
+  {user_id: 1, content: "8", views: nil, title: "8", rating_score: 0},
+  {user_id: 1, content: "9", views: nil, title: "9", rating_score: 0},
+  {user_id: 1, content: "10", views: nil, title: "10", rating_score: 0},
+  {user_id: 1, content: "11", views: nil, title: "11", rating_score: 0},
+  {user_id: 1, content: "12", views: nil, title: "12", rating_score: 0},
+  {user_id: 1, content: "13", views: nil, title: "13", rating_score: 0},
+  {user_id: 1, content: "14", views: nil, title: "14", rating_score: 0},
+  {user_id: 1, content: "15", views: nil, title: "15", rating_score: 0},
+  {user_id: 1, content: "16", views: nil, title: "16", rating_score: 0},
+  {user_id: 1, content: "17", views: nil, title: "17", rating_score: 0},
+  {user_id: 1, content: "18", views: nil, title: "18", rating_score: 0},
+  {user_id: 1, content: "19", views: nil, title: "19", rating_score: 0},
+  {user_id: 1, content: "20", views: nil, title: "20", rating_score: 1},
+  {user_id: 1, content: "21", views: nil, title: "21", rating_score: 0},
+  {user_id: 1, content: "22", views: nil, title: "22", rating_score: 0},
+  {user_id: 1, content: "q", views: nil, title: "q", rating_score: 0},
+  {user_id: 2, content: "asd", views: nil, title: "asdasdasd", rating_score: 0},
+  {user_id: 2, content: "asd", views: nil, title: "asd", rating_score: 1},
+  {user_id: 2, content: "aaaaa", views: nil, title: "aaaaaaaaaaaaaaaaaaaaasssssssssssssssssssssssssssssssssssssssssssssssssss", rating_score: 1},
+  {user_id: 2, content: "1111111111", views: nil, title: "111111", rating_score: 1},
+  {user_id: 1, content: "a", views: nil, title: "asdasd", rating_score: 1}
+])
+Rating.create!([
+  {user_id: 2, rate: 1, answer_id: nil, post_id: 20},
+  {user_id: 1, rate: 1, answer_id: nil, post_id: 27},
+  {user_id: 1, rate: 1, answer_id: nil, post_id: 25},
+  {user_id: 1, rate: 1, answer_id: nil, post_id: 26},
+  {user_id: 2, rate: 1, answer_id: nil, post_id: 5},
+  {user_id: 2, rate: 1, answer_id: nil, post_id: 28}
+])
