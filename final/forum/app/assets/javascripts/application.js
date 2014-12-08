@@ -15,6 +15,7 @@
 //= require jquery-ui/effect.all
 //= require turbolinks
 //= require foundation
+//= require jquery-ui/autocomplete
 //= require_tree .
 $(function() {
   initPage();
@@ -23,7 +24,38 @@ $(function() {
 $(window).bind('page:load', function() {
   initPage();
 });
-function initPage() {
+function initPage() { 
+ var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+    $("#title").autocomplete({
+      source: availableTags
+    });
+
+    // alert(common_words);
+
+
 	url = $(location).attr('href');
 	if (url.indexOf("Lookup") > -1){ //the user just searched a title, so highlight the matches
 		highlight_matches();

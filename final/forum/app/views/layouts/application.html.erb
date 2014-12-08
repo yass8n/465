@@ -9,6 +9,9 @@
     <link data-turbolinks-track="true" href="/assets/foundation-icons/foundation-icons.css" media="all" rel="stylesheet">
     <%# Modernizr is required for Zurb Foundation %>
     <%= javascript_include_tag 'vendor/modernizr' %>
+    <%= javascript_tag do %>
+      window.common_words = "<%= "asddassd" %>";
+  <% end %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
