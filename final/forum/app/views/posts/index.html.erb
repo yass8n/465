@@ -21,7 +21,11 @@
            <% post.title = post.title[0..44] + "..." unless post.title[44].nil? %>
           <!-- if the post has more than 40 letters, add a ... and only show some of it -->
           <h4 class="post_title"><%= link_to post.title.capitalize, post_path(post) %></h4>
-          <div class="relative right">Asked by <%= link_to post.user.username, title_search_path(resource: "users", title: post.user.username, page: 1) %>
+          <% if comment.user.status != "deleted" %>
+            <div class="relative right">Asked by <%= link_to post.user.username, title_search_path(resource: "users", title: post.user.username, page: 1) %>
+          <% else %>
+             <div class="relative right">Asked by <span class="red">DELETED</span>
+          <% end %>
           <% if (post.created_at > 2.day.ago) %>
                  <%= time_ago_in_words(post.created_at) %> ago </div>
           <% else %>
