@@ -1,7 +1,7 @@
    <%= form_tag(title_search_path, method: "get", :id => "search-form") do  %>
    <%= hidden_field_tag 'page', '1' %>
       <div class="relative inline-block" id="title-search">
-		<div class="inline-block"><%= text_field_tag :title, nil, placeholder: "Search" %></div>
+		<div class="inline-block"><%= text_field_tag :title, nil, placeholder: "Search posts by text or username" %></div>
 		<a class="center" id="img-inside"><%= image_tag "https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/128/empty_filter.png", size: "20x20", :id => "filter-image", :title => "Click here to add filters." %></a>
      </div>
       <div class="inline-block"><%= submit_tag("Lookup", :class => "button alert top absolute") %> %></div>
