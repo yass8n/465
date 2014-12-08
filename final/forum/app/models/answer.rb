@@ -20,7 +20,9 @@ class Answer < ActiveRecord::Base
   	return Rating.where(user_id: current_user.id, answer_id: self.id)[0].rate
   end
   def get_all_answers(post_id)
-    return Answer.where(post_id: post_id)
+    answers = Answer.where(post_id: post_id)
+    answers = answers.sort_by{|a| (a.rating_score)}
+    answers.reverse
   end
   def you_already_answered
     answered = Answer.where(post_id: self.post_id, user_id: self.user_id)[0]
