@@ -129,6 +129,8 @@ class PostsController < ApplicationController
       
   def search_posts
     @title = params[:title].downcase
+    redirect_to posts_path(details_message: @details_message), alert: "Must enter a phrase to Search." and return  if @title.gsub(/\s+/, "") == ""
+
     if @title =="." || @title == "?" || @title == "*"
       redirect_to posts_path(details_message: @details_message), alert: "No results. Check your spelling and filters then try again." and return
     end
@@ -170,6 +172,7 @@ class PostsController < ApplicationController
   end
   def search_users
     @username = params[:title].downcase
+    redirect_to posts_path(details_message: @details_message), alert: "Must enter a phrase to Search." and return  if @username.gsub(/\s+/, "") == ""
     @posts = Post.new.find_by_user(@username.downcase, params[:answered], params[:filter])
     total =  @posts.count
     @pages = get_pages(@posts)
