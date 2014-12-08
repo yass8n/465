@@ -178,7 +178,7 @@ class PostsController < ApplicationController
     @pages = get_pages(@posts)
     @current_page = params[:page].to_i
     if @username.nil? || @username.blank? || @posts.size == 0 || @current_page > @pages || @current_page < 1
-      redirect_to posts_path(details_message: @details_message), alert: "No results. Check your spelling and filters then try again." and return
+      redirect_to posts_path(details_message: @details_message), alert: "No posts for that username. Check your spelling and filters then try again." and return
     else
       the_offset = (@current_page -1) * 20
       if the_offset+20 >= @posts.size 
