@@ -167,7 +167,7 @@ function initPage() {
 			        setTimeout(function(){ $('.instruction').show('highlight', 1000) }, 500);
 			        setTimeout(function(){ 
 			        	$('.instruction').hide('explode', 1000) 
-			    }, 11000);
+			    }, 20000);
 		    };
 	    $('.instruction').click(function(){
 	    	setTimeout(function(){ 
