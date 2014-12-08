@@ -32,7 +32,7 @@ function initPage() {
 		$('#sign-up').show('highlight');
 	}
 	if ($('#sign-in').hasClass('hidden')){
-		$('#sign-in').show('highlight', 1500);
+		$('#sign-in').show('highlight', 2000);
 	}
   set_filter_image();
 	// for states and countries
