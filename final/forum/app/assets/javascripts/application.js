@@ -31,6 +31,9 @@ function initPage() {
 		    $("#title").autocomplete({
 		      source: usernames
 		    });
+    		$("#title").autocomplete( "enable" ); 
+    	} else{
+    		$("#title").autocomplete( "disable" );
     	}
     });
 	url = $(location).attr('href');
