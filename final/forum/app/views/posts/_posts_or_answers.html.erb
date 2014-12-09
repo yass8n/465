@@ -109,7 +109,16 @@
 			<% end %>
 			</div>
 			    <p class="absolute top right padding-right">
-				  <strong><%= resource.created_at.strftime("%m/%d/%Y at %I:%M%p") if resource.is_a?(Answer)%></strong>
+				  <strong> 
+				  <% if resource.is_a?(Answer)%>
+				      <% if (resource.created_at > 2.day.ago) %>
+		                 <%= time_ago_in_words(resource.created_at) %> ago </div>
+			          <% else %>
+			                 <%= resource.created_at.strftime("%m/%d/%Y at %I:%M%p") %></div>
+			          <% end %>
+		          <% end %>
+
+				  </strong>
 				</p>
 		</div>
 		<br>
