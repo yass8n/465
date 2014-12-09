@@ -112,9 +112,9 @@
 				  <strong> 
 				  <% if resource.is_a?(Answer)%>
 				      <% if (resource.created_at > 2.day.ago) %>
-		                 <%= time_ago_in_words(resource.created_at) %> ago </div>
+		                 <%= time_ago_in_words(resource.created_at) %> ago 
 			          <% else %>
-			                 <%= resource.created_at.strftime("%m/%d/%Y at %I:%M%p") %></div>
+			                 <%= resource.created_at.strftime("%m/%d/%Y at %I:%M%p") %>
 			          <% end %>
 		          <% end %>
 
