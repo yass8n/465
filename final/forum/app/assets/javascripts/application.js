@@ -40,7 +40,7 @@ function initPage() {
 	if (url.indexOf("Lookup") > -1){ //the user just searched a title, so highlight the matches
 		highlight_matches();
 	}
-	if (url.indexOf('/users/sign_in') > -1 || (window.location.hostname.replace(/\//ig, "") == url.replace(/\//ig, "").replace(/http:/g, ""))){
+	if (url.indexOf('/users/sign_in') > -1 || $('.registration').length ){
 		$('footer').css('bottom', '-120px')
 	}
 	if ($('#error_explanation').length){
