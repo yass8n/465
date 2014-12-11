@@ -41,7 +41,7 @@ function initPage() {
 		highlight_matches();
 	}
 	if (url.indexOf('/users/sign_in') > -1){
-		$('footer').css('bottom', '-145px')
+		$('footer').css('bottom', '-120px')
 	}
 	if ($('#error_explanation').length){
 		$('img[alt="Questionmark"]').hide()
