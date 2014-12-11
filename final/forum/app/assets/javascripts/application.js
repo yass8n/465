@@ -40,6 +40,9 @@ function initPage() {
 	if (url.indexOf("Lookup") > -1){ //the user just searched a title, so highlight the matches
 		highlight_matches();
 	}
+	if (url.indexOf('/users/sign_in') > -1){
+		$('footer').css('bottom', '-145px')
+	}
 	if ($('#error_explanation').length){
 		$('img[alt="Questionmark"]').hide()
 	}

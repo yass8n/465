@@ -225,7 +225,6 @@ footer {
     height: 3em;
     margin-top: -3em;
     background-color: white;
-    bottom: -145px;
 }
 #filter-image{
   margin-top: 6px;
@@ -454,6 +453,9 @@ input.button{
   position: initial;
   float: right;
   padding: 0;
+}
+#up-arrow, #down-arrow{
+  width: 41px;
 }
 @media screen and (max-width: 1000px) {
     *{
