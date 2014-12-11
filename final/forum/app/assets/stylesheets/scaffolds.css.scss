@@ -225,6 +225,7 @@ footer {
     height: 3em;
     margin-top: -3em;
     background-color: white;
+    bottom: -145px;
 }
 #filter-image{
   margin-top: 6px;
@@ -255,6 +256,7 @@ input.button{
   margin-right: auto;
   margin-top: 80px;
   display: table;
+  z-index: 1;
 }
  #edit_user{
    margin-top: 0px;
@@ -346,6 +348,7 @@ input.button{
 }
 #question_guy{
   position: absolute;
+  z-index: 0;
 }
 .login{
    &:hover {
@@ -451,4 +454,15 @@ input.button{
   position: initial;
   float: right;
   padding: 0;
+}
+@media screen and (max-width: 1000px) {
+    *{
+      position: relative;
+    }
+    .has-dropdown, .divider, form, footer{
+        display: none;
+    }
+    #zoom-out-message{
+       display: table;
+    }
 }
