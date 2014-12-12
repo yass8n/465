@@ -5,7 +5,7 @@
 			<i class="step fi-rewind"></i>
 		<% end %>
 	<% end %>
-		<%= link_to current_page, my_answers_path(current_user, page: current_page) %>
+		<strong><%= link_to current_page, my_answers_path(current_user, page: current_page) %></strong>
 	<% unless current_page >= pages %>
 	<%= link_to my_answers_path(current_user, page: current_page + 1 ) do %>
 			<i class="step fi-fast-forward"></i>
