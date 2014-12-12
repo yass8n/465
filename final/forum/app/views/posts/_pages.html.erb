@@ -6,7 +6,7 @@
 			<i class="step fi-rewind"></i>
 		<% end %>
 	<% end %>
-		<%= link_to current_page, my_posts_path(current_user, page: current_page) %>
+		<strong><%= link_to current_page, my_posts_path(current_user, page: current_page) %></strong>
 	<% unless current_page >= pages %>
 	<%= link_to my_posts_path(current_user, page: current_page + 1 ) do %>
 			<i class="step fi-fast-forward"></i>
@@ -20,7 +20,7 @@
 			<i class="step fi-rewind"></i>
 		<% end %>
 	<% end %>
-	<%= link_to current_page, posts_path(page: current_page) %>
+	<strong><%= link_to current_page, posts_path(page: current_page) %></strong>
 	<% unless  current_page >= pages %>
 		<%= link_to posts_path(page: current_page+1) do %>
 			<i class="step fi-fast-forward"></i>
@@ -34,7 +34,7 @@
 			  <i class="step fi-rewind"></i>
 		<% end %>
 	<% end %>
-	<%= link_to current_page, title_search_path(resource: params[:resource], page: current_page, title: params[:title], answered: params[:answered], :filter => params[:filter], commit: "Lookup") %>
+	<strong><%= link_to current_page, title_search_path(resource: params[:resource], page: current_page, title: params[:title], answered: params[:answered], :filter => params[:filter], commit: "Lookup") %></strong>
 	<% unless current_page >= pages %>
 		<%= link_to title_search_path(resource: params[:resource], page: current_page+1, title: params[:title], answered: params[:answered], :filter => params[:filter], commit: "Lookup") do %>
 			  <i class="step fi-fast-forward"></i>
