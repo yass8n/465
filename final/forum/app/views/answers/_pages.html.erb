@@ -1,6 +1,6 @@
 <div class="small-panel bottom padding-top center panel-small">
 <% if current_page > 1 %>
-	<%= link_to "<< ", my_answers_path(current_user, page: 1) %>
+	<%= link_to "1 ", my_answers_path(current_user, page: 1) %>
 	<%= link_to my_answers_path(current_user, page: current_page -1 ) do %>
 			<i class="step fi-rewind"></i>
 		<% end %>
@@ -10,7 +10,7 @@
 	<%= link_to my_answers_path(current_user, page: current_page + 1 ) do %>
 			<i class="step fi-fast-forward"></i>
 		<% end %>
-	<%= link_to " >>", my_answers_path(current_user, page: pages) %>
+	<%= link_to pages, my_answers_path(current_user, page: pages) %>
 	<% end %>
 </div>
 
