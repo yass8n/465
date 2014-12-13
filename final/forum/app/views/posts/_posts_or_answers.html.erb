@@ -34,8 +34,8 @@
 		</div>
 		<div class="large-10 columns replies">
 		<br>
-			<% if resource.is_a?(Post) %><p class="font-increase"><%= resource.content %></p> <% end %>
-			<% if resource.is_a?(Answer) %><p class="font-increase"><%= resource.answer %></p> <% end %>
+			<% if resource.is_a?(Post) %><p class="font-increase"><%= resource.content.html_safe %></p> <% end %>
+			<% if resource.is_a?(Answer) %><p class="font-increase"><%= resource.answer.html_safe %></p> <% end %>
 			<hr>
 		</div>
 		<div class="large-1 columns replies"></div> <!-- to indent the comments -->

@@ -23,5 +23,5 @@
 <% end %>
 
 <% unless current_user.nil? || Answer.where(post_id: @post.id, user_id: current_user.id)[0] %> <!-- user already answered it before -->
-	<div><%= render partial: 'answers/form' %></div>
+	<div class='panel'><%= render partial: 'answers/form' %></div>
 <% end %>

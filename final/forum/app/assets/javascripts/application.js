@@ -16,6 +16,8 @@
 //= require turbolinks
 //= require foundation
 //= require jquery-ui/autocomplete
+//= require foundation-wysihtml5
+//= require foundation-wysihtml5/locales
 //= require_tree .
 $(function() {
   initPage();
@@ -25,6 +27,9 @@ $(window).bind('page:load', function() {
   initPage();
 });
 function initPage() { 
+	 window['rangy'].initialized = false
+    $('#answer_answer').wysihtml5();
+    $('#post_content').wysihtml5();
     $('input[name=resource]').change(function() {
     	if($(this).val() == 'Users'){
 			var usernames = $('#search-form').data('usernames');

@@ -1,4 +1,4 @@
-<div class="panel"><%= form_for(@answer, url: @answer_url) do |f| %>
+<div><%= form_for(@answer, url: @answer_url) do |f| %>
   <% if @answer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@answer.errors.count, "error") %> prohibited this answer from being saved:</h2>

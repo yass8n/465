@@ -11,12 +11,10 @@
     </div>
   <% end %>
   <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, placeholder: "Title" %>
   </div>
   <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
+    <%= f.text_area :content, placeholder: "Question" %>
   </div>
   <div class="actions">
     <%= f.submit "Post Question", :class => "button alert" %>
