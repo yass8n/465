@@ -27,9 +27,19 @@ $(window).bind('page:load', function() {
   initPage();
 });
 function initPage() { 
-	 window['rangy'].initialized = false
+	 // window['rangy'].initialized = false
     $('#answer_answer').wysihtml5();
     $('#post_content').wysihtml5();
+    setTimeout(function(){ 
+    $('.wysihtml5-sandbox').css({ 'height' : '150px' , 'resize' : 'both' });
+    // $('.wysihtml5-toolbar').find('[data-wysihtml5-command="insertUnorderedList"]').next('i').hide();
+    $('.fa-list').attr('class', 'fi-list');
+    $('.fa-th-list').attr('class', 'fi-list-thumbnails');
+    $('.fa-dedent').attr('class', 'fi-indent-less');
+    $('.fa-indent').attr('class', 'fi-indent-more');
+    $('.fa-picture-o').attr('class', 'fi-photo');
+    $('.fa-link').attr('class', 'fi-link');
+    }, 1);
     $('input[name=resource]').change(function() {
     	if($(this).val() == 'Users'){
 			var usernames = $('#search-form').data('usernames');
@@ -164,25 +174,6 @@ function initPage() {
 		        $('.tooltip')
 		        .css({ top: mousey, left: mousex })
 		});
-		// below code causes the sign up div to dissapear
-	// $('.right-corner').hover(function(){
-	// 	        // Hover over code
-	// 	        var title = $(this).attr('title');
-	// 	        $(this).data('tipText', title).removeAttr('title');
-	// 	        $('<p class="tooltip smalltip"></p>')
-	// 	        .text(title)
-	// 	        .appendTo('body')
-	// 	        .fadeIn(1000);
-	// 	}, function() {
-	// 	        // Hover out code
-	// 	        $(this).attr('title', $(this).data('tipText'));
-	// 	        $('.tooltip').remove();
-	// 	}).mousemove(function(e) {
-	// 	        var mousex = e.pageX - 100; //Get X coordinates
-	// 	        var mousey = e.pageY + 10; //Get Y coordinates
-	// 	        $('.tooltip')
-	// 	        .css({ top: mousey, left: mousex })
-	// 	});
 		if ($('.first-login').length){
 			        $('#nav-button')
 			        .after('<p class="tooltip smalltip instruction"><i class="step fi-fast-forward bigger-arrow "></i><br><span class="float-left">Edit Account and add a paypal email to start making MONEY! <span></p>');
