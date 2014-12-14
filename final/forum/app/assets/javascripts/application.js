@@ -48,8 +48,9 @@ function initPage() {
 		height = parseInt(height).toString() + "px";
 		var div = $(this).children()[0];
 		$(div).css('height', height);
+		alert(height);
 	})
-    }, 1);
+    }, 1000);
     // $('.wysihtml5-toolbar').find('[data-wysihtml5-command="code"]').click(function(){
     	// var currentVal = $('.wysihtml5-editor');
      //    currentVal.prepend("<div>asdasddddddd</div>");   
