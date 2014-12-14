@@ -59,7 +59,7 @@ function initPage() {
 			var div = $(this).children()[0];
 			$(div).css('height', height);
 		});
-    }, 100);
+    }, 500);
     $('input[name=resource]').change(function() {
     	if($(this).val() == 'Users'){
 			var usernames = $('#search-form').data('usernames');
