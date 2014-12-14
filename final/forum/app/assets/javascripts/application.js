@@ -50,7 +50,7 @@ function initPage() {
 		$(div).css('height', height);
 		alert(height);
 	})
-    }, 1000);
+    }, 1);
     // $('.wysihtml5-toolbar').find('[data-wysihtml5-command="code"]').click(function(){
     	// var currentVal = $('.wysihtml5-editor');
      //    currentVal.prepend("<div>asdasddddddd</div>");   
