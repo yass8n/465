@@ -93,6 +93,13 @@ function initPage() {
 			$('#states').addClass('hidden')
 		}
 	});
+	//setting the height of the user-information div to be 100% of the parent div
+	$('.content-border').each(function(){
+		var height = $(this).height();
+		height = parseInt(height).toString() + "px";
+		var div = $(this).children()[0];
+		$(div).css('height', height);
+	})
 	//getting rid of the "you are already signed in message"...changing it to "Signed in successfully"
 	if ($('.alert div').html() == "You are already signed in."){
 			$('.alert-box').hide();
