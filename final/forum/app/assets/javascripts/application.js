@@ -23,7 +23,7 @@ $(function() {
   initPage();
   $(document).foundation();
 });
-$(window).bind('page:load, page:change', function() {
+$(window).bind('page:load', function() {
   initPage();
 });
 function initPage() { 
