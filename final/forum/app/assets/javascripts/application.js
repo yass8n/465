@@ -29,10 +29,11 @@ $(window).bind('page:load', function() {
 function initPage() { 
 	 // window['rangy'].initialized = false
     $('#answer_answer').wysihtml5();
-    $('#post_content').wysihtml5();
+    $('#post_content').wysihtml5({
+    // toolbar: { code: '<a class="button secondary" data-wysihtml5-command="code" title="Add Code" tabindex="-1" href="javascript:;" unselectable="on">Code</a>' }
+	});
     setTimeout(function(){ 
-    $('.wysihtml5-sandbox').css({ 'height' : '150px' , 'resize' : 'both' });
-    // $('.wysihtml5-toolbar').find('[data-wysihtml5-command="insertUnorderedList"]').next('i').hide();
+    $('.wysihtml5-sandbox').css({ 'height' : '150px' , 'resize' : 'both', 'min-height' : '150px'});
     $('.fa-list').attr('class', 'fi-list');
     $('.fa-th-list').attr('class', 'fi-list-thumbnails');
     $('.fa-dedent').attr('class', 'fi-indent-less');
@@ -40,6 +41,15 @@ function initPage() {
     $('.fa-picture-o').attr('class', 'fi-photo');
     $('.fa-link').attr('class', 'fi-link');
     }, 1);
+    // $('.wysihtml5-toolbar').find('[data-wysihtml5-command="code"]').click(function(){
+    	// var currentVal = $('.wysihtml5-editor');
+     //    currentVal.prepend("<div>asdasddddddd</div>");   
+     //    currentVal.hide();
+    	// currentVal.html("Aaaaaaaaaaaaaaaaaaaaaaaaa");
+    	// console.log(currentVal);
+    	// $('#_wysihtml5-undo').prepend("aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    	// $('.wysihtml5-editor').appendTo( "<code></code>" );
+    // });
     $('input[name=resource]').change(function() {
     	if($(this).val() == 'Users'){
 			var usernames = $('#search-form').data('usernames');
