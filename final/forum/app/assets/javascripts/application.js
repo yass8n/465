@@ -33,23 +33,22 @@ function initPage() {
     // toolbar: { code: '<a class="button secondary" data-wysihtml5-command="code" title="Add Code" tabindex="-1" href="javascript:;" unselectable="on">Code</a>' }
 	});
     setTimeout(function(){ 
-    $('.wysihtml5-sandbox').css({ 'height' : '150px' , 'resize' : 'both', 'min-height' : '150px'});
-    $('.fa-list').attr('class', 'fi-list');
-    $('.fa-th-list').attr('class', 'fi-list-thumbnails');
-    $('.fa-dedent').attr('class', 'fi-indent-less');
-    $('.fa-indent').attr('class', 'fi-indent-more');
-    $('.fa-picture-o').attr('class', 'fi-photo');
-    $('.fa-link').attr('class', 'fi-link');
+	    $('.wysihtml5-sandbox').css({ 'height' : '150px' , 'resize' : 'both', 'min-height' : '150px'});
+	    $('.fa-list').attr('class', 'fi-list');
+	    $('.fa-th-list').attr('class', 'fi-list-thumbnails');
+	    $('.fa-dedent').attr('class', 'fi-indent-less');
+	    $('.fa-indent').attr('class', 'fi-indent-more');
+	    $('.fa-picture-o').attr('class', 'fi-photo');
+	    $('.fa-link').attr('class', 'fi-link');
 
 
-    	//setting the height of the user-information div to be 100% of the parent div
-	$('.content-border').each(function(){
-		var height = $(this).height();
-		height = parseInt(height).toString() + "px";
-		var div = $(this).children()[0];
-		$(div).css('height', height);
-		alert(height);
-	})
+	    	//setting the height of the user-information div to be 100% of the parent div
+		$('.content-border').each(function(){
+			var height = $(this).height();
+			height = parseInt(height).toString() + "px";
+			var div = $(this).children()[0];
+			$(div).css('height', height);
+		});
     }, 1);
     // $('.wysihtml5-toolbar').find('[data-wysihtml5-command="code"]').click(function(){
     	// var currentVal = $('.wysihtml5-editor');
