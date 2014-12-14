@@ -23,7 +23,7 @@ $(function() {
   initPage();
   $(document).foundation();
 });
-$(window).bind('ready page:load', function() {
+$(window).bind('page:load', function() {
   initPage();
 });
 function initPage() { 
@@ -52,12 +52,14 @@ function initPage() {
     // });
 
 		//setting the height of the user-information div to be 100% of the parent div
-	$('.content-border').each(function(){
-		var height = $(this).height();
-		height = parseInt(height).toString() + "px";
-		var div = $(this).children()[0];
-		$(div).css('height', height);
-	});
+    setTimeout(function(){ 
+		$('.content-border').each(function(){
+			var height = $(this).height();
+			height = parseInt(height).toString() + "px";
+			var div = $(this).children()[0];
+			$(div).css('height', height);
+		});
+    }, 100);
     $('input[name=resource]').change(function() {
     	if($(this).val() == 'Users'){
 			var usernames = $('#search-form').data('usernames');
