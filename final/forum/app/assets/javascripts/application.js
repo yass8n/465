@@ -41,6 +41,14 @@ function initPage() {
 	    $('.fa-picture-o').attr('class', 'fi-photo');
 	    $('.fa-link').attr('class', 'fi-link');
     }, 1);
+    
+    setTimeout(function(){ 
+    	space_out_comments();
+    }, 100);
+	//setting the height of the user-information div to be 100% of the parent div...letting images load before calling it again
+    setTimeout(function(){ 
+    	space_out_comments();
+    }, 500);
     // $('.wysihtml5-toolbar').find('[data-wysihtml5-command="code"]').click(function(){
     	// var currentVal = $('.wysihtml5-editor');
      //    currentVal.prepend("<div>asdasddddddd</div>");   
@@ -51,15 +59,6 @@ function initPage() {
     	// $('.wysihtml5-editor').appendTo( "<code></code>" );
     // });
 
-		//setting the height of the user-information div to be 100% of the parent div
-    setTimeout(function(){ 
-		$('.content-border').each(function(){
-			var height = $(this).height();
-			height = parseInt(height).toString() + "px";
-			var div = $(this).children()[0];
-			$(div).css('height', height);
-		});
-    }, 500);
     $('input[name=resource]').change(function() {
     	if($(this).val() == 'Users'){
 			var usernames = $('#search-form').data('usernames');
@@ -173,8 +172,14 @@ function initPage() {
 	        $('#filter-image').attr("src", src);
 	    });
     }
-
-
+    function space_out_comments(){
+		$('.content-border').each(function(){
+			var height = $(this).height();
+			height = parseInt(height).toString() + "px";
+			var div = $(this).children()[0];
+			$(div).css('height', height);
+		});
+    }
     // Tooltip only Text
 	$('#filter-image').hover(function(){
 		        // Hover over code
